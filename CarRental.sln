@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36811.4 d17.14
+VisualStudioVersion = 17.14.36811.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{F94856AA-7293-47D1-9F03-AE713FCD0C96}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.WebApi", "Presentation\CarRental.WebApi\CarRental.WebApi.csproj", "{ADE9648A-F25A-4A21-897F-F8E7570B9A17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.Application", "Core\CarRental.Application\CarRental.Application.csproj", "{1459C03D-4E17-4D88-941C-C42409C0CD22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{ADE9648A-F25A-4A21-897F-F8E7570B9A17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADE9648A-F25A-4A21-897F-F8E7570B9A17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADE9648A-F25A-4A21-897F-F8E7570B9A17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1459C03D-4E17-4D88-941C-C42409C0CD22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1459C03D-4E17-4D88-941C-C42409C0CD22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1459C03D-4E17-4D88-941C-C42409C0CD22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1459C03D-4E17-4D88-941C-C42409C0CD22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +47,7 @@ Global
 		{BABCF0B6-AC2B-41D4-998B-7B8BD9FDD186} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{36578F68-89A5-47A3-ABAB-12BB0A0B2DFB} = {259F17D9-A76E-4B50-8976-373F1A093EC8}
 		{ADE9648A-F25A-4A21-897F-F8E7570B9A17} = {F94856AA-7293-47D1-9F03-AE713FCD0C96}
+		{1459C03D-4E17-4D88-941C-C42409C0CD22} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6FF2DBFB-F868-4E73-A36C-70DBFAA3D7B2}
