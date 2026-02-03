@@ -22,28 +22,28 @@ namespace CarRental.WebApi.Controllers
 		public async Task<IActionResult> CategoryList()
 		{
 			var values = await getCategoryQueryHandler.Handle();
-			return Ok(ApiResponse<List<GetCategoryQueryResult>>.SuccessResponse(values, "Kategori listesi getirildi"));
+			return Ok(ApiResponse<List<GetCategoryQueryResult>>.SuccessResponse(values, "Araç kategorileri listesi başarıyla getirildi"));
 		}
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> CategoryById(int id)
 		{
 			var value = await getCategoryByIdHandler.Handle(new GetCategoryByIdQuery(id));
-			return Ok(ApiResponse<GetCategoryByIdQueryResult>.SuccessResponse(value, "Kayıt getirildi"));
+			return Ok(ApiResponse<GetCategoryByIdQueryResult>.SuccessResponse(value, "İstenen kategori bilgisi başarıyla getirildi"));
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> CreateCategory(CreateCategoryCommand command)
 		{
 			var createdData = await createCategoryCommandHandler.Handle(command);
-			return StatusCode(201, ApiResponse<CreateCategoryCommand>.SuccessResponse(createdData, "Kategori bilgisi başarıyla eklendi"));
+			return StatusCode(201, ApiResponse<CreateCategoryCommand>.SuccessResponse(createdData, "Yeni kategori başarıyla sisteme eklendi"));
 		}
 
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> RemoveCategory(int id)
 		{
 			var removedData = await removeCategoryCommandHandler.Handle(new RemoveCategoryCommand(id));
-			return Ok(ApiResponse<RemoveCategoryCommand>.SuccessResponse(removedData, "Kayıt silindi"));
+			return Ok(ApiResponse<RemoveCategoryCommand>.SuccessResponse(removedData, "Kategori kaydı başarıyla silindi"));
 		}
 
 		[HttpPut]

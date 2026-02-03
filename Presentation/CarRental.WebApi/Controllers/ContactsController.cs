@@ -22,28 +22,28 @@ namespace CarRental.WebApi.Controllers
 		public async Task<IActionResult> ContactList()
 		{
 			var values = await getContactQueryHandler.Handle();
-			return Ok(ApiResponse<List<GetContactQueryResult>>.SuccessResponse(values, "İletişim listesi getirildi"));
+			return Ok(ApiResponse<List<GetContactQueryResult>>.SuccessResponse(values, "Gelen mesajlar ve iletişim listesi başarıyla getirildi"));
 		}
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> ContactById(int id)
 		{
 			var value = await getContactByIdHandler.Handle(new GetContactByIdQuery(id));
-			return Ok(ApiResponse<GetContactByIdQueryResult>.SuccessResponse(value, "Kayıt getirildi"));
+			return Ok(ApiResponse<GetContactByIdQueryResult>.SuccessResponse(value, "İlgili iletişim mesajı başarıyla getirildi"));
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> CreateContact(CreateContactCommand command)
 		{
 			var createdData = await createContactCommandHandler.Handle(command);
-			return StatusCode(201, ApiResponse<CreateContactCommand>.SuccessResponse(createdData, "İletişim bilgisi başarıyla eklendi"));
+			return StatusCode(201, ApiResponse<CreateContactCommand>.SuccessResponse(createdData, "Yeni iletişim mesajı başarıyla oluşturuldu"));
 		}
 
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> RemoveContact(int id)
 		{
 			var removedData = await removeContactCommandHandler.Handle(new RemoveContactCommand(id));
-			return Ok(ApiResponse<RemoveContactCommand>.SuccessResponse(removedData, "Kayıt silindi"));
+			return Ok(ApiResponse<RemoveContactCommand>.SuccessResponse(removedData, "İlgili iletişim mesajı sistemden silindi"));
 		}
 
 		[HttpPut]

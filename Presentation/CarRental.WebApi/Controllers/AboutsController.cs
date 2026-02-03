@@ -22,14 +22,14 @@ namespace CarRental.WebApi.Controllers
 		public async Task<IActionResult> AboutList()
 		{
 			var values = await getAboutQueryHandler.Handle();
-			return Ok(ApiResponse<List<GetAboutQueryResult>>.SuccessResponse(values, "Hakkımızda listesi getirildi"));
+			return Ok(ApiResponse<List<GetAboutQueryResult>>.SuccessResponse(values, "Hakkımızda bölümü yazıları başarıyla getirildi"));
 		}
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> AboutById(int id)
 		{
 			var value = await getAboutByIdHandler.Handle(new GetAboutByIdQuery(id));
-			return Ok(ApiResponse<GetAboutByIdQueryResult>.SuccessResponse(value, "Kayıt getirildi"));
+			return Ok(ApiResponse<GetAboutByIdQueryResult>.SuccessResponse(value, "Hakkımızda detayı başarıyla getirildi"));
 		}
 
 		[HttpPost]
@@ -43,14 +43,14 @@ namespace CarRental.WebApi.Controllers
 		public async Task<IActionResult> RemoveAbout(int id)
 		{
 			var removedData = await removeAboutCommandHandler.Handle(new RemoveAboutCommand(id));
-			return Ok(ApiResponse<RemoveAboutCommand>.SuccessResponse(removedData, "Kayıt silindi"));
+			return Ok(ApiResponse<RemoveAboutCommand>.SuccessResponse(removedData, "Hakkımızda yazısı başarıyla silindi"));
 		}
 
 		[HttpPut]
 		public async Task<IActionResult> UpdateAbout(UpdateAboutCommand command)
 		{
 			var updatedData = await updateAboutCommandHandler.Handle(command);
-			return Ok(ApiResponse<UpdateAboutCommand>.SuccessResponse(updatedData, "Güncelleme başarılı"));
+			return Ok(ApiResponse<UpdateAboutCommand>.SuccessResponse(updatedData, "Hakkımızda bilgisi başarıyla güncellendi"));
 		}
 	}
 }

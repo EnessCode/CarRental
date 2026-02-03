@@ -21,28 +21,28 @@ namespace CarRental.WebApi.Controllers
 		public async Task<IActionResult> BrandList()
 		{
 			var values = await getBrandQueryHandler.Handle();
-			return Ok(ApiResponse<List<GetBrandQueryResult>>.SuccessResponse(values, "Marka listesi getirildi"));
+			return Ok(ApiResponse<List<GetBrandQueryResult>>.SuccessResponse(values, "Araç markaları listesi başarıyla getirildi"));
 		}
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> BrandById(int id)
 		{
 			var value = await getBrandByIdQueryHandler.Handle(new GetBrandByIdQuery(id));
-			return Ok(ApiResponse<GetBrandByIdQueryResult>.SuccessResponse(value, "Marka kaydı getirildi"));
+			return Ok(ApiResponse<GetBrandByIdQueryResult>.SuccessResponse(value, "İlgili marka bilgisi başarıyla getirildi"));
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> CreateBrand(CreateBrandCommand command)
 		{
 			var createdData = await createBrandCommandHandler.Handle(command);
-			return StatusCode(201, ApiResponse<CreateBrandCommand>.SuccessResponse(createdData, "Marka bilgisi başarıyla eklendi"));
+			return StatusCode(201, ApiResponse<CreateBrandCommand>.SuccessResponse(createdData, "Yeni marka kaydı başarıyla eklendi"));
 		}
 
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> RemoveBrand(int id)
 		{
 			var removedData = await removeBrandCommandHandler.Handle(new RemoveBrandCommand(id));
-			return Ok(ApiResponse<RemoveBrandCommand>.SuccessResponse(removedData, "Kayıt silindi"));
+			return Ok(ApiResponse<RemoveBrandCommand>.SuccessResponse(removedData, "Marka kaydı sistemden silindi"));
 		}
 
 		[HttpPut]
