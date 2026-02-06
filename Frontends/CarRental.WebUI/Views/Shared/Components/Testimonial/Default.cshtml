@@ -1,0 +1,70 @@
+﻿@model List<ResultTestimonialDto>
+
+<section class="py-5 bg-light position-relative overflow-hidden">
+    <div class="position-absolute top-0 start-0 m-5 p-5 bg-primary rounded-circle opacity-10 blur-bg" style="width: 300px; height: 300px; filter: blur(100px); z-index: 0;"></div>
+    <div class="position-absolute bottom-0 end-0 m-5 p-5 bg-secondary rounded-circle opacity-10 blur-bg" style="width: 200px; height: 200px; filter: blur(80px); z-index: 0;"></div>
+
+    <div class="container position-relative z-1">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="d-inline-block py-1 px-3 rounded-pill bg-primary bg-opacity-10 text-primary fw-bold small text-uppercase mb-2">
+                Referanslar
+            </span>
+            <h2 class="display-5 fw-bold text-dark">Mutlu Müşterilerimiz</h2>
+            <p class="text-muted mx-auto" style="max-width: 600px;">
+                Bizi tercih eden müşterilerimizin deneyimleri bizim için en büyük referanstır.
+            </p>
+        </div>
+
+        <div class="swiper testimonial-slider pb-5" data-aos="fade-up" data-aos-delay="200">
+            <div class="swiper-wrapper">
+
+                @foreach (var item in Model)
+                {
+                    <div class="swiper-slide h-auto">
+                        <div class="card h-100 border-0 shadow-sm rounded-4 p-4 hover-lift" style="background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px);">
+                            <div class="card-body p-0 d-flex flex-column">
+                                <div class="mb-4 text-primary opacity-25">
+                                    <i class="ri-double-quotes-l display-3" style="line-height: 0;"></i>
+                                </div>
+
+                                <p class="card-text text-secondary mb-4 fs-6 fst-italic flex-grow-1" style="line-height: 1.8;">
+                                    "@item.Comment"
+                                </p>
+
+                                <div class="text-warning mb-3 small">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                </div>
+
+                                <div class="d-flex align-items-center border-top border-light pt-3 mt-auto">
+                                    <img src="@item.ImageUrl" class="rounded-circle object-fit-cover shadow-sm" width="50" height="50" alt="@item.Name">
+                                    <div class="ms-3">
+                                        <h6 class="fw-bold mb-0 text-dark">@item.Name</h6>
+                                        <small class="text-primary fw-medium small">@item.Title</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+            <div class="swiper-pagination position-relative mt-5"></div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+        }
+</style>

@@ -1,0 +1,126 @@
+﻿@model CreateContactDto
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="py-5 bg-light position-relative" style="margin-top: 100px;">
+    <div class="container">
+
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="d-inline-block py-1 px-3 rounded-pill bg-primary bg-opacity-10 text-primary fw-bold small text-uppercase mb-2">
+                İletişim
+            </span>
+            <h2 class="display-5 fw-bold text-dark">Bize Ulaşın</h2>
+            <p class="text-muted mx-auto" style="max-width: 600px;">
+                Her türlü soru, görüş ve öneriniz için aşağıdaki formu doldurabilir veya iletişim bilgilerimizden bize ulaşabilirsiniz.
+            </p>
+        </div>
+
+        <div class="row g-5">
+
+            @await Component.InvokeAsync("FooterAddress")
+
+            <div class="col-lg-8" data-aos="fade-left" data-aos-delay="200">
+                <div class="card border-0 shadow-lg rounded-4 overflow-hidden h-100">
+                    <div class="card-body p-4 p-md-5 bg-white">
+                        <h4 class="fw-bold mb-4 text-dark border-bottom pb-3">Mesaj Gönderin</h4>
+
+                        <form method="post" asp-action="Index" asp-controller="Contact" class="contact-form">
+                            <div class="row g-3">
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control bg-light border-0" id="name" placeholder="Adınız Soyadınız" asp-for="Name">
+                                        <label for="name" class="text-secondary">Adınız Soyadınız</label>
+                                        <span asp-validation-for="Name" class="text-danger small"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control bg-light border-0" id="email" placeholder="E-Posta Adresiniz" asp-for="Email">
+                                        <label for="email" class="text-secondary">E-Posta Adresiniz</label>
+                                        <span asp-validation-for="Email" class="text-danger small"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control bg-light border-0" id="subject" placeholder="Konu" asp-for="Subject">
+                                        <label for="subject" class="text-secondary">Konu</label>
+                                        <span asp-validation-for="Subject" class="text-danger small"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control bg-light border-0" id="message" asp-for="Message" placeholder="Mesajınız" style="height: 150px"></textarea>
+                                        <label for="message" class="text-secondary">Mesajınız</label>
+                                        <span asp-validation-for="Message" class="text-danger small"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn btn-primary w-100 py-3 rounded-3 fw-bold shadow-sm transition-all hover-up d-flex align-items-center justify-content-center gap-2">
+                                        <i class="ri-send-plane-fill"></i> Mesajı Gönder
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5" data-aos="fade-up">
+            <div class="col-12">
+                <div class="rounded-4 overflow-hidden shadow-md border border-light position-relative" style="height: 450px;">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.9633698339308!2d28.97798637669643!3d41.04791107134443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab7650656bd63%3A0x8ca058b28c20b6c3!2sTaksim%20Meydan%C4%B1%2C%20G%C3%BCm%C3%BC%C5%9Fsuyu%2C%2034437%20Beyo%C4%9Flu%2F%C4%B0stanbul!5e0!3m2!1str!2str!4v1707246530122!5m2!1str!2str"
+                            width="100%"
+                            height="100%"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+
+                    <div class="position-absolute bottom-0 start-0 m-3 p-3 bg-white rounded-3 shadow-sm d-none d-md-block" style="max-width: 200px;">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="ri-map-pin-user-fill text-primary"></i>
+                            <small class="fw-bold">Ofisimiz Burası</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .form-control:focus {
+        box-shadow: none;
+        border: 1px solid var(--primary) !important;
+        background-color: #fff !important;
+    }
+
+    .hover-up:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+    }
+
+    .form-floating > label {
+        color: #6c757d;
+    }
+
+    .form-floating > .form-control:focus ~ label {
+        color: var(--primary);
+        font-weight: 600;
+    }
+</style>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+}

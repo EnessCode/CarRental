@@ -1,0 +1,63 @@
+﻿@model List<ResultFooterAddressesDto>
+
+@foreach (var item in Model)
+{
+    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="card h-100 border-0 shadow-sm rounded-4 p-4 hover-up transition-all bg-white">
+            <div class="card-body p-0">
+
+                <h5 class="fw-bold text-dark mb-4 border-bottom pb-3">İletişim Kanalları</h5>
+
+                <div class="d-flex align-items-start mb-4">
+                    <div class="flex-shrink-0 d-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle" style="width: 50px; height: 50px;">
+                        <i class="ri-map-pin-line fs-4"></i>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="fw-bold text-dark mb-1">Adres</h6>
+                        <p class="text-muted small mb-0" style="line-height: 1.6;">@item.Address</p>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center mb-4">
+                    <div class="flex-shrink-0 d-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle" style="width: 50px; height: 50px;">
+                        <i class="ri-phone-line fs-4"></i>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="fw-bold text-dark mb-1">Telefon</h6>
+                        <a href="tel:@item.Phone" class="text-muted text-decoration-none small hover-text-primary transition-all">
+                            @item.Phone
+                        </a>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0 d-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle" style="width: 50px; height: 50px;">
+                        <i class="ri-mail-send-line fs-4"></i>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="fw-bold text-dark mb-1">E-Posta</h6>
+                        <a href="mailto:@item.Email" class="text-muted text-decoration-none small hover-text-primary transition-all">
+                            @item.Email
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .transition-all {
+        transition: all 0.3s ease;
+    }
+
+    .hover-up:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    }
+
+    .hover-text-primary:hover {
+        color: var(--primary) !important;
+    }
+</style>

@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CarBook - Premium Araç Kiralama</title>
+
+    @await Component.InvokeAsync("Head")
+</head>
+<body class="bg-light">
+
+    @await Component.InvokeAsync("Navbar")
+
+    <main>
+        @RenderBody()
+    </main>
+
+    @await Component.InvokeAsync("Footer")
+
+    @await Component.InvokeAsync("Script")
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

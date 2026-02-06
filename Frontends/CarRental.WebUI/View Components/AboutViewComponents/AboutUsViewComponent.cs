@@ -1,0 +1,28 @@
+﻿using CarRental.Dto; 
+using CarRental.Dto.AboutDtos;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+
+namespace CarRental.WebUI.ViewComponents.DefaultViewComponents
+{
+	public class AboutUsViewComponent(IHttpClientFactory httpClientFactory) : ViewComponent
+	{
+		public async Task<IViewComponentResult> InvokeAsync()
+		{
+			var client = httpClientFactory.CreateClient("CarRentalApi");
+
+			var responseMessage = await client.GetAsync("Abouts");
+			if (responseMessage.IsSuccessStatusCode)
+			{
+				var jsonData = await responseMessage.Content.ReadAsStringAsync();
+
+				var apiResponse = JsonConvert.DeserializeObject<ResultApiResponseDto<List<ResultAboutDto>>>(jsonData);
+				if (apiResponse != null && apiResponse.Success)
+				{
+					return View(apiResponse.Data);
+				}
+			}
+			return View(new List<ResultAboutDto>());
+		}
+	}
+}

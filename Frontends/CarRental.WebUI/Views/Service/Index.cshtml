@@ -1,0 +1,63 @@
+﻿@model List<ResultServiceDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="py-5 bg-light position-relative" style="margin-top: 100px;">
+    <div class="container">
+
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="d-inline-block py-1 px-3 rounded-pill bg-primary bg-opacity-10 text-primary fw-bold small text-uppercase mb-2">
+                Hizmetlerimiz
+            </span>
+            <h2 class="display-5 fw-bold text-dark">Size Nasıl Yardımcı Olabiliriz?</h2>
+            <p class="text-muted mx-auto" style="max-width: 600px;">
+                Yolculuğunuzu keyifli ve güvenli hale getirmek için sunduğumuz ayrıcalıklı hizmetleri keşfedin.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4 hover-up transition-all">
+                        <div class="card-body text-center p-0">
+
+                            <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle mb-4 transition-icon" style="width: 80px; height: 80px;">
+                                <i class="@item.IconUrl fs-2"></i>
+                            </div>
+
+                            <h4 class="fw-bold mb-3 text-dark">@item.Title</h4>
+                            <p class="text-secondary mb-0" style="line-height: 1.6;">
+                                @item.Description
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@await Component.InvokeAsync("AboutBecomeDriver")
+
+
+<style>
+    .transition-all {
+        transition: all 0.3s ease;
+    }
+
+    .hover-up:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+    }
+
+        .hover-up:hover .transition-icon {
+            background-color: var(--primary) !important;
+            color: #fff !important;
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+        }
+</style>
