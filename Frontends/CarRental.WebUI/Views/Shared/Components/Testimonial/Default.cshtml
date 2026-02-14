@@ -17,13 +17,12 @@
 
         <div class="swiper testimonial-slider pb-5" data-aos="fade-up" data-aos-delay="200">
             <div class="swiper-wrapper">
-
                 @foreach (var item in Model)
                 {
                     <div class="swiper-slide h-auto">
-                        <div class="card h-100 border-0 shadow-sm rounded-4 p-4 hover-lift" style="background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px);">
+                        <div class="card h-100 border-0 shadow-sm rounded-4 p-4 hover-lift" style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);">
                             <div class="card-body p-0 d-flex flex-column">
-                                <div class="mb-4 text-primary opacity-25">
+                                <div class="mb-3 text-primary opacity-25">
                                     <i class="ri-double-quotes-l display-3" style="line-height: 0;"></i>
                                 </div>
 
@@ -31,7 +30,7 @@
                                     "@item.Comment"
                                 </p>
 
-                                <div class="text-warning mb-3 small">
+                                <div class="text-warning mb-4 small">
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
                                     <i class="ri-star-fill"></i>
@@ -40,19 +39,22 @@
                                 </div>
 
                                 <div class="d-flex align-items-center border-top border-light pt-3 mt-auto">
-                                    <img src="@item.ImageUrl" class="rounded-circle object-fit-cover shadow-sm" width="50" height="50" alt="@item.Name">
+                                    <div class="flex-shrink-0">
+                                        <img src="@item.ImageUrl"
+                                             class="rounded-circle shadow-sm border border-2 border-white"
+                                             style="width: 80px; height: 80px; object-fit: cover;"
+                                             alt="@item.Name">
+                                    </div>
                                     <div class="ms-3">
                                         <h6 class="fw-bold mb-0 text-dark">@item.Name</h6>
-                                        <small class="text-primary fw-medium small">@item.Title</small>
+                                        <small class="text-primary fw-medium small text-uppercase ls-1">@item.Title</small>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 }
-
             </div>
-
             <div class="swiper-pagination position-relative mt-5"></div>
         </div>
     </div>
@@ -67,4 +69,7 @@
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
         }
+    .ls-1 {
+        letter-spacing: 1px;
+    }
 </style>

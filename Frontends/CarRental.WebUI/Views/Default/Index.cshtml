@@ -1,0 +1,28 @@
+﻿@{
+	ViewData["Title"] = "Ana Sayfa";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@await Component.InvokeAsync("MainCover")
+
+@await Component.InvokeAsync("Last5Cars")
+
+@await Component.InvokeAsync("AboutUs")
+
+@await Component.InvokeAsync("AboutBecomeDriver")
+
+@await Component.InvokeAsync("Testimonial")
+
+<section class="ftco-section bg-light">
+	<div class="container">
+		<div class="row justify-content-center mb-5">
+			<div class="col-md-7 text-center heading-section">
+				<span class="subheading">Blog</span>
+				<h2>Son Blog Yazılarımız</h2>
+			</div>
+		</div>
+		@await Component.InvokeAsync("Last3BlogWithAuthor")
+	</div>
+</section>
+
+@await Component.InvokeAsync("Statistics")

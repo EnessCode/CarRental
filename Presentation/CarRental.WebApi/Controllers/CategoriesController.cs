@@ -14,7 +14,8 @@ namespace CarRental.WebApi.Controllers
 		GetCategoryQueryHandler getCategoryQueryHandler,
 		GetCategoryByIdQueryHandler getCategoryByIdHandler,
 		UpdateCategoryCommandHandler updateCategoryCommandHandler,
-		RemoveCategoryCommandHandler removeCategoryCommandHandler
+		RemoveCategoryCommandHandler removeCategoryCommandHandler,
+		GetCategoryWithBlogCountQueryHandler getCategoryWithBlogCountQueryHandler
 		) : ControllerBase
 	{
 
@@ -51,6 +52,13 @@ namespace CarRental.WebApi.Controllers
 		{
 			var updatedData = await updateCategoryCommandHandler.Handle(command);
 			return Ok(ApiResponse<UpdateCategoryCommand>.SuccessResponse(updatedData, "Kategori bilgisi başarıyla güncellendi"));
+		}
+
+		[HttpGet("GetCategoriesWithBlogCount")]
+		public async Task<IActionResult> GetCategoriesWithBlogCount()
+		{
+			var values = await getCategoryWithBlogCountQueryHandler.Handle();
+			return Ok(ApiResponse<List<GetCategoryWithBlogCountQueryResult>>.SuccessResponse(values, "Kategoriler ve blog sayıları başarıyla listelendi"));
 		}
 	}
 }

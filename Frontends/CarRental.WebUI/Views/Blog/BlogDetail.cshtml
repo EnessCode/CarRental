@@ -1,0 +1,102 @@
+﻿@model ResultBlogDetailDto
+
+@{
+	ViewData["Title"] = "BlogDetail";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="py-5 bg-light position-relative" style="margin-top: 60px;">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-8 ftco-animate">
+
+				<div class="mb-4 overflow-hidden rounded-4 shadow-sm">
+					<img src="@Model.CoverImageUrl" alt="" class="img-fluid w-100 object-fit-cover" style="height: 400px;">
+				</div>
+
+				<h2 class="mb-3 fw-bold text-dark">@Model.Title</h2>
+				<div class="d-flex align-items-center mb-4 text-muted small">
+					<div class="me-3">
+						<i class="ri-calendar-line text-primary"></i> @Model.CreatedAt.ToString("dd MMMM yyyy")
+					</div>
+					<div class="me-3">
+						<i class="ri-user-line text-primary"></i> @Model.AuthorName
+					</div>
+					<div>
+						<i class="ri-chat-1-line text-primary"></i> 3 Yorum
+					</div>
+				</div>
+
+				<div class="blog-content text-secondary" style="line-height: 1.8; font-size: 1.1rem;">
+					@Html.Raw(Model.Description)
+				</div>
+
+				@await Component.InvokeAsync("BlogDetailsTagCloud", new { id = Model.Id })
+
+				@await Component.InvokeAsync("BlogDetailsAuthorAbout", new { id = Model.Id })
+
+				@await Component.InvokeAsync("BlogDetailsCommentList", new { id = Model.Id })
+
+				@await Component.InvokeAsync("BlogDetailsAddComment", new { id = Model.Id })
+
+			</div>
+
+			<div class="col-md-4 sidebar ftco-animate pl-md-5">
+
+				@await Component.InvokeAsync("BlogDetailsSideBarSearchBox")
+
+				@await Component.InvokeAsync("BlogDetailsCategoryList")
+
+				@await Component.InvokeAsync("BlogDetailsRecentBlogs")
+
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<style>
+	.tag-cloud-link {
+		border: 1px solid #e9ecef;
+		padding: 5px 15px;
+		border-radius: 20px;
+		color: gray;
+		font-size: 14px;
+		margin-right: 5px;
+		display: inline-block;
+		margin-bottom: 5px;
+		transition: all 0.3s;
+	}
+
+		.tag-cloud-link:hover {
+			background-color: var(--bs-primary);
+			color: white;
+			border-color: var(--bs-primary);
+			text-decoration: none;
+		}
+
+	.categories li a {
+		color: #666;
+		text-decoration: none;
+		transition: 0.3s;
+	}
+
+		.categories li a:hover {
+			color: var(--bs-primary);
+		}
+
+	.transition-all {
+		transition: all 0.3s ease;
+	}
+
+	.reply:hover {
+		background-color: var(--bs-primary) !important;
+		color: white !important;
+	}
+
+	.comment-body p {
+		font-size: 0.95rem;
+		line-height: 1.6;
+	}
+</style>

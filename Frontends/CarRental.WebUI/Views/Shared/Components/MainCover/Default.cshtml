@@ -1,26 +1,58 @@
-﻿<section class="position-relative d-flex align-items-center justify-content-center" style="height: 85vh; min-height: 600px; background: url('/carbook/images/bg_1.jpg') center/cover no-repeat;">
-    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity: 0.6;"></div>
+﻿@model List<ResultBannerDto>
 
-    <div class="container position-relative text-center text-white" data-aos="fade-up">
-        <span class="d-inline-block py-2 px-4 rounded-pill bg-white bg-opacity-10 border border-light border-opacity-25 mb-4 backdrop-blur fw-bold text-uppercase small tracking-wider">
-            Premium Araç Kiralama Deneyimi
-        </span>
+@foreach (var item in Model)
+{
+	<section class="position-relative d-flex align-items-center justify-content-center" style="height: 85vh; min-height: 600px; background: url('/carbook/images/bg_1.jpg') center/cover no-repeat;">
 
-        <h1 class="display-3 fw-bold mb-4">
-            Yolculuğun Keyfini <br> <span class="text-primary">Bizimle Çıkarın</span>
-        </h1>
+		<div class="position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity: 0.5;"></div>
 
-        <p class="lead text-white-50 mb-5 mx-auto" style="max-width: 600px;">
-            Geniş araç filomuz, uygun fiyatlarımız ve 7/24 destek hattımızla seyahatleriniz artık daha konforlu.
-        </p>
+		<div class="container position-relative text-center text-white" data-aos="fade-up">
 
-        <div class="d-flex justify-content-center gap-3">
-            <a href="/Car" class="btn btn-primary btn-lg rounded-3 px-5 shadow-lg fw-bold">
-                Araçları İncele
-            </a>
-            <a href="/Contact" class="btn btn-light btn-lg rounded-3 px-5 shadow-lg fw-bold text-primary">
-                Bize Ulaşın
-            </a>
-        </div>
-    </div>
-</section>
+			<span class="d-inline-block py-2 px-4 rounded-pill bg-white bg-opacity-10 border border-light border-opacity-25 mb-4 backdrop-blur fw-bold text-uppercase small tracking-wider">
+				@item.VideoDescription
+			</span>
+
+			<h1 class="display-3 fw-bold mb-4 text-shadow">
+				@item.Title
+			</h1>
+
+			<p class="lead text-white-50 mb-5 mx-auto" style="max-width: 650px;">
+				@item.Description
+			</p>
+
+			<div class="d-flex justify-content-center flex-wrap gap-3">
+
+				<a href="/Car" class="btn btn-primary btn-lg rounded-3 px-5 shadow-lg fw-bold transition-all hover-scale d-flex align-items-center justify-content-center">
+					Araçları İncele
+				</a>
+
+				<a href="/Contact" class="btn btn-light btn-lg rounded-3 px-5 shadow-lg fw-bold text-primary transition-all hover-scale d-flex align-items-center justify-content-center">
+					Bize Ulaşın
+				</a>
+
+				<a href="@item.VideoUrl" target="_blank" class="btn btn-outline-light btn-lg rounded-3 px-4 shadow-lg fw-bold transition-all hover-scale d-flex align-items-center justify-content-center gap-2">
+					<i class="ri-play-circle-line fs-4"></i> <span>Tanıtım</span>
+				</a>
+
+			</div>
+		</div>
+	</section>
+}
+
+<style>
+	.backdrop-blur {
+		backdrop-filter: blur(5px);
+	}
+
+	.text-shadow {
+		text-shadow: 2px 2px 20px rgba(0,0,0,0.5);
+	}
+
+	.hover-scale:hover {
+		transform: scale(1.05);
+	}
+
+	.transition-all {
+		transition: all 0.3s ease;
+	}
+</style>

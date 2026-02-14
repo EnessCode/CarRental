@@ -1,0 +1,83 @@
+﻿@model List<ResultAllBlogsWithAuthorDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="py-5 bg-light position-relative" style="margin-top: 60px;">
+    <div class="container">
+
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="d-inline-block py-1 px-3 rounded-pill bg-primary bg-opacity-10 text-primary fw-bold small text-uppercase mb-2">
+                Güncel Yazılar
+            </span>
+            <h2 class="display-5 fw-bold text-dark">Son Blog Paylaşımları</h2>
+            <p class="text-muted mx-auto" style="max-width: 600px;">
+                Seyahat ipuçları, araç bakımı ve sektörden en güncel haberleri takip edin.
+            </p>
+        </div>
+
+        <div class="row d-flex g-4">
+            @foreach (var item in Model)
+            {
+                <partial name="~/Views/Blog/_BlogListCardPartial.cshtml" model="item" />
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .hover-blog {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .hover-blog:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+        }
+
+    .block-20 {
+        background-size: cover;
+        background-position: center top;
+        position: relative;
+        transition: background-position 0.5s ease;
+    }
+
+    .hover-blog:hover .block-20 {
+        background-position: center center;
+    }
+
+    .meta-date {
+        background: #1089ff;
+        color: #fff;
+        border-radius: 0 10px 0 0;
+    }
+
+        .meta-date span {
+            display: block;
+            line-height: 1.2;
+        }
+
+        .meta-date .day {
+            font-size: 20px;
+        }
+
+        .meta-date .mos {
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .meta-date .yr {
+            font-size: 12px;
+        }
+
+    .hover-underline:hover {
+        color: #1089ff !important;
+        text-decoration: underline !important;
+    }
+
+    .transition-all {
+        transition: all 0.3s ease;
+    }
+</style>

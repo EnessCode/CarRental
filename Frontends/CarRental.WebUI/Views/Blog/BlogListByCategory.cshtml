@@ -1,0 +1,130 @@
+﻿@model List<ResultAllBlogsWithAuthorDto>
+
+@{
+    ViewData["Title"] = "BlogListByCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="py-5 bg-light position-relative" style="margin-top: 60px;">
+    <div class="container">
+        
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="d-inline-block py-1 px-3 rounded-pill bg-primary bg-opacity-10 text-primary fw-bold small text-uppercase mb-2">
+                Kategoriye Göre Yazılar
+            </span>
+            <h2 class="display-5 fw-bold text-dark">Seçilen Kategorideki Yazılar</h2>
+        </div>
+
+        <div class="row d-flex g-4">
+            @if (Model != null && Model.Count > 0)
+            {
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-4 col-md-6 d-flex ftco-animate" data-aos="fade-up">
+                        <div class="blog-entry justify-content-end w-100 shadow-sm rounded-4 overflow-hidden bg-white hover-blog transition-all h-100 d-flex flex-column">
+                            
+                            <a href="/Blog/BlogDetail/@item.Id" class="block-20 d-flex align-items-end" style="background-image: url('@item.CoverImageUrl'); height: 250px; background-size:cover;">
+                                <div class="meta-date text-center p-2">
+                                    <span class="day fw-bold">@item.CreatedAt.ToString("dd")</span>
+                                    <span class="mos">@item.CreatedAt.ToString("MMM")</span>
+                                    <span class="yr">@item.CreatedAt.ToString("yyyy")</span>
+                                </div>
+                            </a>
+
+                            <div class="text p-4 float-right d-block d-flex flex-column flex-grow-1">
+                                
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill small fw-bold">
+                                        @item.CategoryName
+                                    </span>
+                                    <div class="text-muted small">
+                                        <i class="ri-user-line text-primary"></i> @item.AuthorName
+                                    </div>
+                                </div>
+
+                                <h3 class="heading mt-2 mb-3">
+                                    <a href="/Blog/BlogDetail/@item.Id" class="text-dark text-decoration-none fw-bold hover-underline">
+                                        @item.Title
+                                    </a>
+                                </h3>
+
+                                <p class="text-muted small mb-4">
+                                    @if (!string.IsNullOrEmpty(item.Description))
+                                    {
+                                        if (item.Description.Length > 100)
+                                        {
+                                            @Html.Raw(item.Description.Substring(0, 100) + "...")
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw(item.Description)
+                                        }
+                                    }
+                                </p>
+
+                                <div class="d-flex align-items-center mt-auto">
+                                    <a href="/Blog/BlogDetail/@item.Id" class="btn btn-outline-primary w-100 rounded-pill px-4 fw-bold transition-all d-flex align-items-center justify-content-center gap-2">
+                                        Devamını Oku <i class="ri-arrow-right-line"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center">
+                    <div class="alert alert-warning py-4 rounded-4 shadow-sm">
+                        <i class="ri-information-line fs-4 d-block mb-2"></i>
+                        Bu kategoride henüz blog yazısı bulunmamaktadır.
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Kart Hover Efekti */
+    .hover-blog {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hover-blog:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    }
+
+    /* Resim Zoom Efekti */
+    .block-20 {
+        background-size: cover;
+        background-position: center top;
+        position: relative;
+        transition: background-position 0.5s ease;
+    }
+    .hover-blog:hover .block-20 {
+        background-position: center center; 
+    }
+
+    /* Tarih Kutusu */
+    .meta-date {
+        background: #1089ff; 
+        color: #fff;
+        border-radius: 0 10px 0 0; 
+    }
+    .meta-date span {
+        display: block;
+        line-height: 1.2;
+    }
+    .meta-date .day { font-size: 20px; }
+    .meta-date .mos { font-size: 14px; text-transform: uppercase; }
+    .meta-date .yr { font-size: 12px; }
+
+    /* Başlık Hover */
+    .hover-underline:hover {
+        color: #1089ff !important;
+        text-decoration: underline !important;
+    }
+
+    .transition-all { transition: all 0.3s ease; }
+</style>

@@ -1,0 +1,48 @@
+﻿@model ResultAllBlogsWithAuthorDto
+
+<div class="col-lg-4 col-md-6 d-flex ftco-animate" data-aos="fade-up">
+    <div class="blog-entry justify-content-end w-100 shadow-sm rounded-4 overflow-hidden bg-white hover-blog transition-all h-100 d-flex flex-column">
+
+        <a href="/Blog/BlogDetail/@Model.Id" class="block-20 d-flex align-items-end" style="background-image: url('@Model.CoverImageUrl'); height: 250px;">
+            <div class="meta-date text-center p-2">
+                <span class="day fw-bold">@Model.CreatedAt.ToString("dd")</span>
+                <span class="mos">@Model.CreatedAt.ToString("MMM")</span>
+                <span class="yr">@Model.CreatedAt.ToString("yyyy")</span>
+            </div>
+        </a>
+
+        <div class="text p-4 float-right d-block d-flex flex-column flex-grow-1">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill small fw-bold">
+                    @Model.CategoryName
+                </span>
+                <div class="text-muted small">
+                    <i class="ri-user-line text-primary"></i> @Model.AuthorName
+                </div>
+            </div>
+
+            <h3 class="heading mt-2 mb-3">
+                <a href="/Blog/BlogDetail/@Model.Id" class="text-dark text-decoration-none fw-bold hover-underline">
+                    @Model.Title
+                </a>
+            </h3>
+
+            <p class="text-muted small mb-4">
+                @if (!string.IsNullOrEmpty(Model.Description) && Model.Description.Length > 100)
+                {
+                    @Html.Raw(Model.Description.Substring(0, 100) + "...")
+                }
+                else if (!string.IsNullOrEmpty(Model.Description))
+                {
+                    @Html.Raw(Model.Description)
+                }
+            </p>
+
+            <div class="d-flex align-items-center mt-auto">
+                <a href="/Blog/BlogDetail/@Model.Id" class="btn btn-outline-primary w-100 rounded-pill px-4 fw-bold transition-all d-flex align-items-center justify-content-center gap-2">
+                    Devamını Oku <i class="ri-arrow-right-line"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

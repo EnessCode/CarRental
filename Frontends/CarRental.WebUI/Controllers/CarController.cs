@@ -1,5 +1,6 @@
 ﻿using CarRental.Dto;
 using CarRental.Dto.CarDtos;
+using CarRental.Dto.CarPricingDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http;
@@ -12,12 +13,12 @@ namespace CarRental.WebUI.Controllers
 		{
 			var client = httpClientFactory.CreateClient("CarRentalApi");
 
-			var responseMessage = await client.GetAsync("Cars/GetCarWithBrand");
+			var responseMessage = await client.GetAsync("CarPricings");
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				var jsonData = await responseMessage.Content.ReadAsStringAsync();
 
-				var apiResponse = JsonConvert.DeserializeObject<ResultApiResponseDto<List<ResultCarWithBrandDto>>>(jsonData);
+				var apiResponse = JsonConvert.DeserializeObject<ResultApiResponseDto<List<ResultCarPricingWithCarsDto>>>(jsonData);
 				if (apiResponse != null && apiResponse.Success)
 				{
 					return View(apiResponse.Data);

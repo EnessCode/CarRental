@@ -1,0 +1,132 @@
+﻿@model List<GetLast5CarsWithBrand>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<section class="py-5 bg-light position-relative overflow-hidden">
+    <div class="position-absolute top-50 start-50 translate-middle w-100 h-100 bg-gradient-light opacity-50" style="z-index: 0;"></div>
+
+    <div class="container-fluid px-lg-5 position-relative" style="z-index: 2;">
+        
+        <div class="d-flex justify-content-between align-items-end mb-5 px-2">
+            <div>
+                <span class="text-primary fw-bold text-uppercase small ls-1">🔥 Fırsat Araçları</span>
+                <h2 class="display-6 fw-bold text-dark mb-0">Son Eklenenler</h2>
+            </div>
+            
+            <div class="d-none d-md-flex gap-2">
+                <button class="swiper-btn-prev btn btn-outline-dark rounded-circle p-0 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                    <i class="ri-arrow-left-line fs-5"></i>
+                </button>
+                <button class="swiper-btn-next btn btn-primary rounded-circle p-0 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                    <i class="ri-arrow-right-line fs-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="swiper car-slider pb-5">
+            <div class="swiper-wrapper">
+                @foreach (var item in Model)
+                {
+                    <div class="swiper-slide">
+                        <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden car-card-horizontal">
+                            
+                            <div class="position-relative">
+                                <img src="@item.CoverImageUrl" class="card-img-top object-fit-cover" alt="@item.BrandName" style="height: 220px;">
+                                
+                                <div class="position-absolute top-0 start-0 m-3">
+                                    <span class="badge bg-white text-dark fw-bold py-2 px-3 rounded-pill shadow-sm">
+                                        @item.BrandName
+                                    </span>
+                                </div>
+                                <div class="position-absolute bottom-0 end-0 m-3">
+                                    <span class="badge bg-primary text-white border border-light py-2 px-3 rounded-pill shadow-sm">
+                                        1.500 ₺ <small class="fw-light">/gün</small>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="card-body p-4 d-flex flex-column">
+                                <h5 class="fw-bold text-dark mb-3">@item.BrandName @item.Model</h5>
+                                
+                                <div class="d-flex justify-content-between text-muted small mb-4 border-bottom pb-3">
+                                    <span class="d-flex align-items-center gap-1"><i class="ri-gas-station-line text-primary"></i> @item.Fuel</span>
+                                    <span class="d-flex align-items-center gap-1"><i class="ri-steering-2-line text-primary"></i> @item.Transmission</span>
+                                    <span class="d-flex align-items-center gap-1"><i class="ri-user-3-line text-primary"></i> @item.Seat</span>
+                                </div>
+
+                                <a href="#" class="btn btn-outline-primary w-100 rounded-pill fw-bold mt-auto hover-fill">
+                                    İncele
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                }
+            </div>
+            
+            <div class="swiper-pagination position-relative mt-4"></div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+    var swiper = new Swiper(".car-slider", {
+        slidesPerView: 1,        
+        spaceBetween: 20,       
+        loop: true,             
+        autoplay: {
+            delay: 3000,         
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+            dynamicBullets: true, 
+        },
+        navigation: {
+            nextEl: ".swiper-btn-next",
+            prevEl: ".swiper-btn-prev",
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+            1024: {
+                slidesPerView: 4, 
+                spaceBetween: 30,
+            },
+            1400: {
+                 slidesPerView: 4,
+                 spaceBetween: 30,
+            }
+        },
+    });
+</script>
+
+<style>
+    .car-card-horizontal {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .car-card-horizontal:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+    }
+
+    .hover-fill:hover {
+        background-color: var(--bs-primary);
+        color: white;
+    }
+
+    .object-fit-cover {
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .swiper-pagination-bullet-active {
+        background-color: var(--bs-primary) !important;
+    }
+    
+    .ls-1 { letter-spacing: 1px; }
+</style>
