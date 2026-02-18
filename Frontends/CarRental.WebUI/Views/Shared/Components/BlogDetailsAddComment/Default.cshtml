@@ -1,84 +1,82 @@
 ﻿<div class="comment-form-wrap pt-5">
-
-    <div class="mb-4">
-        <h3 class="fw-bold text-dark">Yorum Yazın</h3>
+    <div class="mb-4 d-flex align-items-center gap-3">
+        <div class="bg-primary bg-opacity-10 p-2 rounded-3">
+            <i class="ri-chat-smile-3-line fs-4 text-primary"></i>
+        </div>
+        <h3 class="fw-bold text-dark mb-0">Düşüncelerinizi Paylaşın</h3>
     </div>
 
-    <form action="/Blog/AddComment" method="post">
-        <input type="hidden" name="BlogID" value="@ViewBag.blogid" />
+    <form action="/Blog/AddComment" method="post" class="p-4 bg-white rounded-4 border border-light shadow-sm">
+        <input type="hidden" name="BlogId" value="@ViewBag.blogid" />
 
-        <div class="row g-3">
-
-            <div class="col-md-6">
-                <div class="form-floating">
-                    <input type="text" class="form-control solid-input" id="name" name="Name" placeholder="Adınız" required>
-                    <label for="name" class="text-secondary fw-medium">Ad Soyad</label>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-floating">
-                    <input type="email" class="form-control solid-input" id="email" name="Email" placeholder="Email" required>
-                    <label for="email" class="text-secondary fw-medium">Email Adresi</label>
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="form-floating custom-form-group">
+                    <input type="text" class="form-control border-0 bg-light rounded-3 shadow-none px-4" id="name" name="Name" placeholder="Adınız" required>
+                    <label for="name" class="px-4 text-muted small fw-bold text-uppercase">
+                        <i class="ri-user-smile-line me-1"></i> Ad Soyad
+                    </label>
                 </div>
             </div>
 
             <div class="col-12">
-                <div class="form-floating">
-                    <textarea class="form-control solid-input" placeholder="Yorum" id="message" name="Message" style="height: 140px" required></textarea>
-                    <label for="message" class="text-secondary fw-medium">Yorumunuz</label>
+                <div class="form-floating custom-form-group">
+                    <textarea class="form-control border-0 bg-light rounded-3 shadow-none px-4" placeholder="Yorum" id="message" name="Description" style="height: 160px; resize: none;" required></textarea>
+                    <label for="message" class="px-4 text-muted small fw-bold text-uppercase">
+                        <i class="ri-message-3-line me-1"></i> Yorumunuz
+                    </label>
                 </div>
             </div>
 
-            <div class="col-12 mt-4">
-                <button type="submit" class="btn btn-primary py-3 px-5 rounded-pill fw-bold shadow-primary btn-cta">
-                    Yorumu Yayınla <i class="ri-send-plane-fill ms-2"></i>
+            <div class="col-12 text-end">
+                <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5 fw-bold transition-all shadow-sm hover-up">
+                    <span class="d-flex align-items-center gap-2">
+                        Gönder <i class="ri-send-plane-2-fill"></i>
+                    </span>
                 </button>
             </div>
-
         </div>
     </form>
 </div>
 
 <style>
-    .solid-input {
-        background-color: #f8f9fa; 
-        border: 2px solid #e9ecef; 
-        border-radius: 12px; 
-        color: #495057;
-        font-weight: 500;
-        transition: all 0.3s ease;
+    .custom-form-group .form-control {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 2px solid transparent !important;
     }
 
-        .solid-input:focus {
-            background-color: #ffffff; 
-            border-color: var(--bs-primary);
-            box-shadow: 0 0 0 5px rgba(var(--bs-primary-rgb), 0.15); 
-            color: #000;
+        .custom-form-group .form-control:focus {
+            background-color: #fff !important;
+            border-color: rgba(var(--bs-primary-rgb), 0.3) !important;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05) !important;
         }
 
     .form-floating > label {
-        padding-left: 1.2rem;
-        font-size: 0.95rem;
-        color: #6c757d; 
+        transition: all 0.2s ease-in-out;
+        opacity: 0.8;
     }
 
-    .form-floating > .form-control {
-        padding-left: 1.2rem;
+    .form-floating > .form-control:focus ~ label,
+    .form-floating > .form-control:not(:placeholder-shown) ~ label {
+        color: var(--bs-primary) !important;
+        opacity: 1;
+        transform: scale(0.85) translateY(-0.75rem) translateX(0.15rem);
     }
 
-    .btn-cta {
-        letter-spacing: 0.5px;
+    .hover-up {
         transition: all 0.3s ease;
-        border: none;
     }
 
-    .shadow-primary {
-        box-shadow: 0 4px 15px rgba(var(--bs-primary-rgb), 0.4);
+        .hover-up:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(var(--bs-primary-rgb), 0.3) !important;
+        }
+
+    .transition-all {
+        transition: all 0.3s ease;
     }
 
-    .btn-cta:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(var(--bs-primary-rgb), 0.5);
+    .bg-light {
+        background-color: #f9fbff !important;
     }
 </style>

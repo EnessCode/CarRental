@@ -33,7 +33,8 @@ namespace CarRental.Application.Features.Mediator.Handlers.BlogHandlers
 				AuthorDescription = values.Author.Description,
 				AuthorImageUrl = values.Author.ImageUrl,   
 				CategoryId = values.CategoryId,
-				CategoryName = values.Category.Name
+				CategoryName = values.Category.Name,
+				CommentCount = values.Comments.Count
 			};
 		}
 	}

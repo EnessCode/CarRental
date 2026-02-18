@@ -1,8 +1,10 @@
 ﻿using CarRental.Dto;
 using CarRental.Dto.BlogDtos;
+using CarRental.Dto.CommentDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http;
+using System.Text;
 
 namespace CarRental.WebUI.Controllers
 {
@@ -62,6 +64,22 @@ namespace CarRental.WebUI.Controllers
 				}
 			}
 			return View(new List<ResultAllBlogsWithAuthorDto>());
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> AddComment(CreateCommentDto createCommentDto)
+		{
+			var client = httpClientFactory.CreateClient("CarRentalApi");
+			var jsonData = JsonConvert.SerializeObject(createCommentDto);
+			StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+			var responseMessage = await client.PostAsync("Comments", content);
+
+			if (responseMessage.IsSuccessStatusCode)
+			{
+				return RedirectToAction("BlogDetail", "Blog", new { id = createCommentDto.BlogId });
+			}
+			return RedirectToAction("Index", "Default");
 		}
 	}
 }

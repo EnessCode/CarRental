@@ -19,5 +19,7 @@ namespace CarRental.Application.Features.Mediator.Results.BlogResults
 		public string AuthorImageUrl { get; set; }  
 		public int CategoryId { get; set; }
 		public string CategoryName { get; set; }
+		public int CommentCount { get; set; }
+
 	}
 }

@@ -24,7 +24,7 @@ namespace CarRental.Persistence.Repositories.BlogRepositories
 
 		public async Task<Blog> GetBlogWithAuthorAndCategoryByBlogId(int id)
 		{
-			return await context.Blogs.Include(x => x.Author).Include(x => x.Category).FirstOrDefaultAsync(x => x.Id == id);
+			return await context.Blogs.Include(x => x.Author).Include(x => x.Category).Include(x => x.Comments).FirstOrDefaultAsync(x => x.Id == id);
 		}
 
 		public async Task<List<Blog>> GetLast3BlogsWithAuthor()
