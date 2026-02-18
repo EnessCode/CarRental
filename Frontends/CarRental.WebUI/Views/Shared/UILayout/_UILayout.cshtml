@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    @await Html.PartialAsync("~/Views/Shared/UILayout/_UIHeadPartial.cshtml")
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+    @await Html.PartialAsync("~/Views/Shared/UILayout/_UINavbarPartial.cshtml")
+
+    <main>
+        @RenderBody()
+    </main>
+
+    @await Html.PartialAsync("~/Views/Shared/UILayout/_UIFooterPartial.cshtml")
+
+    @await Html.PartialAsync("~/Views/Shared/UILayout/_UIScriptPartial.cshtml")
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
