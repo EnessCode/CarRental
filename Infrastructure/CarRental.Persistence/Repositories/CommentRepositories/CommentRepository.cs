@@ -36,7 +36,7 @@ namespace CarRental.Persistence.Repositories.CommentRepositories
 
 		public List<Comment> GetCommentsByBlogId(int id)
 		{
-			return context.Comments.Where(x => x.BlogId == id).OrderByDescending(x => x.CreatedDate).ToList();
+			return context.Comments.Where(x => x.BlogId == id).Include(x => x.Blog).OrderByDescending(x => x.CreatedDate).ToList();
 		}
 
 		public async Task RemoveAsync(Comment entity)

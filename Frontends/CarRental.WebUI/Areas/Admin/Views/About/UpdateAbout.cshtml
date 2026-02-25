@@ -1,0 +1,89 @@
+﻿@model UpdateAboutDto
+
+@{
+    ViewData["Title"] = "Hakkımızda Metnini Güncelle";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="alert alert-info border-0 shadow-sm rounded-4 mb-4 d-flex align-items-center gap-3">
+                <div class="bg-info p-2 rounded-3 text-white">
+                    <i class="ri-refresh-line fs-4"></i>
+                </div>
+                <div>
+                    <h6 class="fw-bold mb-0">Düzenleme Modu</h6>
+                    <small>Şu anda kurumsal tanıtım bilgilerini güncelliyorsunuz. Değişiklikleri kaydettiğinizde hakkımızda sayfası anlık olarak güncellenecektir.</small>
+                </div>
+            </div>
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="card-header bg-white border-bottom py-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="bg-info-soft p-2 rounded-3 text-info">
+                            <i class="ri-edit-2-fill fs-3"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-0">Kurumsal Bilgileri Düzenle</h5>
+                            <small class="text-muted">ID: #@Model.Id olan hakkımızda içeriğini düzenliyorsunuz.</small>
+                        </div>
+                    </div>
+                </div>
+                <form asp-area="Admin" asp-controller="About" asp-action="UpdateAbout" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="card-body p-4 p-md-5">
+                        <div class="row g-4">
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Hakkımızda Başlığı</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i class="ri-bookmark-3-line text-info"></i></span>
+                                    <input type="text" asp-for="Title" class="form-control border-start-0 py-2 shadow-none" placeholder="Başlık giriniz...">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Kurumsal Görsel URL</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i class="ri-image-2-line text-info"></i></span>
+                                    <input type="text" asp-for="ImageUrl" class="form-control border-start-0 py-2 shadow-none" placeholder="Görsel linki...">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Hakkımızda Metni</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i class="ri-align-left text-info"></i></span>
+                                    <textarea asp-for="Description" class="form-control border-start-0 py-2 shadow-none" rows="8" placeholder="Kurumsal açıklama..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light border-top p-4 d-flex justify-content-end gap-2">
+                        <a asp-area="Admin" asp-controller="About" asp-action="Index" class="btn btn-light rounded-pill px-4 fw-bold">Vazgeç</a>
+                        <button type="submit" class="btn btn-info text-white rounded-pill px-5 fw-bold shadow-sm">
+                            <i class="ri-refresh-line me-2"></i> Değişiklikleri Kaydet
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-info-soft {
+        background-color: rgba(13, 202, 240, 0.1);
+    }
+
+    .input-group-text {
+        border-color: #E2E8F0;
+    }
+
+    .form-control {
+        border-color: #E2E8F0;
+        font-size: 0.9rem;
+    }
+
+        .form-control:focus {
+            border-color: #0dcaf0;
+            box-shadow: 0 0 0 0.25rem rgba(13, 202, 240, 0.1);
+        }
+</style>

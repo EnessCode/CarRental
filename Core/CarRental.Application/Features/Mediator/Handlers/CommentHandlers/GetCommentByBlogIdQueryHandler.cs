@@ -21,6 +21,7 @@ namespace CarRental.Application.Features.Mediator.Handlers.CommentHandlers
 				Name = x.Name,
 				Description = x.Description,
 				CreatedDate = x.CreatedDate,
+				BlogTitle = x.Blog.Title,
 			}).ToList();
 		}
 	}

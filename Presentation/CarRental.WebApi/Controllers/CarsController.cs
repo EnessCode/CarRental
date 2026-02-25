@@ -36,7 +36,7 @@ namespace CarRental.WebApi.Controllers
 
 		[HttpPost]
 		public async Task<IActionResult> CreateCar(CreateCarCommand command)
-		{
+		{ 
 			var createdData = await createCarCommandHandler.Handle(command);
 			return StatusCode(201, ApiResponse<CreateCarCommand>.SuccessResponse(createdData, "Yeni araç kaydı başarıyla oluşturuldu"));
 		}

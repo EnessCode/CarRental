@@ -1,0 +1,56 @@
+﻿@model CreateFooterAddressesDto
+
+@{
+    ViewData["Title"] = "Yeni Adres Ekle";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h5 class="fw-bold mb-0">Kurumsal İletişim Detayları</h5>
+                </div>
+
+                <form asp-controller="FooterAddress" asp-action="CreateFooterAddress" method="post">
+                    <div class="card-body p-4 p-md-5">
+                        <div class="row g-4">
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Kısa Açıklama</label>
+                                <textarea asp-for="Description" class="form-control shadow-none" rows="2" placeholder="Şirket vizyonu veya kısa bir not..."></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Tam Adres</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i class="ri-map-pin-line text-primary"></i></span>
+                                    <input type="text" asp-for="Address" class="form-control border-start-0 py-2 shadow-none" placeholder="Mahalle, Sokak, No, Şehir...">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Telefon</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i class="ri-phone-fill text-primary"></i></span>
+                                    <input type="text" asp-for="Phone" class="form-control border-start-0 py-2 shadow-none" placeholder="+90 5XX XXX XX XX">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted text-uppercase">E-Posta</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i class="ri-mail-send-line text-primary"></i></span>
+                                    <input type="email" asp-for="Email" class="form-control border-start-0 py-2 shadow-none" placeholder="info@carrental.com">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light border-top p-4 d-flex justify-content-end gap-2">
+                        <a href="/Admin/FooterAddress/Index" class="btn btn-light rounded-pill px-4 fw-bold text-secondary">Vazgeç</a>
+                        <button type="submit" class="btn btn-primary rounded-pill px-5 fw-bold shadow-primary">
+                            <i class="ri-save-line me-2"></i> Adresi Kaydet
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

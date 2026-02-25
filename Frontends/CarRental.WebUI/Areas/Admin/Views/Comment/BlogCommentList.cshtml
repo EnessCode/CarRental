@@ -1,0 +1,84 @@
+﻿@model List<ResultCommentDto>
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-primary border-0 shadow-sm rounded-4 mb-4 d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="bg-primary p-2 rounded-3 text-white">
+                        <i class="ri-chat-1-line fs-4"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-0">Yorum Yönetimi</h6>
+                        <small>" @ViewBag.BlogTitle " başlıklı yazıya gelen yorumlar.</small>
+                    </div>
+                </div>
+                <a href="/Admin/Blog/Index" class="btn btn-sm btn-light rounded-pill px-3 fw-bold">
+                    <i class="ri-arrow-left-line"></i> Bloglara Dön
+                </a>
+            </div>
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th class="ps-4 py-3 text-muted fw-bold small text-uppercase">Yorum Yapan</th>
+                                    <th class="py-3 text-muted fw-bold small text-uppercase">Yorum İçeriği</th>
+                                    <th class="py-3 text-muted fw-bold small text-uppercase text-center">İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="ps-4">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <div class="bg-soft-primary p-2 rounded-circle text-primary fw-bold" style="width: 35px; height: 35px; display:flex; align-items:center; justify-content:center; font-size: 0.8rem;">
+                                                    @item.Name.Substring(0,1).ToUpper()
+                                                </div>
+                                                <span class="fw-bold text-dark">@item.Name</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="text-muted small" style="max-width: 500px; white-space: normal;">
+                                                @item.Description
+                                            </div>
+                                        </td>
+                                        <td class="text-center pe-4">
+                                            <button onclick="deleteComment('@item.Id', '@ViewBag.BlogId')"
+                                                    class="btn btn-sm btn-outline-danger rounded-circle p-2 border-0 shadow-sm"
+                                                    title="Sil">
+                                                <i class="ri-delete-bin-6-line fs-5"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function deleteComment(id, blogId) {
+        Swal.fire({
+            title: 'Emin misiniz?',
+            text: "Bu yorumu silmek istediğinize emin misiniz? Bu işlem geri alınamaz!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ef4444',
+            cancelButtonColor: '#64748b',
+            confirmButtonText: 'Evet, Sil!',
+            cancelButtonText: 'Vazgeç'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Admin/Comment/DeleteComment?id=" + id + "&blogId=" + blogId;
+            }
+        })
+    }
+</script>

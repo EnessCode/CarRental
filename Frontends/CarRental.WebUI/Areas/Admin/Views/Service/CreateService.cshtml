@@ -1,0 +1,41 @@
+﻿@model CreateServiceDto
+
+@{
+    ViewData["Title"] = "Yeni Hizmet";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h5 class="fw-bold mb-0">Hizmet Detaylarını Girin</h5>
+                </div>
+
+                <form asp-controller="Service" asp-action="CreateService" method="post">
+                    <div class="card-body p-4">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Hizmet Başlığı</label>
+                                <input type="text" asp-for="Title" class="form-control py-2 shadow-none" placeholder="Örn: 7/24 Destek">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted text-uppercase">RemixIcon Sınıfı</label>
+                                <input type="text" asp-for="IconUrl" class="form-control py-2 shadow-none" placeholder="ri-customer-service-line">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Açıklama</label>
+                                <textarea asp-for="Description" class="form-control shadow-none" rows="4" placeholder="Hizmet hakkında kısa bilgi..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light border-top p-4 d-flex justify-content-end gap-2">
+                        <a href="/Admin/Service/Index" class="btn btn-light rounded-pill px-4 fw-bold">Vazgeç</a>
+                        <button type="submit" class="btn btn-primary rounded-pill px-5 fw-bold shadow-primary">Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

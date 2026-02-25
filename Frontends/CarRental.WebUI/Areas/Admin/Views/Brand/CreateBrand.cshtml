@@ -1,0 +1,69 @@
+﻿@model CreateBrandDto
+
+@{
+	ViewData["Title"] = "Yeni Marka Ekle";
+	Layout = "~/Areas/Admin/Views/Shared/AdminLayout/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid py-4">
+	<div class="row justify-content-center">
+		<div class="col-lg-10">
+			<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+				<div class="card-header bg-white border-bottom py-3">
+					<div class="d-flex align-items-center gap-3">
+						<div class="bg-primary-soft p-2 rounded-3 text-primary">
+							<i class="ri-add-box-line fs-3"></i>
+						</div>
+						<div>
+							<h5 class="fw-bold mb-0">Yeni Marka Tanımla</h5>
+							<small class="text-muted">Filoya dahil edilecek yeni markayı giriniz.</small>
+						</div>
+					</div>
+				</div>
+				<form asp-area="Admin" asp-controller="Brand" asp-action="CreateBrand" method="post">
+					<div class="card-body p-4 p-md-5">
+						<div class="row g-4">
+							<div class="col-md-6">
+								<label class="form-label fw-bold small text-muted text-uppercase">Marka Adı</label>
+								<div class="input-group">
+									<span class="input-group-text bg-light border-end-0"><i class="ri-car-fill"></i></span>
+									<input type="text" asp-for="Name" class="form-control border-start-0 py-2 shadow-none" placeholder="Örn: Mercedes">
+								</div>
+							</div>
+						</div>
+					</div> <div class="card-footer bg-light border-top p-4 d-flex justify-content-end gap-2">
+						<a asp-area="Admin" asp-controller="Brand" asp-action="Index" class="btn btn-light rounded-pill px-4 fw-bold">Vazgeç</a>
+						<button type="submit" class="btn btn-primary rounded-pill px-5 fw-bold shadow-primary">
+							<i class="ri-save-line me-2"></i> Marka Kaydet
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.input-group-text {
+		color: #64748B;
+		border-color: #E2E8F0;
+	}
+
+	.form-control, .form-select {
+		border-color: #E2E8F0;
+		font-size: 0.9rem;
+	}
+
+		.form-control:focus, .form-select:focus {
+			border-color: #4361ee;
+		}
+
+	.bg-primary-soft {
+		background-color: rgba(67, 97, 238, 0.1);
+	}
+
+	.shadow-primary {
+		box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+	}
+</style>
+

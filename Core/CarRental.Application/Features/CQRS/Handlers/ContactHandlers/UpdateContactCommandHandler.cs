@@ -21,6 +21,7 @@ namespace CarRental.Application.Features.CQRS.Handlers.ContactHandlers
 			value.Subject = command.Subject;
 			value.Message = command.Message;
 			value.SendDate = command.SendDate;
+			value.IsRead = command.IsRead;
 
 			await aboutRepository.UpdateAsync(value);
 			return command;

@@ -1,0 +1,93 @@
+﻿@model CreateAboutDto
+
+@{
+    ViewData["Title"] = "Hakkımızda Metni Ekle";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="alert alert-primary border-0 shadow-sm rounded-4 mb-4 d-flex align-items-center gap-3">
+                <div class="bg-primary p-2 rounded-3 text-white">
+                    <i class="ri-history-line fs-4"></i>
+                </div>
+                <div>
+                    <h6 class="fw-bold mb-0">Kurumsal Kimlik</h6>
+                    <small>Bu sayfada gireceğiniz bilgiler, müşterilerinizin markanıza olan güvenini artıracak "Hakkımızda" bölümünde yer alacaktır.</small>
+                </div>
+            </div>
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="card-header bg-white border-bottom py-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="bg-primary-soft p-2 rounded-3 text-primary">
+                            <i class="ri-edit-box-line fs-3"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-0">Hakkımızda İçeriği Oluştur</h5>
+                            <small class="text-muted">Başlık, açıklama ve kurumsal fotoğraf bilgilerini giriniz.</small>
+                        </div>
+                    </div>
+                </div>
+                <form asp-area="Admin" asp-controller="About" asp-action="CreateAbout" method="post">
+                    <div class="card-body p-4 p-md-5">
+                        <div class="row g-4">
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Hakkımızda Başlığı</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i class="ri-bookmark-3-line"></i></span>
+                                    <input type="text" asp-for="Title" class="form-control border-start-0 py-2 shadow-none" placeholder="Örn: Yolculuğunuzda Güvenilir Ortağınız">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Kurumsal Görsel URL</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i class="ri-image-2-line"></i></span>
+                                    <input type="text" asp-for="ImageUrl" class="form-control border-start-0 py-2 shadow-none" placeholder="Hakkımızda sayfasında görünecek ana görsel linki">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Hakkımızda Metni</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i class="ri-align-left"></i></span>
+                                    <textarea asp-for="Description" class="form-control border-start-0 py-2 shadow-none" rows="6" placeholder="Şirket geçmişiniz, vizyonunuz ve misyonunuz hakkında detaylı bilgi veriniz..."></textarea>
+                                </div>
+                                <small class="text-muted mt-2 d-block">Metnin okunaklı olması için paragraflara bölerek yazmanız önerilir.</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light border-top p-4 d-flex justify-content-end gap-2">
+                        <a asp-area="Admin" asp-controller="About" asp-action="Index" class="btn btn-light rounded-pill px-4 fw-bold">Vazgeç</a>
+                        <button type="submit" class="btn btn-primary rounded-pill px-5 fw-bold shadow-primary">
+                            <i class="ri-save-line me-2"></i> İçeriği Kaydet
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .input-group-text {
+        color: #64748B;
+        border-color: #E2E8F0;
+    }
+
+    .form-control {
+        border-color: #E2E8F0;
+        font-size: 0.9rem;
+    }
+
+        .form-control:focus {
+            border-color: #4361ee;
+        }
+
+    .bg-primary-soft {
+        background-color: rgba(67, 97, 238, 0.1);
+    }
+
+    .shadow-primary {
+        box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+    }
+</style>

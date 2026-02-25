@@ -1,0 +1,108 @@
+﻿@model List<ResultCarWithBrandDto>
+
+@{
+	ViewData["Title"] = "Araç Listesi";
+	Layout = "~/Areas/Admin/Views/Shared/AdminLayout/_AdminLayout.cshtml";
+	int count = 0;
+}
+
+<div class="container-fluid py-4">
+	<div class="row">
+		<div class="col-12">
+			<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+				<div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+					<div>
+						<h5 class="fw-bold mb-0 text-dark">
+							<i class="ri-car-fill text-primary me-2"></i> Araç Yönetimi
+						</h5>
+						<small class="text-muted">Sistemde kayıtlı olan tüm araçları buradan yönetebilirsiniz.</small>
+					</div>
+					<a href="/Admin/Car/CreateCar" class="btn btn-primary rounded-pill px-4 d-flex align-items-center gap-2">
+						<i class="ri-add-circle-line"></i> Yeni Araç Ekle
+					</a>
+				</div>
+			</div>
+			<div class="card-body p-0">
+				<div class="table-responsive">
+					<table class="table table-hover align-middle mb-0">
+						<thead class="bg-light">
+							<tr>
+								<th class="ps-4 py-3 text-muted fw-bold small text-uppercase">#</th>
+								<th class="py-3 text-muted fw-bold small text-uppercase">Araç Bilgisi</th>
+								<th class="py-3 text-muted fw-bold small text-uppercase text-center">Vites</th>
+								<th class="py-3 text-muted fw-bold small text-uppercase text-center">Km</th>
+								<th class="py-3 text-muted fw-bold small text-uppercase text-center">İşlemler</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model)
+							{
+								count++;
+								<tr>
+									<td class="ps-4 fw-medium text-secondary">@count</td>
+									<td>
+										<div class="d-flex align-items-center gap-3">
+											<div class="bg-light rounded-3 p-2 border">
+												<i class="ri-car-line text-primary fs-4"></i>
+											</div>
+											<div>
+												<div class="fw-bold text-dark">@item.BrandName @item.Model</div>
+												<div class="small text-muted">ID: #@item.Id</div>
+											</div>
+										</div>
+									</td>
+									<td class="text-center">
+										<span class="badge bg-soft-primary text-primary rounded-pill px-3">
+											@item.Transmission
+										</span>
+									</td>
+									<td class="text-center text-secondary">
+										<i class="ri-dashboard-3-line me-1"></i> @item.Kilometer.ToString("N0")
+									</td>
+									<td class="text-center pe-4">
+										<div class="d-flex justify-content-center gap-2">
+											<a href="/Admin/Car/UpdateCar/@item.Id" class="btn btn-sm btn-outline-info rounded-circle p-2 border-0 shadow-sm" title="Güncelle">
+												<i class="ri-edit-2-line fs-5"></i>
+											</a>
+											<button onclick="deleteItem('@item.Id','Car')" class="btn btn-sm btn-outline-danger rounded-circle p-2 border-0 shadow-sm" title="Sil">
+												<i class="ri-delete-bin-6-line fs-5"></i>
+											</button>
+										</div>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="card-footer bg-white border-top py-3">
+				<p class="mb-0 small text-muted">Toplam <strong>@Model.Count</strong> kayıt bulundu.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.bg-soft-primary {
+		background-color: rgba(79, 70, 229, 0.1) !important;
+	}
+
+	.table thead th {
+		font-size: 0.75rem;
+		letter-spacing: 0.5px;
+	}
+
+	.table tbody tr {
+		transition: background-color 0.2s ease;
+	}
+
+		.table tbody tr:hover {
+			background-color: rgba(0, 0, 0, 0.01) !important;
+		}
+
+	.btn-outline-info:hover, .btn-outline-danger:hover {
+		background-color: var(--bs-light);
+		color: inherit;
+		transform: scale(1.1);
+	}
+</style>

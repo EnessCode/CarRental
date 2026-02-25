@@ -1,0 +1,136 @@
+﻿@model CreateCarDto
+
+@{
+	ViewData["Title"] = "Yeni Araç Ekle";
+	Layout = "~/Areas/Admin/Views/Shared/AdminLayout/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid py-4">
+	<div class="row justify-content-center">
+		<div class="col-lg-10">
+			<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+				<div class="card-header bg-white border-bottom py-3">
+					<div class="d-flex align-items-center gap-3">
+						<div class="bg-primary-soft p-2 rounded-3 text-primary">
+							<i class="ri-add-box-line fs-3"></i>
+						</div>
+						<div>
+							<h5 class="fw-bold mb-0">Yeni Araç Tanımla</h5>
+							<small class="text-muted">Filoya dahil edilecek yeni aracın detaylarını giriniz.</small>
+						</div>
+					</div>
+				</div>
+				<form asp-area="Admin" asp-controller="Car" asp-action="CreateCar" method="post">
+					<div class="card-body p-4 p-md-5">
+						<div class="row g-4">
+							<div class="col-md-6">
+								<label class="form-label fw-bold small text-muted text-uppercase">Araç Markası</label>
+								<div class="input-group">
+									<span class="input-group-text bg-light border-end-0"><i class="ri-price-tag-3-line"></i></span>
+									@Html.DropDownListFor(x => x.BrandId, (List<SelectListItem>)ViewBag.BrandList, "Marka Seçiniz", new { @class = "form-select border-start-0 py-2 shadow-none" })
+								</div>
+							</div>
+							<div class="col-md-6">
+								<label class="form-label fw-bold small text-muted text-uppercase">Model Adı</label>
+								<div class="input-group">
+									<span class="input-group-text bg-light border-end-0"><i class="ri-car-fill"></i></span>
+									<input type="text" asp-for="Model" class="form-control border-start-0 py-2 shadow-none" placeholder="Örn: Golf">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<label class="form-label fw-bold small text-muted text-uppercase">Liste Görsel URL (Kapak)</label>
+								<div class="input-group">
+									<span class="input-group-text bg-light border-end-0"><i class="ri-image-line"></i></span>
+									<input type="text" asp-for="CoverImageUrl" class="form-control border-start-0 py-2 shadow-none" placeholder="https://image-url.com/liste.jpg">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<label class="form-label fw-bold small text-muted text-uppercase">Detay Görsel URL (Büyük)</label>
+								<div class="input-group">
+									<span class="input-group-text bg-light border-end-0"><i class="ri-image-fill"></i></span>
+									<input type="text" asp-for="BigImageUrl" class="form-control border-start-0 py-2 shadow-none" placeholder="https://image-url.com/detay.jpg">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<label class="form-label fw-bold small text-muted text-uppercase">Kilometre</label>
+								<div class="input-group">
+									<span class="input-group-text bg-light border-end-0"><i class="ri-dashboard-3-line"></i></span>
+									<input type="number" asp-for="Kilometer" class="form-control border-start-0 py-2 shadow-none" placeholder="0">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<label class="form-label fw-bold small text-muted text-uppercase">Vites Tipi</label>
+								<div class="input-group">
+									<span class="input-group-text bg-light border-end-0"><i class="ri-settings-3-line"></i></span>
+									<select asp-for="Transmission" class="form-select border-start-0 py-2 shadow-none">
+										<option value="">Vites Seçiniz</option>
+										<option value="Otomatik">Otomatik</option>
+										<option value="Manuel">Manuel</option>
+										<option value="Yarı Otomatik">Yarı Otomatik</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<label class="form-label fw-bold small text-muted text-uppercase">Yakıt Tipi</label>
+								<div class="input-group">
+									<span class="input-group-text bg-light border-end-0"><i class="ri-gas-station-line"></i></span>
+									<select asp-for="Fuel" class="form-select border-start-0 py-2 shadow-none">
+										<option value="">Yakıt Türü Seçiniz</option>
+										<option value="Benzin">Benzin</option>
+										<option value="Dizel">Dizel</option>
+										<option value="Hibrit">Hibrit</option>
+										<option value="Elektrik">Elektrik</option>
+										<option value="LPG">Benzin & LPG</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<label class="form-label fw-bold small text-muted text-uppercase">Bagaj Kapasitesi</label>
+								<div class="input-group">
+									<span class="input-group-text bg-light border-end-0"><i class="ri-briefcase-4-line"></i></span>
+									<input type="number" asp-for="Luggage" class="form-control border-start-0 py-2 shadow-none" placeholder="Bağaj">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<label class="form-label fw-bold small text-muted text-uppercase">Koltuk Sayısı</label>
+								<div class="input-group">
+									<span class="input-group-text bg-light border-end-0"><i class="ri-user-line"></i></span>
+									<input type="number" asp-for="Seat" class="form-control border-start-0 py-2 shadow-none" placeholder="Kişi">
+								</div>
+							</div>
+						</div>
+					</div> <div class="card-footer bg-light border-top p-4 d-flex justify-content-end gap-2">
+						<a asp-area="Admin" asp-controller="Car" asp-action="Index" class="btn btn-light rounded-pill px-4 fw-bold">Vazgeç</a>
+						<button type="submit" class="btn btn-primary rounded-pill px-5 fw-bold shadow-primary">
+							<i class="ri-save-line me-2"></i> Aracı Kaydet
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.input-group-text {
+		color: #64748B;
+		border-color: #E2E8F0;
+	}
+
+	.form-control, .form-select {
+		border-color: #E2E8F0;
+		font-size: 0.9rem;
+	}
+
+		.form-control:focus, .form-select:focus {
+			border-color: #4361ee;
+		}
+
+	.bg-primary-soft {
+		background-color: rgba(67, 97, 238, 0.1);
+	}
+
+	.shadow-primary {
+		box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+	}
+</style>

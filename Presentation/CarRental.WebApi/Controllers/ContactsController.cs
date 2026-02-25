@@ -14,7 +14,8 @@ namespace CarRental.WebApi.Controllers
 		GetContactQueryHandler getContactQueryHandler,
 		GetContactByIdQueryHandler getContactByIdHandler,
 		UpdateContactCommandHandler updateContactCommandHandler,
-		RemoveContactCommandHandler removeContactCommandHandler
+		RemoveContactCommandHandler removeContactCommandHandler,
+		MarkContactAsReadCommandHandler markContactAsReadCommandHandler
 		) : ControllerBase
 	{
 
@@ -51,6 +52,13 @@ namespace CarRental.WebApi.Controllers
 		{
 			var updatedData = await updateContactCommandHandler.Handle(command);
 			return Ok(ApiResponse<UpdateContactCommand>.SuccessResponse(updatedData, "İletişim bilgisi başarıyla güncellendi"));
+		}
+
+		[HttpGet("MarkContactAsRead/{id}")] 
+		public async Task<IActionResult> MarkContactAsRead(int id)
+		{
+			await markContactAsReadCommandHandler.Handle(id);
+			return Ok(ApiResponse<string>.SuccessResponse(null, "Mesaj okundu olarak işaretlendi."));
 		}
 	}
 }

@@ -6,7 +6,11 @@
         <div class="card h-100 border-0 shadow-sm rounded-4 p-4 hover-up transition-all bg-white">
             <div class="card-body p-0">
 
-                <h5 class="fw-bold text-dark mb-4 border-bottom pb-3">İletişim Kanalları</h5>
+                <h5 class="fw-bold text-dark mb-2">İletişim Kanalları</h5>
+
+                <p class="text-muted small mb-4 pb-3 border-bottom italic" style="line-height: 1.6;">
+                    @item.Description
+                </p>
 
                 <div class="d-flex align-items-start mb-4">
                     <div class="flex-shrink-0 d-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle" style="width: 50px; height: 50px;">
@@ -59,5 +63,9 @@
 
     .hover-text-primary:hover {
         color: var(--primary) !important;
+    }
+
+    .italic {
+        font-style: italic;
     }
 </style>

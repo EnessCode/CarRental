@@ -1,0 +1,46 @@
+﻿@model CreateAuthorDto
+
+@{
+    ViewData["Title"] = "Yeni Yazar";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h5 class="fw-bold mb-0"><i class="ri-user-add-line text-primary me-2"></i>Yeni Yazar Tanımla</h5>
+                </div>
+                <form method="post">
+                    <div class="card-body p-4 p-md-5">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Yazar Adı Soyadı</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i class="ri-user-line"></i></span>
+                                    <input type="text" asp-for="Name" class="form-control border-start-0 py-2 shadow-none" placeholder="Örn: Ahmet Yılmaz">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Profil Fotoğraf URL</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i class="ri-image-circle-line"></i></span>
+                                    <input type="text" asp-for="ImageUrl" class="form-control border-start-0 py-2 shadow-none" placeholder="Fotoğraf linkini buraya yapıştırın">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Yazar Biyografisi / Hakkında</label>
+                                <textarea asp-for="Description" class="form-control py-3 shadow-none" rows="4" placeholder="Yazarın uzmanlık alanları ve kısa özgeçmişi..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light border-top p-4 d-flex justify-content-end gap-2">
+                        <a href="/Admin/Author/Index" class="btn btn-light rounded-pill px-4 fw-bold">Vazgeç</a>
+                        <button type="submit" class="btn btn-primary rounded-pill px-5 fw-bold shadow-primary">Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

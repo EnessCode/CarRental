@@ -26,7 +26,8 @@ namespace CarRental.Application.Features.CQRS.Handlers.ContactHandlers
 				Email = value.Email,
 				Subject = value.Subject,
 				Message = value.Message,
-				SendDate = value.SendDate
+				SendDate = value.SendDate,
+				IsRead = value.IsRead
 			};
 		}
 	}

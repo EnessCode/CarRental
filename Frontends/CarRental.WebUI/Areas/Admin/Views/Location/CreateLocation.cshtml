@@ -1,0 +1,44 @@
+﻿@model CreateLocationDto
+
+@{
+    ViewData["Title"] = "Yeni Lokasyon";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="card-header bg-white border-bottom py-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="bg-primary-soft p-2 rounded-3 text-primary">
+                            <i class="ri-map-pin-add-line fs-3"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-0">Yeni Lokasyon Tanımla</h5>
+                            <small class="text-muted">Havalimanı, Şehir Merkezi veya Şube adı giriniz.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <form asp-area="Admin" asp-controller="Location" asp-action="CreateLocation" method="post">
+                    <div class="card-body p-4 p-md-5">
+                        <div class="col-12">
+                            <label class="form-label fw-bold small text-muted text-uppercase">Lokasyon Adı</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="ri-map-pin-line text-primary"></i></span>
+                                <input type="text" asp-for="Name" class="form-control border-start-0 py-2 shadow-none" placeholder="Örn: İstanbul Sabiha Gökçen Havalimanı">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light border-top p-4 d-flex justify-content-end gap-2">
+                        <a href="/Admin/Location/Index" class="btn btn-light rounded-pill px-4 fw-bold text-secondary">Vazgeç</a>
+                        <button type="submit" class="btn btn-primary rounded-pill px-5 fw-bold shadow-primary">
+                            <i class="ri-save-line me-2"></i> Lokasyonu Kaydet
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

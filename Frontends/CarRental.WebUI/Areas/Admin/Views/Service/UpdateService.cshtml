@@ -1,0 +1,42 @@
+﻿@model UpdateServiceDto
+
+@{
+    ViewData["Title"] = "Hizmet Güncelle";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h5 class="fw-bold mb-0">Hizmet Bilgilerini Düzenle</h5>
+                </div>
+
+                <form asp-controller="Service" asp-action="UpdateService" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="card-body p-4">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Başlık</label>
+                                <input type="text" asp-for="Title" class="form-control py-2 shadow-none">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted text-uppercase">İkon Kodu</label>
+                                <input type="text" asp-for="IconUrl" class="form-control py-2 shadow-none">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-bold small text-muted text-uppercase">Açıklama</label>
+                                <textarea asp-for="Description" class="form-control shadow-none" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light border-top p-4 d-flex justify-content-end gap-2">
+                        <a href="/Admin/Service/Index" class="btn btn-light rounded-pill px-4 fw-bold">İptal</a>
+                        <button type="submit" class="btn btn-info text-white rounded-pill px-5 fw-bold shadow-sm">Güncelle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,7 +14,8 @@ namespace CarRental.Application.Features.CQRS.Handlers.ContactHandlers
 				Email = Command.Email,
 				Subject = Command.Subject,
 				Message = Command.Message,
-				SendDate = Command.SendDate
+				SendDate = Command.SendDate,
+				IsRead = Command.IsRead
 			};
 
 			await contactRepository.CreateAsync(contact);

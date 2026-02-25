@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    @await Html.PartialAsync("~/Areas/Admin/Views/Shared/AdminLayout/_AdminHeaderPartial.cshtml")
+    <title>@ViewData["Title"] - CarRental Admin</title>
+</head>
+<body>
+    <div class="d-flex">
+        @await Html.PartialAsync("~/Areas/Admin/Views/Shared/AdminLayout/_AdminSidebarPartial.cshtml")
+
+        <div id="page-content-wrapper" style="margin-left: var(--sidebar-width); flex: 1; min-height: 100vh; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+            @await Html.PartialAsync("~/Areas/Admin/Views/Shared/AdminLayout/_AdminNavbarPartial.cshtml")
+
+            <main class="p-4 px-lg-5">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    @await Html.PartialAsync("~/Areas/Admin/Views/Shared/AdminLayout/_AdminFooterPartial.cshtml")
+</body>
+</html>

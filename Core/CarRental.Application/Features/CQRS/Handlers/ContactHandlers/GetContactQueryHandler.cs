@@ -16,7 +16,8 @@ namespace CarRental.Application.Features.CQRS.Handlers.ContactHandlers
 				Email = x.Email,
 				Subject = x.Subject,
 				Message = x.Message,
-				SendDate = x.SendDate
+				SendDate = x.SendDate,
+				IsRead = x.IsRead
 			}).ToList();
 		}
 	}

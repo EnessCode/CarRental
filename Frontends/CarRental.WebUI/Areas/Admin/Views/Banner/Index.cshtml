@@ -1,0 +1,99 @@
+﻿@model List<ResultBannerDto>
+
+@{
+	ViewData["Title"] = "Banner Listesi";
+	Layout = "~/Areas/Admin/Views/Shared/AdminLayout/_AdminLayout.cshtml";
+	int count = 0;
+}
+
+<div class="container-fluid py-4">
+	<div class="alert alert-warning border-0 shadow-sm rounded-4 mb-4 d-flex align-items-center gap-3">
+		<div class="bg-warning p-2 rounded-3 text-white">
+			<i class="ri-information-line fs-4"></i>
+		</div>
+		<div>
+			<h6 class="fw-bold mb-0">Önemli Hatırlatma</h6>
+			<small>Ana sayfa tasarımı gereği sistemde sadece <strong>bir adet aktif banner</strong> girişi olmalıdır. Yeni bir banner eklemeden önce mevcut olanı silmeniz veya güncellemeniz önerilir.</small>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+				<div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
+					<div>
+						<h5 class="fw-bold mb-0 text-dark">
+							<i class="ri-slideshow-3-line text-primary me-2"></i> Banner Yönetimi
+						</h5>
+					</div>
+					@if (Model.Count == 0)
+					{
+						<a href="/Admin/Banner/CreateBanner" class="btn btn-primary rounded-pill px-4 shadow-primary">
+							<i class="ri-add-circle-line me-1"></i> Yeni Banner Ekle
+						</a>
+					}
+				</div>
+				<div class="card-body p-0">
+					<div class="table-responsive">
+						<table class="table table-hover align-middle mb-0">
+							<thead class="bg-light">
+								<tr>
+									<th class="ps-4 py-3 text-muted fw-bold small text-uppercase">#</th>
+									<th class="py-3 text-muted fw-bold small text-uppercase">Banner İçeriği</th>
+									<th class="py-3 text-muted fw-bold small text-uppercase text-center">İşlemler</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var item in Model)
+								{
+									count++;
+									<tr>
+										<td class="ps-4 fw-medium text-secondary">@count</td>
+										<td>
+											<div class="fw-bold text-dark">@item.Title</div>
+											<div class="small text-muted">@item.Description</div>
+										</td>
+										<td class="text-center pe-4">
+											<div class="d-flex justify-content-center gap-2">
+												<a href="/Admin/Banner/UpdateBanner/@item.Id" class="btn btn-sm btn-outline-info rounded-circle p-2 border-0 shadow-sm">
+													<i class="ri-edit-2-line fs-5"></i>
+												</a>
+												<button onclick="deleteItem('@item.Id','Banner')" class="btn btn-sm btn-outline-danger rounded-circle p-2 border-0 shadow-sm">
+													<i class="ri-delete-bin-6-line fs-5"></i>
+												</button>
+											</div>
+										</td>
+									</tr>
+								}
+								@if (Model.Count == 0)
+								{
+									<tr>
+										<td colspan="3" class="text-center py-5 text-muted">
+											Henüz bir banner girişi yapılmamış.
+										</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.btn-soft-danger {
+		background-color: rgba(239, 68, 68, 0.1);
+		color: #ef4444;
+		border: none;
+	}
+
+		.btn-soft-danger:hover {
+			background-color: #ef4444;
+			color: white;
+		}
+
+	.shadow-primary {
+		box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+	}
+</style>

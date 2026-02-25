@@ -1,0 +1,69 @@
+﻿@model CreateFeatureDto
+
+@{
+	ViewData["Title"] = "Özellik Ekle";
+	Layout = "~/Areas/Admin/Views/Shared/AdminLayout/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid py-4">
+	<div class="row justify-content-center">
+		<div class="col-lg-10">
+			<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+				<div class="card-header bg-white border-bottom py-3">
+					<div class="d-flex align-items-center gap-3">
+						<div class="bg-primary-soft p-2 rounded-3 text-primary">
+							<i class="ri-add-box-line fs-3"></i>
+						</div>
+						<div>
+							<h5 class="fw-bold mb-0">Yeni Özellik Tanımla</h5>
+							<small class="text-muted">Sisteme dahil edilecek yeni özelliği giriniz.</small>
+						</div>
+					</div>
+				</div>
+				<form asp-area="Admin" asp-controller="Feature" asp-action="CreateFeature" method="post">
+					<div class="card-body p-4 p-md-5">
+						<div class="col-md-8">
+							<label class="form-label fw-bold small text-muted text-uppercase">Özellik Adı</label>
+							<div class="input-group">
+								<span class="input-group-text bg-white border-end-0"><i class="ri-list-check-3 text-primary"></i></span>
+								<input type="text" asp-for="Name" class="form-control border-start-0 py-3 shadow-none" placeholder="Örn: Navigasyon, Geri Görüş Kamerası...">
+							</div>
+							<small class="text-muted mt-2 d-block">Lütfen kısa ve açıklayıcı bir isim giriniz.</small>
+						</div>
+					</div> <div class="card-footer bg-light border-top p-4 d-flex justify-content-end gap-2">
+						<a asp-area="Admin" asp-controller="Feature" asp-action="Index" class="btn btn-light rounded-pill px-4 fw-bold">Vazgeç</a>
+						<button type="submit" class="btn btn-primary rounded-pill px-5 fw-bold shadow-primary">
+							<i class="ri-save-line me-2"></i> Özellik Kaydet
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.input-group-text {
+		color: #64748B;
+		border-color: #E2E8F0;
+	}
+
+	.form-control, .form-select {
+		border-color: #E2E8F0;
+		font-size: 0.9rem;
+	}
+
+		.form-control:focus, .form-select:focus {
+			border-color: #4361ee;
+		}
+
+	.bg-primary-soft {
+		background-color: rgba(67, 97, 238, 0.1);
+	}
+
+	.shadow-primary {
+		box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+	}
+</style>
+
+
