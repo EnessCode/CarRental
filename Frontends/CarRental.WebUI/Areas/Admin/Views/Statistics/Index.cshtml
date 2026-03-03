@@ -1,0 +1,171 @@
+﻿@{
+    ViewData["Title"] = "İstatistikler";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <h2 class="fw-bold">Sistem İstatistikleri</h2>
+            <p class="text-muted">Araç kiralama verilerine dair güncel özet bilgiler.</p>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white shadow-sm h-100">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <h6 class="card-title text-uppercase mb-2">Toplam Araç</h6>
+                    <h2 class="display-6 fw-bold">@ViewBag.carCount</h2>
+                    <i class="fas fa-car fa-2x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white shadow-sm h-100">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <h6 class="card-title text-uppercase mb-2">Lokasyon Sayısı</h6>
+                    <h2 class="display-6 fw-bold">@ViewBag.locationCount</h2>
+                    <i class="fas fa-map-marker-alt fa-2x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white shadow-sm h-100">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <h6 class="card-title text-uppercase mb-2">Marka Sayısı</h6>
+                    <h2 class="display-6 fw-bold">@ViewBag.brandCount</h2>
+                    <i class="fas fa-tags fa-2x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-dark shadow-sm h-100">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <h6 class="card-title text-uppercase mb-2">Blog Sayısı</h6>
+                    <h2 class="display-6 fw-bold">@ViewBag.blogCount</h2>
+                    <i class="fas fa-newspaper fa-2x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-start border-secondary border-4">
+                <div class="card-header bg-white fw-bold">Şanzıman Dağılımı</div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Otomatik Vites:</span>
+                        <span class="badge bg-dark">@ViewBag.automaticCarCount Adet</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Manuel Vites:</span>
+                        <span class="badge bg-secondary">@ViewBag.manualCarCount Adet</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm border-start border-secondary border-4">
+                <div class="card-header bg-white fw-bold">Yakıt Türleri</div>
+                <div class="card-body d-flex justify-content-around text-center">
+                    <div>
+                        <p class="mb-0 text-muted small">Benzin</p>
+                        <h4 class="fw-bold">@ViewBag.gasolineCount</h4>
+                    </div>
+                    <div class="border-start ps-4">
+                        <p class="mb-0 text-muted small">Dizel</p>
+                        <h4 class="fw-bold text-danger">@ViewBag.dieselCount</h4>
+                    </div>
+                    <div class="border-start ps-4">
+                        <p class="mb-0 text-muted small">Elektrik</p>
+                        <h4 class="fw-bold text-success">@ViewBag.electricCount</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0 border-top border-4 border-primary h-100">
+                <div class="card-body">
+                    <h5 class="card-title mb-4"><i class="fas fa-clock me-2 text-primary"></i>Ortalama Fiyatlar</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Saatlik: <span class="fw-bold text-primary">@(ViewBag.avgPriceHourly ?? "0.00") ₺</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Günlük: <span class="fw-bold text-primary">@(ViewBag.avgPriceDaily ?? "0.00") ₺</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Aylık: <span class="fw-bold text-primary">@(ViewBag.avgPriceMonthly ?? "0.00") ₺</span>
+                        </li>
+                    </ul>
+                    <div class="alert alert-light mt-3 small text-muted">
+                        * Fiyatlar sistemdeki tüm araçların ortalamasıdır.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title mb-4"><i class="fas fa-star me-2 text-warning"></i>Öne Çıkan Bilgiler</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Kategori</th>
+                                    <th>Sonuç</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>En Çok Aracı Olan Marka</td>
+                                    <td><span class="badge bg-info text-dark">@ViewBag.maxBrandName</span></td>
+                                </tr>
+                                <tr>
+                                    <td>En Pahalı Kiralık Araç (Günlük)</td>
+                                    <td><span class="text-danger fw-bold">@ViewBag.maxPriceCar</span></td>
+                                </tr>
+                                <tr>
+                                    <td>En Ekonomik Araç (Günlük)</td>
+                                    <td><span class="text-success fw-bold">@ViewBag.minPriceCar</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Toplam Yazar Sayısı</td>
+                                    <td><span class="fw-bold">@ViewBag.authorCount</span> Kayıtlı Yazar</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+<style>
+    .card {
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        border-radius: 10px;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        }
+
+    .display-6 {
+        font-size: 2.2rem;
+    }
+
+    .badge {
+        padding: 8px 12px;
+    }
+</style>
