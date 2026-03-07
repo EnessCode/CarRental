@@ -18,6 +18,8 @@ using CarRental.Persistence.Repositories.TagCloudRepositories;
 using CarRental.Persistence.Repositories.StatisticsRepositories;
 using CarRental.WebApi.Middlewares;
 using CarRental.Application.Interfaces.StatisticsInterfaces;
+using CarRental.Application.Interfaces.RentACarInterfaces;
+using CarRental.Persistence.Repositories.RentACarRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +32,7 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ITagCloudRepository, TagCloudRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IStatisticsRepository, StatisticsRepository>();
+builder.Services.AddScoped<IRentACarRepository, RentACarRepository>();
 
 builder.Services.AddApplicationService(builder.Configuration);
 
