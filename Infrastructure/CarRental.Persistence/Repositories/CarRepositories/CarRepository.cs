@@ -14,6 +14,11 @@ namespace CarRental.Persistence.Repositories.CarRepositories
 			return await context.Cars.Include(x => x.Brand).ToListAsync();
 		}
 
+		public async Task<Car> GetCarWithBrandById(int id)
+		{
+			return await context.Cars.Include(x => x.Brand).FirstOrDefaultAsync(x => x.Id == id);
+		}
+
 		public async Task<List<Car>> GetLast5CarsWithBrand()
 		{
 			return await context.Cars.Include(x => x.Brand).OrderByDescending(x => x.Id).Take(5).ToListAsync();

@@ -1,0 +1,116 @@
+﻿@model CreateReservationDto
+
+@{
+    ViewData["Title"] = "Rezervasyon Tamamla";
+    Layout = "~/Views/Shared/UILayout/_UILayout.cshtml";
+}
+
+<section class="py-5 bg-light position-relative" style="margin-top: 60px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="sticky-top" style="top: 100px; z-index: 1000;">
+                    <div class="card border-0 shadow-sm rounded-4 mb-4">
+                        <div class="card-header bg-primary text-white p-3 rounded-top-4">
+                            <h5 class="mb-0"><i class="ri-car-line me-2"></i>Araç Özeti</h5>
+                        </div>
+                        <div class="card-body p-0 text-center py-3">
+                            <img src="@ViewBag.carImage" class="img-fluid rounded-3 mb-3" style="max-height:150px; object-fit: contain;">
+                            <h4 class="fw-bold">@ViewBag.carBrand @ViewBag.carModel</h4>
+                            <div class="px-3">
+                                <hr>
+                                <div class="d-flex flex-column align-items-center justify-content-center mb-2 text-center">
+                                    <span class="text-muted small mb-1">Alış Lokasyonu</span>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <i class="ri-map-pin-2-line text-primary me-2"></i> <span class="fw-bold small text-primary">@ViewBag.locationName</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-body p-4">
+                        <h3 class="fw-bold mb-4 text-secondary">Rezervasyon Bilgileri</h3>
+
+                        <form method="post" action="/Reservation/Index">
+                            <input type="hidden" asp-for="CarId" value="@ViewBag.carId" />
+                            <input type="hidden" asp-for="PickUpLocationId" value="@ViewBag.locationId" />
+                            <input type="hidden" asp-for="Status" value="Beklemede" />
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small">Adınız</label>
+                                    <input type="text" asp-for="Name" class="form-control" placeholder="Adınız" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small">Soyadınız</label>
+                                    <input type="text" asp-for="Surname" class="form-control" placeholder="Soyadınız" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small">E-Posta</label>
+                                    <input type="email" asp-for="Email" class="form-control" placeholder="email@adresiniz.com" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small">Telefon</label>
+                                    <input type="tel" asp-for="Phone" class="form-control" placeholder="05xx xxx xx xx" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small">Yaşınız</label>
+                                    <input type="number" asp-for="Age" class="form-control" min="18" placeholder="Örn: 25" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small">Ehliyet Yaşınız</label>
+                                    <input type="number" asp-for="DriverLicenseYear" class="form-control" min="0" placeholder="Örn: 5" required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label class="form-label fw-bold small text-primary">Aracı Teslim Edeceğiniz Lokasyon</label>
+                                    <select asp-for="DropOffLocationId" class="form-select border-primary" asp-items="@ViewBag.locationList" required>
+                                        <option value="" disabled selected>Lütfen İade Ofisini Seçin</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-12">
+                                    <label class="form-label fw-bold small">Notlarınız</label>
+                                    <textarea asp-for="Description" class="form-control" rows="2" placeholder="Varsa eklemek istedikleriniz..."></textarea>
+                                </div>
+
+                                <div class="col-12 mt-4 text-end">
+                                    <button type="submit" class="btn btn-success btn-lg px-5 rounded-pill fw-bold shadow-sm">
+                                        Rezervasyonu Tamamla <i class="ri-check-double-line ms-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .form-control:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1);
+    }
+
+    .card {
+        transition: transform 0.2s;
+    }
+
+    @@media (max-width: 767px) {
+        .sticky-top
+
+    {
+        position: relative !important;
+        top: 0 !important;
+    }
+
+    }
+</style>

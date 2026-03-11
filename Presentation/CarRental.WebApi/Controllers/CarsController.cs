@@ -16,7 +16,8 @@ namespace CarRental.WebApi.Controllers
 		UpdateCarCommandHandler updateCarCommandHandler,
 		RemoveCarCommandHandler removeCarCommandHandler,
 		GetCarWithBrandQueryHandler getCarWithBrandQueryHandler,
-		GetLast5CarsWithBrandQueryHandler getLast5CarsWithBrandQueryHandler
+		GetLast5CarsWithBrandQueryHandler getLast5CarsWithBrandQueryHandler,
+		GetCarWithBrandByIdQueryHandler getCarWithBrandByIdQueryHandler
 		) : ControllerBase
 	{
 
@@ -67,6 +68,13 @@ namespace CarRental.WebApi.Controllers
 		{
 			var values = await getLast5CarsWithBrandQueryHandler.Handle();
 			return Ok(ApiResponse<List<GetLast5CarsWithBrandQueryResult>>.SuccessResponse(values, "Son 5 araç marka bilgileriyle birlikte listelendi"));
+		}
+
+		[HttpGet("GetCarWithBrandById/{id}")]
+		public async Task<IActionResult> GetCarWithBrandById(int id)
+		{
+			var value = await getCarWithBrandByIdQueryHandler.Handle(new GetCarByIdQuery(id));
+			return Ok(ApiResponse<GetCarWithBrandByIdQueryResult>.SuccessResponse(value, "Araç ve marka detayları başarıyla getirildi"));
 		}
 	}
 }

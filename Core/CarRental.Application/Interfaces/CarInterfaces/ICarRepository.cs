@@ -11,5 +11,6 @@ namespace CarRental.Application.Interfaces.CarInterfaces
 	{
 		Task<List<Car>> GetCarsWithBrand();
 		Task<List<Car>> GetLast5CarsWithBrand();
+		Task<Car> GetCarWithBrandById(int id);
 	}
 }
