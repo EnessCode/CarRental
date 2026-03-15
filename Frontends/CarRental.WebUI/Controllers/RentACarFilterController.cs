@@ -19,5 +19,22 @@ namespace CarRental.WebUI.Controllers
 			}
 			return View(new List<ResultRentACarDto>());
 		}
+
+		[HttpGet]
+		public async Task<IActionResult> CheckCarAvailability(int locationId, int carId)
+		{
+			var client = _httpClientFactory.CreateClient("CarRentalApi");
+			var responseMessage = await client.GetAsync($"RentACars?LocationId={locationId}&Available=true");
+
+			if (responseMessage.IsSuccessStatusCode)
+			{
+				var jsonData = await responseMessage.Content.ReadAsStringAsync();
+				var values = JsonConvert.DeserializeObject<ResultApiResponseDto<List<ResultRentACarDto>>>(jsonData);
+				bool isAvailable = values.Data.Any(x => x.CarId == carId);
+				return Json(new { success = isAvailable });
+			}
+
+			return Json(new { success = false });
+		}
 	}
 }

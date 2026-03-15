@@ -17,5 +17,12 @@ namespace CarRental.WebApi.Controllers
 			var values = await mediator.Send(new GetCarPricingWithCarsQuery());
 			return Ok(ApiResponse<List<GetCarPricingWithCarsQueryResult>>.SuccessResponse(values, "Araç fiyat listesi başarıyla getirildi"));
 		}
+
+		[HttpGet("GetCarPricingWithTimePeriodList")]
+		public async Task<IActionResult> GetCarPricingWithTimePeriodList()
+		{
+			var values = await mediator.Send(new GetCarPricingWithTimePeriodQuery());
+			return Ok(ApiResponse<List<GetCarPricingWithTimePeriodQueryResult>>.SuccessResponse(values, "Süreli fiyat listesi başarıyla getirildi"));
+		}
 	}
 }
