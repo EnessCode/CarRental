@@ -12,7 +12,7 @@
         @RenderBody()
     </main>
 
-    @await Html.PartialAsync("~/Views/Shared/UILayout/_UIFooterPartial.cshtml")
+    @await Component.InvokeAsync("FooterAddress")
 
     @await Html.PartialAsync("~/Views/Shared/UILayout/_UIScriptPartial.cshtml")
 

@@ -1,71 +1,139 @@
-﻿@model List<ResultFooterAddressesDto>
+﻿@model ResultFooterAddressesDto
 
-@foreach (var item in Model)
-{
-    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
-        <div class="card h-100 border-0 shadow-sm rounded-4 p-4 hover-up transition-all bg-white">
-            <div class="card-body p-0">
-
-                <h5 class="fw-bold text-dark mb-2">İletişim Kanalları</h5>
-
-                <p class="text-muted small mb-4 pb-3 border-bottom italic" style="line-height: 1.6;">
-                    @item.Description
-                </p>
-
-                <div class="d-flex align-items-start mb-4">
-                    <div class="flex-shrink-0 d-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle" style="width: 50px; height: 50px;">
-                        <i class="ri-map-pin-line fs-4"></i>
+<footer class="bg-dark text-white pt-5 pb-4 mt-5">
+    <div class="container">
+        <div class="row g-4 mb-5">
+            <div class="col-lg-4 col-md-6">
+                <a class="d-flex align-items-center gap-2 text-white mb-4 text-decoration-none" href="/">
+                    <div class="bg-primary rounded-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                        <i class="ri-roadster-fill fs-5"></i>
                     </div>
-                    <div class="ms-3">
-                        <h6 class="fw-bold text-dark mb-1">Adres</h6>
-                        <p class="text-muted small mb-0" style="line-height: 1.6;">@item.Address</p>
-                    </div>
+                    <span class="fs-4 fw-bold">CarRental</span>
+                </a>
+                <p class="text-white-50">@Model?.Description</p>
+                <div class="d-flex gap-3 mt-4">
+                    <a href="#" class="social-icon"><i class="ri-twitter-fill"></i></a>
+                    <a href="#" class="social-icon"><i class="ri-facebook-fill"></i></a>
+                    <a href="#" class="social-icon"><i class="ri-instagram-fill"></i></a>
                 </div>
+            </div>
 
-                <div class="d-flex align-items-center mb-4">
-                    <div class="flex-shrink-0 d-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle" style="width: 50px; height: 50px;">
-                        <i class="ri-phone-line fs-4"></i>
-                    </div>
-                    <div class="ms-3">
-                        <h6 class="fw-bold text-dark mb-1">Telefon</h6>
-                        <a href="tel:@item.Phone" class="text-muted text-decoration-none small hover-text-primary transition-all">
-                            @item.Phone
-                        </a>
-                    </div>
-                </div>
+            <div class="col-lg-2 col-md-6">
+                <h5 class="fw-bold mb-4 text-primary">Kurumsal</h5>
+                <ul class="list-unstyled d-flex flex-column gap-2">
+                    <li><a href="/About/Index" class="footer-link">Hakkımızda</a></li>
+                    <li><a href="/Car/Index" class="footer-link">Araçlarımız</a></li>
+                    <li><a href="/Service/Index" class="footer-link">Hizmetler</a></li>
+                </ul>
+            </div>
 
-                <div class="d-flex align-items-center">
-                    <div class="flex-shrink-0 d-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle" style="width: 50px; height: 50px;">
-                        <i class="ri-mail-send-line fs-4"></i>
-                    </div>
-                    <div class="ms-3">
-                        <h6 class="fw-bold text-dark mb-1">E-Posta</h6>
-                        <a href="mailto:@item.Email" class="text-muted text-decoration-none small hover-text-primary transition-all">
-                            @item.Email
-                        </a>
-                    </div>
-                </div>
+            <div class="col-lg-2 col-md-6">
+                <h5 class="fw-bold mb-4 text-primary">Destek</h5>
+                <ul class="list-unstyled d-flex flex-column gap-2">
+                    <li><a href="/Contact/Index" class="footer-link">İletişim</a></li>
+                    <li><a href="javascript:void(0)" class="footer-link" data-bs-toggle="modal" data-bs-target="#privacyModal">Gizlilik Politikası</a></li>
+                    <li><a href="javascript:void(0)" class="footer-link" data-bs-toggle="modal" data-bs-target="#termsModal">Şartlar & Koşullar</a></li>
+                </ul>
+            </div>
 
+            <div class="col-lg-4 col-md-6">
+                <h5 class="fw-bold mb-4 text-primary">Bize Ulaşın</h5>
+                <ul class="list-unstyled d-flex flex-column gap-3">
+                    <li class="d-flex gap-3 text-white-50">
+                        <i class="ri-map-pin-line text-primary fs-5"></i>
+                        <span>@Model?.Address</span>
+                    </li>
+                    <li class="d-flex gap-3 text-white-50">
+                        <i class="ri-phone-line text-primary fs-5"></i>
+                        <span>@Model?.Phone</span>
+                    </li>
+                    <li class="d-flex gap-3 text-white-50">
+                        <i class="ri-mail-line text-primary fs-5"></i>
+                        <span>@Model?.Email</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-top border-secondary pt-4 text-center text-white-50 small">
+            <p class="mb-0">&copy; @DateTime.Now.Year CarRental. Tüm hakları saklıdır.</p>
+        </div>
+    </div>
+</footer>
+
+<div class="modal fade" id="privacyModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content rounded-4 border-0">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title fw-bold text-dark"><i class="ri-shield-check-line text-primary me-2"></i>Gizlilik Politikası</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4 text-muted">
+                <p><strong>CarRental</strong> olarak kişisel verilerinizin güvenliği hususuna azami hassasiyet göstermekteyiz.</p>
+                <h6 class="text-dark fw-bold mt-3">Hangi Verileri İşliyoruz?</h6>
+                <p>Kiralama süreçlerinde kimlik bilgileriniz, iletişim bilgileriniz ve güvenliğiniz için ehliyet bilgileriniz işlenmektedir. Bu veriler yalnızca yasal yükümlülükler çerçevesinde muhafaza edilir.</p>
+                <h6 class="text-dark fw-bold mt-3">Veri Paylaşımı</h6>
+                <p>Kişisel verileriniz, açık rızanız olmaksızın üçüncü taraflarla reklam veya pazarlama amacıyla paylaşılmaz. Sadece adli makamlardan gelen talepler doğrultusunda yasal zorunluluk gereği paylaşılabilir.</p>
+            </div>
+            <div class="modal-footer border-0 pt-0">
+                <button type="button" class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">Anladım</button>
             </div>
         </div>
     </div>
-}
+</div>
+
+<div class="modal fade" id="termsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content rounded-4 border-0">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title fw-bold text-dark"><i class="ri-article-line text-primary me-2"></i>Şartlar & Koşullar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4 text-muted">
+                <h6 class="text-dark fw-bold">Kiralama Koşulları</h6>
+                <ul class="small">
+                    <li>Araç kiralayan kişinin en az 21 yaşında olması ve 2 yıllık geçerli ehliyet sahibi olması gerekmektedir.</li>
+                    <li>Araç teslimatında yakıt deposu seviyesi, teslim alındığı seviyede iade edilmelidir.</li>
+                    <li>Otoyol geçiş ücretleri (HGS/OGS) kiralama sonunda kullanıcıdan tahsil edilir.</li>
+                </ul>
+                <h6 class="text-dark fw-bold mt-3">Sigorta ve Güvenceler</h6>
+                <p>Tüm araçlarımız Rent A Car kaskoludur. Ancak kaza durumunda alkol raporu ve trafik tutanağı aslı ibraz edilmediği takdirde sigorta geçersiz sayılır.</p>
+            </div>
+            <div class="modal-footer border-0 pt-0">
+                <button type="button" class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">Kabul Ediyorum</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <style>
-    .transition-all {
-        transition: all 0.3s ease;
+    .footer-link {
+        color: rgba(255,255,255,0.5);
+        text-decoration: none;
+        transition: 0.3s;
     }
 
-    .hover-up:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+        .footer-link:hover {
+            color: #fff;
+            padding-left: 5px;
+        }
+
+    .social-icon {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 50%;
+        color: #fff;
+        text-decoration: none;
+        transition: 0.3s;
     }
 
-    .hover-text-primary:hover {
-        color: var(--primary) !important;
-    }
-
-    .italic {
-        font-style: italic;
-    }
+        .social-icon:hover {
+            background: var(--bs-primary);
+            border-color: var(--bs-primary);
+            transform: translateY(-3px);
+        }
 </style>

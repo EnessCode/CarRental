@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http;
 
-namespace CarRental.WebUI.View_Components.FooterAddressViewComponents
+namespace CarRental.WebUI.View_Components.ContactDetailViewComponents
 {
-	public class FooterAddressViewComponent(IHttpClientFactory httpClientFactory) : ViewComponent
+	public class ContactDetailViewComponent(IHttpClientFactory httpClientFactory) : ViewComponent
 	{
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
@@ -20,11 +20,10 @@ namespace CarRental.WebUI.View_Components.FooterAddressViewComponents
 				var apiResponse = JsonConvert.DeserializeObject<ResultApiResponseDto<List<ResultFooterAddressesDto>>>(jsonData);
 				if (apiResponse != null && apiResponse.Success)
 				{
-					// Footer için tekil nesne gönderiyoruz
-					return View(apiResponse.Data.FirstOrDefault());
+					return View(apiResponse.Data);
 				}
 			}
-			return View(new ResultFooterAddressesDto());
+			return View(new List<ResultFooterAddressesDto>());
 		}
 	}
 }
