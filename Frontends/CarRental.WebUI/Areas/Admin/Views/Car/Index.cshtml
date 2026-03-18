@@ -61,9 +61,14 @@
 									</td>
 									<td class="text-center pe-4">
 										<div class="d-flex justify-content-center gap-2">
+											<a href="/Admin/CarFeatureDetail/Index/@item.Id" target="_blank" class="btn btn-sm btn-outline-primary rounded-circle p-2 border-0 shadow-sm" title="Araba Detayına Git">
+												<i class="ri-external-link-line fs-5"></i>
+											</a>
+
 											<a href="/Admin/Car/UpdateCar/@item.Id" class="btn btn-sm btn-outline-info rounded-circle p-2 border-0 shadow-sm" title="Güncelle">
 												<i class="ri-edit-2-line fs-5"></i>
 											</a>
+
 											<button onclick="deleteItem('@item.Id','Car')" class="btn btn-sm btn-outline-danger rounded-circle p-2 border-0 shadow-sm" title="Sil">
 												<i class="ri-delete-bin-6-line fs-5"></i>
 											</button>
