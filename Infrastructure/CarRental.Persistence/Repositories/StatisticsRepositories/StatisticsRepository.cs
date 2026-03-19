@@ -33,7 +33,7 @@ namespace CarRental.Persistence.Repositories.StatisticsRepositories
 		public async Task<decimal> GetAvgRentPriceForHourly()
 		{
 			var prices = await context.CarPricings
-							.Where(x => x.Pricing.Name == "Saatlik")
+							.Where(x => x.Pricing.Name == "Haftalık")
 							.Select(x => x.Amount)
 							.ToListAsync();
 			return prices.Average();

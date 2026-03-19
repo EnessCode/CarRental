@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace CarRental.Application.Features.Mediator.Handlers.StatisticsHandlers
 {
-	public class GetAvgRentPriceForHourlyQueryHandler(IStatisticsRepository statisticsRepository) : IRequestHandler<GetAvgRentPriceForHourlyQuery, GetAvgRentPriceForHourlyQueryResult>
+	public class GetAvgRentPriceForWeeklyQueryHandler(IStatisticsRepository statisticsRepository) : IRequestHandler<GetAvgRentPriceForWeeklyQuery, GetAvgRentPriceForWeeklyQueryResult>
 	{
-		public async Task<GetAvgRentPriceForHourlyQueryResult> Handle(GetAvgRentPriceForHourlyQuery request, CancellationToken cancellationToken)
+		public async Task<GetAvgRentPriceForWeeklyQueryResult> Handle(GetAvgRentPriceForWeeklyQuery request, CancellationToken cancellationToken)
 		{
 			var value = await statisticsRepository.GetAvgRentPriceForHourly();
-			return new GetAvgRentPriceForHourlyQueryResult
+			return new GetAvgRentPriceForWeeklyQueryResult
 			{
-				AvgRentPriceForHourly = value
+				AvgRentPriceForWeekly = value
 			};
 		}
 	}

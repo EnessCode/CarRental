@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CarRental.Application.Features.Mediator.Queries.StatisticsQueries
 {
-	public class GetAvgRentPriceForHourlyQuery : IRequest<GetAvgRentPriceForHourlyQueryResult>
+	public class GetAvgRentPriceForWeeklyQuery : IRequest<GetAvgRentPriceForWeeklyQueryResult>
 	{
 	}
 }

@@ -60,12 +60,12 @@ namespace CarRental.WebUI.Areas.Admin.Controllers
 				ViewBag.avgPriceDaily = apiResponse.Data.avgRentPriceForDaily.ToString("0.00");
 			}
 
-			var responseMessage7 = await client.GetAsync("Statistics/GetAvgRentPriceForHourly");
+			var responseMessage7 = await client.GetAsync("Statistics/GetAvgRentPriceForWeekly");
 			if (responseMessage7.IsSuccessStatusCode)
 			{
 				var jsonData = await responseMessage7.Content.ReadAsStringAsync();
 				var apiResponse = JsonConvert.DeserializeObject<ResultApiResponseDto<ResultStatisticsDto>>(jsonData);
-				ViewBag.avgPriceHourly = apiResponse.Data.avgRentPriceForHourly.ToString("0.00");
+				ViewBag.avgPriceWeekly = apiResponse.Data.avgRentPriceForWeekly.ToString("0.00");
 			}
 
 			var responseMessage8 = await client.GetAsync("Statistics/GetAvgRentPriceForMonthly");

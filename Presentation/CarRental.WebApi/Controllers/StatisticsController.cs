@@ -52,11 +52,11 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<GetAvgRentPriceForDailyQueryResult>.SuccessResponse(result, "Günlük ortalama araç kiralama fiyatı başarıyla getirildi."));
 		}
 
-		[HttpGet("GetAvgRentPriceForHourly")]
-		public async Task<IActionResult> GetAvgRentPriceForHourly()
+		[HttpGet("GetAvgRentPriceForWeekly")]
+		public async Task<IActionResult> GetAvgRentPriceForWeekly()
 		{
-			var result = await mediator.Send(new GetAvgRentPriceForHourlyQuery());
-			return Ok(ApiResponse<GetAvgRentPriceForHourlyQueryResult>.SuccessResponse(result, "Haftalık ortalama araç kiralama fiyatı başarıyla getirildi."));
+			var result = await mediator.Send(new GetAvgRentPriceForWeeklyQuery());
+			return Ok(ApiResponse<GetAvgRentPriceForWeeklyQueryResult>.SuccessResponse(result, "Haftalık ortalama araç kiralama fiyatı başarıyla getirildi."));
 		}
 
 		[HttpGet("GetAvgRentPriceForMonthly")]

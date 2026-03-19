@@ -14,7 +14,7 @@ namespace CarRental.Dto.StatisticsDtos
 		public int blogCount { get; set; }
 		public int brandCount { get; set; }
 		public decimal avgRentPriceForDaily { get; set; }
-		public decimal avgRentPriceForHourly { get; set; }
+		public decimal avgRentPriceForWeekly { get; set; }
 		public decimal avgRentPriceForMonthly { get; set; }
 		public int automaticCarCount { get; set; }
 		public string brandNameByMaxCarCount { get; set; }
