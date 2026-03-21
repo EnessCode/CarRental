@@ -11,5 +11,6 @@ namespace CarRental.Application.Interfaces.RentACarInterfaces
 	public interface IRentACarRepository
 	{
 		Task<List<RentACar>> GetByFilterAsync(Expression<Func<RentACar, bool>> filter);
+		Task<List<RentACar>> GetRentACarsWithLocation();
 	}
 }

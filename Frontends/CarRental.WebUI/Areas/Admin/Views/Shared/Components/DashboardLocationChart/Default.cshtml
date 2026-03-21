@@ -1,0 +1,49 @@
+﻿@model List<ResultCarCountByLocationDto>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Lokasyon Bazlı Araç Sayıları</h4>
+        <div style="height: 300px;">
+            <canvas id="locationChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const locations = @Html.Raw(Json.Serialize(Model.Select(x => x.LocationName)));
+        const counts = @Html.Raw(Json.Serialize(Model.Select(x => x.CarCount)));
+
+        const ctxLocation = document.getElementById('locationChart').getContext('2d');
+        new Chart(ctxLocation, {
+            type: 'bar', 
+            data: {
+                labels: locations,
+                datasets: [{
+                    label: 'Araç Sayısı',
+                    data: counts,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false 
+                    }
+                }
+            }
+        });
+    });
+</script>

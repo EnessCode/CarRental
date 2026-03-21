@@ -23,5 +23,13 @@ namespace CarRental.Persistence.Repositories.RentACarRepositories
 				.Where(filter)
 				.ToListAsync();
 		}
+
+		public async Task<List<RentACar>> GetRentACarsWithLocation()
+		{
+			return await context.RentACars
+				.Include(x => x.Location) 
+				.Where(x => x.Available == true)
+				.ToListAsync();
+		}
 	}
 }

@@ -1,0 +1,50 @@
+﻿@model List<ResultBrandDistributionDto>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Marka Dağılım Grafiği</h4>
+        <div style="height: 300px;">
+            <canvas id="brandChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const brandNames = @Html.Raw(Json.Serialize(Model.Select(x => x.BrandName)));
+        const carCounts = @Html.Raw(Json.Serialize(Model.Select(x => x.CarCount)));
+
+        const ctx = document.getElementById('brandChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut', 
+            data: {
+                labels: brandNames,
+                datasets: [{
+                    label: 'Araç Sayısı',
+                    data: carCounts,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)'
+                    ],
+                    borderColor: '#ffffff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    });
+</script>

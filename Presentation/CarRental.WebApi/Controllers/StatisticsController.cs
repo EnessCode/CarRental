@@ -1,5 +1,7 @@
 ﻿using CarRental.Application.Common;
+using CarRental.Application.Features.Mediator.Queries.BlogQueries;
 using CarRental.Application.Features.Mediator.Queries.StatisticsQueries;
+using CarRental.Application.Features.Mediator.Results.BlogResults;
 using CarRental.Application.Features.Mediator.Results.StatisticsResults;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -120,6 +122,27 @@ namespace CarRental.WebApi.Controllers
 		{
 			var result = await mediator.Send(new GetCarBrandAndModelByMinRentPriceQuery());
 			return Ok(ApiResponse<GetCarBrandAndModelByMinRentPriceQueryResult>.SuccessResponse(result, "En düşük fiyatlı kiralık araç başarıyla getirildi."));
+		}
+
+		[HttpGet("GetBrandDistribution")]
+		public async Task<IActionResult> GetBrandDistribution()
+		{
+			var result = await mediator.Send(new GetBrandDistributionQuery());
+			return Ok(ApiResponse<List<GetBrandDistributionQueryResult>>.SuccessResponse(result, "Marka dağılımı başarıyla getirildi."));
+		}
+
+		[HttpGet("GetCarCountByLocation")]
+		public async Task<IActionResult> GetCarCountByLocation()
+		{
+			var result = await mediator.Send(new GetCarCountByLocationQuery());
+			return Ok(ApiResponse<List<GetCarCountByLocationQueryResult>>.SuccessResponse(result, "Lokasyon bazlı araç sayıları getirildi."));
+		}
+
+		[HttpGet("GetLast5BlogsWithAuthor")]
+		public async Task<IActionResult> GetLast5BlogsWithAuthor()
+		{
+			var result = await mediator.Send(new GetLast5BlogsWithAuthorQuery());
+			return Ok(ApiResponse<List<GetLast5BlogsWithAuthorQueryResult>>.SuccessResponse(result, "Son 5 blog başarıyla getirildi."));
 		}
 	}
 }

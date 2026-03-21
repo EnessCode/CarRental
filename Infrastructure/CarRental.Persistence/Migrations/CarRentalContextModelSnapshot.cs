@@ -44,7 +44,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Abouts");
+                    b.ToTable("Abouts", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Author", b =>
@@ -69,7 +69,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Authors", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Banner", b =>
@@ -98,7 +98,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Banners");
+                    b.ToTable("Banners", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Blog", b =>
@@ -136,7 +136,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Blogs");
+                    b.ToTable("Blogs", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Brand", b =>
@@ -153,7 +153,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brands", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Car", b =>
@@ -200,7 +200,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasIndex("BrandId");
 
-                    b.ToTable("Cars");
+                    b.ToTable("Cars", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.CarDescription", b =>
@@ -222,7 +222,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("CarDescriptions");
+                    b.ToTable("CarDescriptions", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.CarFeature", b =>
@@ -248,7 +248,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasIndex("FeatureId");
 
-                    b.ToTable("CarFeatures");
+                    b.ToTable("CarFeatures", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.CarPricing", b =>
@@ -274,7 +274,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasIndex("PricingId");
 
-                    b.ToTable("CarPricings");
+                    b.ToTable("CarPricings", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Category", b =>
@@ -291,7 +291,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Comment", b =>
@@ -320,7 +320,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasIndex("BlogId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Contact", b =>
@@ -355,7 +355,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contacts");
+                    b.ToTable("Contacts", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Customer", b =>
@@ -380,7 +380,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customer", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Feature", b =>
@@ -397,7 +397,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Features");
+                    b.ToTable("Features", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.FooterAddress", b =>
@@ -426,7 +426,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FooterAddresses");
+                    b.ToTable("FooterAddresses", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Location", b =>
@@ -443,7 +443,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Locations");
+                    b.ToTable("Locations", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Pricing", b =>
@@ -460,7 +460,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pricings");
+                    b.ToTable("Pricings", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.RentACar", b =>
@@ -486,7 +486,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasIndex("LocationId");
 
-                    b.ToTable("RentACars");
+                    b.ToTable("RentACars", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.RentACarProcess", b =>
@@ -542,7 +542,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasIndex("PickUpLocationId");
 
-                    b.ToTable("RentACarProcesses");
+                    b.ToTable("RentACarProcesses", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Reservation", b =>
@@ -600,7 +600,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasIndex("PickUpLocationId");
 
-                    b.ToTable("Reservations");
+                    b.ToTable("Reservations", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Service", b =>
@@ -625,7 +625,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Services");
+                    b.ToTable("Services", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.SocialMedia", b =>
@@ -650,7 +650,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SocialMedias");
+                    b.ToTable("SocialMedias", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.TagCloud", b =>
@@ -672,7 +672,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasIndex("BlogId");
 
-                    b.ToTable("TagClouds");
+                    b.ToTable("TagClouds", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Testimonial", b =>
@@ -701,7 +701,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Testimonials");
+                    b.ToTable("Testimonials", (string)null);
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Blog", b =>

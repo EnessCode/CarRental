@@ -13,5 +13,6 @@ namespace CarRental.Application.Interfaces.BlogInterfaces
 		Task<List<Blog>> GetAllBlogsWithAuthor();
 		Task<Blog> GetBlogWithAuthorAndCategoryByBlogId(int id);
 		Task<List<Blog>> GetBlogsByCategoryId(int id);
+		Task<List<Blog>> GetLast5BlogsWithAuthors();
 	}
 }

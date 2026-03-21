@@ -1,0 +1,90 @@
+﻿<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card bg-primary text-white shadow-sm h-100 stat-card overflow-hidden">
+            <div class="card-body position-relative">
+                <div class="text-start">
+                    <h6 class="text-uppercase mb-1 opacity-75 small fw-bold" style="letter-spacing: 1px;">Toplam Araç</h6>
+                    <h2 class="display-6 fw-bold mb-0">@(ViewBag.carCount ?? 0)</h2>
+                    <span class="badge bg-white bg-opacity-25 mt-2" style="font-size: 0.7rem;">Aktif Filo</span>
+                </div>
+                <i class="fas fa-car position-absolute stat-icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-success text-white shadow-sm h-100 stat-card overflow-hidden">
+            <div class="card-body position-relative">
+                <div class="text-start">
+                    <h6 class="text-uppercase mb-1 opacity-75 small fw-bold" style="letter-spacing: 1px;">Hizmet Noktası</h6>
+                    <h2 class="display-6 fw-bold mb-0">@(ViewBag.locationCount ?? 0)</h2>
+                    <span class="badge bg-white bg-opacity-25 mt-2" style="font-size: 0.7rem;">Şehir & Şube</span>
+                </div>
+                <i class="fas fa-map-marker-alt position-absolute stat-icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-info text-white shadow-sm h-100 stat-card overflow-hidden">
+            <div class="card-body position-relative">
+                <div class="text-start">
+                    <h6 class="text-uppercase mb-1 opacity-75 small fw-bold" style="letter-spacing: 1px;">Marka Çeşitliliği</h6>
+                    <h2 class="display-6 fw-bold mb-0">@(ViewBag.brandCount ?? 0)</h2>
+                    <span class="badge bg-white bg-opacity-25 mt-2" style="font-size: 0.7rem;">Global Partnerler</span>
+                </div>
+                <i class="fas fa-tags position-absolute stat-icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-warning text-dark shadow-sm h-100 stat-card overflow-hidden">
+            <div class="card-body position-relative">
+                <div class="text-start">
+                    <h6 class="text-uppercase mb-1 opacity-75 small fw-bold" style="letter-spacing: 1px;">Toplam İçerik</h6>
+                    <h2 class="display-6 fw-bold mb-0">@(ViewBag.blogCount ?? 0)</h2>
+                    <span class="badge bg-dark bg-opacity-10 mt-2" style="font-size: 0.7rem;">Yayınlanmış Blog</span>
+                </div>
+                <i class="fas fa-newspaper position-absolute stat-icon"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .stat-card {
+        border: none;
+        border-radius: 12px;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1) !important;
+        }
+
+    .stat-icon {
+        right: -10px;
+        bottom: -10px;
+        font-size: 4rem;
+        opacity: 0.15;
+        transform: rotate(-15deg);
+        transition: all 0.3s ease;
+    }
+
+    .stat-card:hover .stat-icon {
+        transform: rotate(0deg) scale(1.1);
+        opacity: 0.25;
+    }
+
+    .display-6 {
+        font-size: 2.2rem;
+        z-index: 2;
+    }
+
+    .badge {
+        letter-spacing: 0.5px;
+        font-weight: 500;
+    }
+</style>

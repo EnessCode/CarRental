@@ -1,0 +1,48 @@
+﻿@model List<ResultLast5BlogsWithAuthorDto>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title mb-4">Son Eklenen 5 Blog</h4>
+        <div class="table-responsive">
+            <table class="table table-hover table-centered table-nowrap mb-0">
+                <thead class="thead-light">
+                    <tr>
+                        <th style="width: 45%;">Blog Başlığı</th>
+                        <th>Yazar</th>
+                        <th>Kategori</th>
+                        <th>Tarih</th>
+                        <th class="text-center">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <span class="font-weight-bold text-dark" style="font-size: 14px;">
+                                    @item.Title
+                                </span>
+                            </td>
+                            <td>
+                                <i class="mdi mdi-account-outline mr-1 text-muted"></i>@item.AuthorName
+                            </td>
+                            <td>
+                                <span class="badge badge-pill" style="background-color: #f0f4f8; color: #2d3748; border: 1px solid #d1d5db; padding: 6px 12px;">
+                                    @item.CategoryName
+                                </span>
+                            </td>
+                            <td class="text-muted">
+                                <i class="mdi mdi-calendar-range mr-1"></i>@item.CreatedAt.ToString("dd.MM.yyyy")
+                            </td>
+                            <td class="text-center">
+                                <a href="/Blog/BlogDetail/@item.Id" class="btn btn-sm btn-outline-primary btn-rounded">
+                                    Görüntüle
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
