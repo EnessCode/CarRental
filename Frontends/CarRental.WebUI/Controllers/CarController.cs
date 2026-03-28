@@ -24,7 +24,14 @@ namespace CarRental.WebUI.Controllers
 					return View(apiResponse.Data);
 				}
 			}
-			return View(new List<ResultCarWithBrandDto>());
+			return View(new List<ResultCarPricingWithCarsDto>());
+		}
+
+		public async Task<IActionResult> CarDetail(int id, int price)
+		{
+			ViewBag.CarId = id;
+			ViewBag.CarPrice = price;
+			return View();
 		}
 	}
 }

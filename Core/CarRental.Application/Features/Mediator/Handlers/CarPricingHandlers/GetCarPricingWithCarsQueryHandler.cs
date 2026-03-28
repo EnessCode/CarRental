@@ -21,6 +21,7 @@ namespace CarRental.Application.Features.Mediator.Handlers.CarPricingHandlers
 			return values.Select(x => new GetCarPricingWithCarsQueryResult
 			{
 				Id = x.Id,
+				CarId = x.CarId,
 				Brand = x.Car.Brand.Name,
 				Model = x.Car.Model,
 				CoverImageUrl = x.Car.CoverImageUrl,

@@ -1,0 +1,24 @@
+﻿@model ResultCarDescriptionByCarIdDto
+
+<div class="row mt-4" data-aos="fade-up">
+	<div class="col-12">
+		<div class="card border-0 shadow-sm rounded-4 p-4">
+			<h4 class="fw-bold mb-4 d-flex align-items-center">
+				<i class="ri-information-line text-primary me-2"></i> Araç Hakkında Genel Bilgiler
+			</h4>
+
+			@if (Model != null && !string.IsNullOrEmpty(Model.Details))
+			{
+				<p class="text-muted lh-lg fs-5">
+					@Model.Details
+				</p>
+			}
+			else
+			{
+				<div class="alert alert-info rounded-3">
+					Bu araca ait henüz detaylı bir açıklama girilmemiştir.
+				</div>
+			}
+		</div>
+	</div>
+</div>

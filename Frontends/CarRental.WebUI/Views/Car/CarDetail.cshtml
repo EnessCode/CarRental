@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "Araç Detayları";
+    Layout = "~/Views/Shared/UILayout/_UILayout.cshtml";
+}
+
+<section class="page-header py-5 bg-dark position-relative overflow-hidden" style="margin-top: 80px; background: linear-gradient(45deg, #1a1a1a 0%, #333 100%);">
+    <div class="container position-relative z-2 py-4">
+        <div class="row align-items-center">
+            <div class="col-md-8 text-white" data-aos="fade-right">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-2">
+                        <li class="breadcrumb-item"><a href="/" class="text-primary text-decoration-none">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item"><a href="/Car/Index" class="text-primary text-decoration-none">Araç Listesi</a></li>
+                        <li class="breadcrumb-item active text-white-50" aria-current="page">Araç Detay</li>
+                    </ol>
+                </nav>
+                <h1 class="fw-bold display-5 mb-0">Seçtiğiniz Aracın <span class="text-primary">Tüm Detayları</span></h1>
+            </div>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0" data-aos="fade-left">
+                <a href="/Car/Index" class="btn btn-outline-light rounded-pill px-4">
+                    <i class="ri-arrow-left-line me-2"></i>Araçlara Geri Dön
+                </a>
+            </div>
+        </div>
+    </div>
+    <i class="ri-car-fill position-absolute text-white opacity-05" style="right: -50px; bottom: -30px; font-size: 15rem; transform: rotate(-15deg);"></i>
+</section>
+
+<div class="container py-5">
+
+    <section class="mb-5">
+        @await Component.InvokeAsync("CarDetailMainInfo", new { id = ViewBag.CarId })
+    </section>
+
+    <section class="mb-5">
+        @await Component.InvokeAsync("CarDetailDescription", new { id = ViewBag.CarId })
+    </section>
+
+    <hr class="my-5 opacity-05">
+
+    <section class="mb-5">
+        @await Component.InvokeAsync("CarDetailFeature", new { id = ViewBag.CarId })
+    </section>
+</div>
+
+<style>
+    .opacity-05 {
+        opacity: 0.05;
+    }
+    
+    .breadcrumb-item + .breadcrumb-item::before {
+        color: rgba(255,255,255,0.3);
+    }
+ </style>

@@ -22,6 +22,8 @@ using CarRental.Application.Interfaces.RentACarInterfaces;
 using CarRental.Persistence.Repositories.RentACarRepositories;
 using CarRental.Persistence.Repositories.CarFeatureRepositories;
 using CarRental.Application.Interfaces.CarFeatureInterfaces;
+using CarRental.Application.Interfaces.CarDescriptionInterfaces;
+using CarRental.Persistence.Repositories.CarDescriptionRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +38,7 @@ builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IStatisticsRepository, StatisticsRepository>();
 builder.Services.AddScoped<IRentACarRepository, RentACarRepository>();
 builder.Services.AddScoped<ICarFeatureRepository, CarFeatureRepository>();
+builder.Services.AddScoped<ICarDescriptionRepository, CarDescriptionRepository>();
 
 builder.Services.AddApplicationService(builder.Configuration);
 

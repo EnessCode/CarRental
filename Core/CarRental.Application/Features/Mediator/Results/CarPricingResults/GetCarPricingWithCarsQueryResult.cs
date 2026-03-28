@@ -10,6 +10,7 @@ namespace CarRental.Application.Features.Mediator.Results.CarPricingResults
 	public class GetCarPricingWithCarsQueryResult
 	{
 		public int Id { get; set; }
+		public int CarId { get; set; }
 		public string Brand { get; set; }
 		public string Model { get; set; }
 		public string CoverImageUrl { get; set; }

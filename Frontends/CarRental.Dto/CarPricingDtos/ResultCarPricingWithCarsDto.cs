@@ -9,6 +9,7 @@ namespace CarRental.Dto.CarPricingDtos
 	public class ResultCarPricingWithCarsDto
 	{
 		public int Id { get; set; }
+		public int CarId { get; set; }
 		public string Brand { get; set; }
 		public string Model { get; set; }
 		public string CoverImageUrl { get; set; }

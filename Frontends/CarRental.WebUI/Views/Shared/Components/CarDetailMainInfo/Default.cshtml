@@ -1,0 +1,123 @@
+﻿@model ResultCarWithBrandDto
+
+<div class="row g-5">
+    <div class="col-lg-7" data-aos="fade-right">
+        <div class="position-relative">
+            <div class="position-absolute top-0 start-0 m-4 z-3">
+                <span class="badge bg-primary px-4 py-2 rounded-pill shadow-lg fw-bold text-uppercase tracking-wider">
+                    @Model.BrandName
+                </span>
+            </div>
+
+            <div class="car-main-card shadow-sm rounded-5 overflow-hidden border-0 bg-white">
+                <div class="p-2">
+                    <img src="@Model.CoverImageUrl" class="img-fluid rounded-5 w-100 object-fit-cover shadow-sm"
+                         alt="@Model.Model" style="min-height: 400px; max-height: 500px;">
+                </div>
+            </div>
+
+            <div class="mt-4 d-flex gap-3 justify-content-center">
+                <div class="rounded-4 border p-2 bg-white shadow-sm" style="width: 100px; height: 70px; opacity: 0.6;">
+                    <img src="@Model.CoverImageUrl" class="img-fluid rounded-3 h-100 w-100 object-fit-cover">
+                </div>
+                <div class="rounded-4 border p-2 bg-white shadow-sm d-flex align-items-center justify-content-center" style="width: 100px; height: 70px;">
+                    <i class="ri-image-add-line fs-3 text-muted"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5" data-aos="fade-left">
+        <div class="ps-lg-4">
+            <nav aria-label="breadcrumb" class="mb-3">
+                <ol class="breadcrumb small text-uppercase fw-bold">
+                    <li class="breadcrumb-item"><a href="/Car/Index" class="text-decoration-none text-muted">Araçlar</a></li>
+                    <li class="breadcrumb-item active text-primary" aria-current="page">@Model.BrandName</li>
+                </ol>
+            </nav>
+
+            <h1 class="display-5 fw-bold text-dark mb-2">@Model.BrandName @Model.Model</h1>
+            <p class="text-muted mb-4">Sınıfının en konforlu ve güvenli sürüş deneyimini sunan @Model.Model ile yolculuğun tadını çıkarın.</p>
+
+            <div class="price-box p-4 rounded-4 mb-4 d-flex align-items-center justify-content-between shadow-sm border border-primary border-opacity-10">
+                <div>
+                    <span class="text-muted small d-block mb-1">Günlük Başlayan Fiyatlarla</span>
+                    <h2 class="text-primary fw-bold mb-0 display-6">₺@ViewBag.CarPrice <small class="fs-6 text-muted fw-normal">/gün</small></h2>
+                </div>
+                <div class="bg-primary bg-opacity-10 p-3 rounded-circle text-primary">
+                    <i class="ri-money-dollar-circle-line fs-1"></i>
+                </div>
+            </div>
+
+            <div class="row g-3 mb-4">
+                <div class="col-6">
+                    <div class="d-flex align-items-center p-3 border rounded-4 bg-white shadow-xs">
+                        <i class="ri-steering-2-line fs-3 text-primary me-3"></i>
+                        <div>
+                            <span class="text-muted d-block small">Vites</span>
+                            <span class="fw-bold text-dark">@Model.Transmission</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex align-items-center p-3 border rounded-4 bg-white shadow-xs">
+                        <i class="ri-gas-station-line fs-3 text-primary me-3"></i>
+                        <div>
+                            <span class="text-muted d-block small">Yakıt</span>
+                            <span class="fw-bold text-dark">@Model.Fuel</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex align-items-center p-3 border rounded-4 bg-white shadow-xs">
+                        <i class="ri-dashboard-3-line fs-3 text-primary me-3"></i>
+                        <div>
+                            <span class="text-muted d-block small">Kilometre</span>
+                            <span class="fw-bold text-dark">@Model.Kilometer km</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex align-items-center p-3 border rounded-4 bg-white shadow-xs">
+                        <i class="ri-user-heart-line fs-3 text-primary me-3"></i>
+                        <div>
+                            <span class="text-muted d-block small">Kapasite</span>
+                            <span class="fw-bold text-dark">@Model.Luggage Kişi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid">
+                <a href="/Default/Index" class="btn btn-primary btn-lg rounded-4 fw-bold py-3 shadow-sm d-flex align-items-center justify-content-center gap-2">
+                    <i class="ri-calendar-check-line"></i>
+                    Şimdi Rezervasyon Yap
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .car-main-card {
+        transition: transform 0.3s ease;
+        border: 1px solid #f1f1f1 !important;
+    }
+
+    .price-box {
+        background: linear-gradient(to right, #ffffff, #f8faff);
+    }
+
+    .shadow-xs {
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .tracking-wider {
+        letter-spacing: 1px;
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: "•";
+        color: #dee2e6;
+    }
+</style>
