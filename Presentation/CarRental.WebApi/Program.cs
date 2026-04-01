@@ -1,31 +1,50 @@
 using CarRental.Application.Features.CQRS.Handlers.AboutHandlers;
 using CarRental.Application.Interfaces;
 using CarRental.Application.Interfaces.BlogInterfaces;
+using CarRental.Application.Interfaces.CarDescriptionInterfaces;
+using CarRental.Application.Interfaces.CarFeatureInterfaces;
 using CarRental.Application.Interfaces.CarInterfaces;
 using CarRental.Application.Interfaces.CarPricingInterfaces;
 using CarRental.Application.Interfaces.CategoryInterfaces;
 using CarRental.Application.Interfaces.CommentInterfaces;
+using CarRental.Application.Interfaces.RentACarInterfaces;
+using CarRental.Application.Interfaces.StatisticsInterfaces;
 using CarRental.Application.Interfaces.TagCloudInterfaces;
 using CarRental.Application.Services;
+using CarRental.Application.Tools;
 using CarRental.Persistence.Context;
 using CarRental.Persistence.Repositories;
 using CarRental.Persistence.Repositories.BlogRepositories;
+using CarRental.Persistence.Repositories.CarDescriptionRepositories;
+using CarRental.Persistence.Repositories.CarFeatureRepositories;
 using CarRental.Persistence.Repositories.CarPricingRepositories;
 using CarRental.Persistence.Repositories.CarRepositories;
 using CarRental.Persistence.Repositories.CategoryRepositories;
 using CarRental.Persistence.Repositories.CommentRepositories;
-using CarRental.Persistence.Repositories.TagCloudRepositories;
-using CarRental.Persistence.Repositories.StatisticsRepositories;
-using CarRental.WebApi.Middlewares;
-using CarRental.Application.Interfaces.StatisticsInterfaces;
-using CarRental.Application.Interfaces.RentACarInterfaces;
 using CarRental.Persistence.Repositories.RentACarRepositories;
-using CarRental.Persistence.Repositories.CarFeatureRepositories;
-using CarRental.Application.Interfaces.CarFeatureInterfaces;
-using CarRental.Application.Interfaces.CarDescriptionInterfaces;
-using CarRental.Persistence.Repositories.CarDescriptionRepositories;
+using CarRental.Persistence.Repositories.StatisticsRepositories;
+using CarRental.Persistence.Repositories.TagCloudRepositories;
+using CarRental.WebApi.Middlewares;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+	opt.RequireHttpsMetadata = false;
+	opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+	{
+		ValidateIssuer = true,
+		ValidateAudience = true,
+		ValidateLifetime = true,
+		ValidateIssuerSigningKey = true,
+		ValidIssuer = builder.Configuration[JwtTokenDefaults.ValidIssuer],
+		ValidAudience = builder.Configuration[JwtTokenDefaults.ValidAudience],
+		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration[JwtTokenDefaults.SecretKey])),
+	};
+});
 
 builder.Services.AddDbContext<CarRentalContext>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -39,6 +58,7 @@ builder.Services.AddScoped<IStatisticsRepository, StatisticsRepository>();
 builder.Services.AddScoped<IRentACarRepository, RentACarRepository>();
 builder.Services.AddScoped<ICarFeatureRepository, CarFeatureRepository>();
 builder.Services.AddScoped<ICarDescriptionRepository, CarDescriptionRepository>();
+builder.Services.AddScoped<JwtTokenGenerator>();
 
 builder.Services.AddApplicationService(builder.Configuration);
 
@@ -63,6 +83,7 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +21,11 @@ namespace CarRental.Persistence.Repositories
 		public async Task<List<T>> GetAllAsync()
 		{
 			return await context.Set<T>().ToListAsync();
+		}
+
+		public async Task<T?> GetByFilterAsync(Expression<Func<T, bool>> filter)
+		{
+			return await context.Set<T>().SingleOrDefaultAsync(filter);
 		}
 
 		public async Task<T> GetByIdAsync(int id)

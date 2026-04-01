@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CarRental.Application.Interfaces.CommentInterfaces
 {
-	public interface ICommentRepository : IRepository<Comment>
+	public interface ICommentRepository
 	{
 		List<Comment> GetCommentsByBlogId(int id);
 	}
