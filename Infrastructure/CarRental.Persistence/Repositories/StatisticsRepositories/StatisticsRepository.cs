@@ -13,7 +13,7 @@ namespace CarRental.Persistence.Repositories.StatisticsRepositories
 	{
 		public async Task<int> GetAuthorCount()
 		{
-			return await context.Authors.CountAsync();
+			return await context.AppUsers.CountAsync(x => x.AppRole.Name == "Moderator");
 		}
 
 		public async Task<int> GetAutomaticCarCount()
@@ -117,6 +117,19 @@ namespace CarRental.Persistence.Repositories.StatisticsRepositories
 		public async Task<int> GetManualCarCount()
 		{
 			return await context.Cars.CountAsync(x => x.Transmission == "Manuel");
+		}
+
+		public async Task<int> GetBlogCountByAuthorId(int id)
+		{
+			return await context.Blogs.CountAsync(x => x.AppUserId == id);
+		}
+
+		public async Task<int> GetTotalCommentCountByAuthorId(int id)
+		{
+			return await context.Blogs
+				.Where(x => x.AppUserId == id)
+				.SelectMany(x => x.Comments)
+				.CountAsync();
 		}
 	}
 }

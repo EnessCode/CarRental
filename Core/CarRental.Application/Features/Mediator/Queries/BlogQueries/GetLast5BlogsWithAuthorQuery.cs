@@ -10,5 +10,11 @@ namespace CarRental.Application.Features.Mediator.Queries.BlogQueries
 {
 	public class GetLast5BlogsWithAuthorQuery : IRequest<List<GetLast5BlogsWithAuthorQueryResult>>
 	{
+		public int? AppUserId { get; set; } 
+
+		public GetLast5BlogsWithAuthorQuery(int? appUserId = null)
+		{
+			AppUserId = appUserId;
+		}
 	}
 }

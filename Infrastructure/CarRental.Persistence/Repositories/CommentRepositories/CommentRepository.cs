@@ -21,13 +21,7 @@ namespace CarRental.Persistence.Repositories.CommentRepositories
 
 		public async Task<List<Comment>> GetAllAsync()
 		{
-			return await context.Comments.Select(x => new Comment
-			{
-				Id = x.Id,
-				BlogId = x.BlogId,
-				CreatedDate = x.CreatedDate,
-				Description = x.Description
-			}).ToListAsync();
+			return await context.Comments.Include(x => x.Blog).ToListAsync();
 		}
 
 		public async Task<Comment?> GetByFilterAsync(Expression<Func<Comment, bool>> filter)

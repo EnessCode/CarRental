@@ -1,0 +1,72 @@
+﻿@model ResultModeratorProfileDto
+@{
+    ViewData["Title"] = "Profil Ayarlarım";
+    Layout = "~/Areas/Moderator/Views/Shared/ModeratorLayout/_ModeratorLayout.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm rounded-4 text-center p-4 mb-4">
+                <div class="mb-3">
+                    <img src="@Model.ImageUrl" class="rounded-circle shadow-sm border border-4 border-white" style="width: 120px; height: 120px; object-fit: cover;" onerror="this.src='/images/no-user.png'">
+                </div>
+                <h5 class="fw-bold mb-1">@Model.Name @Model.Surname</h5>
+                <span class="badge bg-soft-info text-info rounded-pill px-3">@Model.Username</span>
+                <hr class="my-4 opacity-50">
+                <p class="text-muted small">@Model.Description</p>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h6 class="fw-bold mb-0"><i class="ri-user-settings-line me-2 text-primary"></i>Hesap Bilgilerini Güncelle</h6>
+                </div>
+                <form method="post">
+                    <input type="hidden" asp-for="AppUserId" />
+                    <div class="card-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-muted">ADINIZ</label>
+                                <input type="text" asp-for="Name" class="form-control bg-light" readonly />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-muted">SOYADINIZ</label>
+                                <input type="text" asp-for="Surname" class="form-control bg-light" readonly />
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label small fw-bold text-muted">KULLANICI ADI</label>
+                                <input type="text" asp-for="Username" class="form-control bg-light" readonly />
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label small fw-bold text-muted">PROFİL FOTOĞRAFI URL</label>
+                                <input type="text" asp-for="ImageUrl" class="form-control" placeholder="https://..." />
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label small fw-bold text-muted">HAKKIMDA (BİO)</label>
+                                <textarea asp-for="Description" class="form-control" rows="5" placeholder="Okuyucularınıza kendinizden bahsedin..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-top p-3 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary rounded-pill px-5 shadow-sm">
+                            <i class="ri-save-line me-1"></i> Değişiklikleri Kaydet
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-soft-info {
+        background-color: rgba(13, 202, 240, 0.1);
+    }
+
+    .form-control:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.1);
+    }
+</style>

@@ -1,0 +1,123 @@
+﻿@model UpdateBlogDto
+
+@{
+    ViewData["Title"] = "Yazıyı Düzenle";
+    Layout = "~/Areas/Moderator/Views/Shared/ModeratorLayout/_ModeratorLayout.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+            <form asp-area="Moderator" asp-controller="Blog" asp-action="UpdateBlog" method="post">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="CreatedAt" />
+                <input type="hidden" asp-for="AppUserId" />
+                <input type="hidden" asp-for="CategoryId" />
+
+                <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                    <div class="card-header bg-white border-0 pt-4 px-4">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-warning-soft p-2 rounded-3 me-3">
+                                    <i class="ri-edit-2-line fs-3 text-warning"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-0">İçeriği Güncelle</h5>
+                                    <small class="text-muted">Yazı ID: <span class="badge bg-light text-dark">#@Model.Id</span></small>
+                                </div>
+                            </div>
+                            <a href="/Moderator/Blog/Index" class="btn btn-sm btn-light rounded-pill px-3">
+                                <i class="ri-arrow-go-back-line me-1"></i> Geri Dön
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <div class="row g-4">
+                            <div class="col-12">
+                                <label class="form-label fw-semibold text-dark">Yazı Başlığı</label>
+                                <input type="text" asp-for="Title" class="form-control form-control-lg custom-input-update" placeholder="Başlığı revize edin...">
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="form-label fw-semibold text-dark">Kapak Fotoğrafı</label>
+                                <div class="row align-items-start">
+                                    <div class="col-md-8">
+                                        <div class="input-group mb-2">
+                                            <span class="input-group-text bg-light border-end-0"><i class="ri-link"></i></span>
+                                            <input type="text" asp-for="CoverImageUrl" class="form-control border-start-0 custom-input-update" id="imageInput" placeholder="Fotoğraf URL'sini güncelleyin">
+                                        </div>
+                                        <small class="text-muted"><i class="ri-information-line me-1"></i> Görsel otomatik olarak aşağıdaki alanda önizlenir.</small>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="image-preview-container rounded-3 border p-2 bg-light text-center">
+                                            <img src="@Model.CoverImageUrl" id="imagePreview" class="img-fluid rounded-2 shadow-sm" style="max-height: 120px; object-fit: cover;" onerror="this.src='https://placehold.co/600x400?text=Görsel+Bulunamadı'">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-semibold text-dark">Blog İçeriği</label>
+                                <textarea asp-for="Description" class="form-control custom-input-update" rows="12" placeholder="İçeriği burada zenginleştirin..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer bg-light border-0 p-4">
+                        <div class="d-flex justify-content-end gap-3">
+                            <a href="/Moderator/Blog/Index" class="btn btn-link text-secondary text-decoration-none fw-bold">İptal Et</a>
+                            <button type="submit" class="btn btn-warning px-5 rounded-3 fw-bold text-white shadow-sm">
+                                <i class="ri-save-3-line me-2"></i> Değişiklikleri Kaydet
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+-    .bg-warning-soft {
+        background-color: rgba(245, 158, 11, 0.1);
+    }
+
+    .custom-input-update {
+        border: 2px solid #f1f5f9;
+        border-radius: 12px;
+        padding: 12px 16px;
+        transition: all 0.2s ease;
+        background-color: #f8fafc;
+    }
+
+        .custom-input-update:focus {
+            background-color: #fff;
+            border-color: #f59e0b; -
+            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+            outline: none;
+        }
+
+    .image-preview-container {
+        min-height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-style: dashed !important;
+        border-width: 2px !important;
+    }
+
+    .form-control-lg {
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+</style>
+
+@section Scripts {
+    <script>
+-        document.getElementById('imageInput').addEventListener('input', function() {
+            const preview = document.getElementById('imagePreview');
+            preview.src = this.value;
+        });
+    </script>
+}

@@ -3,15 +3,17 @@ using CarRental.Application.Features.Mediator.Commands.ServiceCommands;
 using CarRental.Application.Features.Mediator.Queries.ServiceQueries;
 using CarRental.Application.Features.Mediator.Results.ServiceResults;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.WebApi.Controllers
 {
-	[Area("Admin")]
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class ServicesController(IMediator mediator) : ControllerBase
 	{
+		[AllowAnonymous]
 		[HttpGet]
 		public async Task<IActionResult> ServiceList()
 		{
@@ -19,6 +21,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<List<GetServiceQueryResult>>.SuccessResponse(values, "Hizmetler listesi başarıyla getirildi"));
 		}
 
+		[AllowAnonymous]
 		[HttpGet("{id}")]
 		public async Task<IActionResult> ServiceById(int id)
 		{
@@ -26,6 +29,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<GetServiceByIdQueryResult>.SuccessResponse(value, "İlgili hizmet bilgisi başarıyla getirildi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPost]
 		public async Task<IActionResult> CreateService(CreateServiceCommand command)
 		{
@@ -33,6 +37,7 @@ namespace CarRental.WebApi.Controllers
 			return StatusCode(201, ApiResponse<CreateServiceCommand>.SuccessResponse(createdData, "Yeni hizmet kaydı başarıyla oluşturuldu"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> RemoveService(int id)
 		{
@@ -40,6 +45,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<RemoveServiceCommand>.SuccessResponse(removedData, "Hizmet kaydı başarıyla silindi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPut]
 		public async Task<IActionResult> UpdateService(UpdateServiceCommand command)
 		{

@@ -75,7 +75,15 @@ namespace CarRental.Persistence.Migrations
                     b.Property<int>("AppRoleId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -100,31 +108,6 @@ namespace CarRental.Persistence.Migrations
                     b.HasIndex("AppRoleId");
 
                     b.ToTable("AppUsers");
-                });
-
-            modelBuilder.Entity("CarRental.Domain.Entities.Author", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Authors");
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Banner", b =>
@@ -164,7 +147,7 @@ namespace CarRental.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AuthorId")
+                    b.Property<int>("AppUserId")
                         .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
@@ -187,7 +170,7 @@ namespace CarRental.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("CategoryId");
 
@@ -772,9 +755,9 @@ namespace CarRental.Persistence.Migrations
 
             modelBuilder.Entity("CarRental.Domain.Entities.Blog", b =>
                 {
-                    b.HasOne("CarRental.Domain.Entities.Author", "Author")
+                    b.HasOne("CarRental.Domain.Entities.AppUser", "AppUser")
                         .WithMany("Blogs")
-                        .HasForeignKey("AuthorId")
+                        .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -784,7 +767,7 @@ namespace CarRental.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Author");
+                    b.Navigation("AppUser");
 
                     b.Navigation("Category");
                 });
@@ -955,7 +938,7 @@ namespace CarRental.Persistence.Migrations
                     b.Navigation("AppUsers");
                 });
 
-            modelBuilder.Entity("CarRental.Domain.Entities.Author", b =>
+            modelBuilder.Entity("CarRental.Domain.Entities.AppUser", b =>
                 {
                     b.Navigation("Blogs");
                 });

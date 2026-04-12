@@ -2,12 +2,14 @@
 using CarRental.Dto.CarDtos;
 using CarRental.Dto.LocationDtos;
 using CarRental.Dto.ReservationDtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 
 namespace CarRental.WebUI.Controllers
 {
+	[Authorize]
 	public class ReservationController(IHttpClientFactory httpClientFactory) : Controller
 	{
 		[HttpGet]

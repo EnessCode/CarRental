@@ -1,0 +1,125 @@
+﻿@{
+    ViewData["Title"] = "Moderatör Dashboard";
+    Layout = "~/Areas/Moderator/Views/Shared/ModeratorLayout/_ModeratorLayout.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 modern-action-card shadow-sm">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-4">
+                        <div class="action-header">
+                            <div>
+                                <h4 class="fw-bold mb-0 text-dark">Moderatör İşlem Merkezi</h4>
+                                <p class="text-muted small mb-0">Hızlı blog ve yorum yönetimi.</p>
+                            </div>
+                        </div>
+
+                        <div class="action-grid">
+                            <a href="/Moderator/Blog/CreateBlog/" class="modern-btn m-create">
+                                <div class="m-btn-icon"><i class="ri-edit-box-line"></i></div>
+                                <div class="m-btn-text">
+                                    <span>Yeni Yazı</span>
+                                    <small>Blog Oluştur</small>
+                                </div>
+                            </a>
+
+                            <a href="/Moderator/Comment/Index/" class="modern-btn m-comments">
+                                <div class="m-btn-icon"><i class="ri-chat-3-line"></i></div>
+                                <div class="m-btn-text">
+                                    <span>Yorumlar</span>
+                                    <small>Gelen Yanıtlar</small>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @await Component.InvokeAsync("ModeratorStatistics")
+
+    <div class="row mt-2">
+        <div class="col-12">
+            @await Component.InvokeAsync("ModeratorLast5Blogs")
+        </div>
+    </div>
+</div>
+
+<style>
+    .modern-action-card {
+        background: #ffffff;
+        border-radius: 20px !important;
+        border: 1px solid #f0f0f0 !important;
+    }
+
+    .action-grid {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .modern-btn {
+        text-decoration: none !important;
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        border-radius: 15px;
+        min-width: 185px;
+        transition: all 0.3s ease;
+        border: 1px solid #f1f3f5;
+        background: #fff;
+    }
+
+    .m-btn-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        margin-right: 12px;
+        transition: transform 0.3s ease;
+    }
+
+    .m-btn-text span {
+        color: #334155;
+        font-weight: 700;
+        font-size: 0.9rem;
+    }
+
+    .m-btn-text small {
+        color: #94a3b8;
+        font-size: 0.75rem;
+    }
+
+    .m-create {
+        border-left: 4px solid #4361ee;
+    }
+
+        .m-create .m-btn-icon {
+            background: #eef2ff;
+            color: #4361ee;
+        }
+
+    .m-comments {
+        border-left: 4px solid #10b981;
+    }
+
+        .m-comments .m-btn-icon {
+            background: #ecfdf5;
+            color: #10b981;
+        }
+
+    .modern-btn:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+    }
+
+        .modern-btn:hover .m-btn-icon {
+            transform: rotate(-10deg) scale(1.1);
+        }
+</style>

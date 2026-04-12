@@ -1,10 +1,12 @@
 ﻿using CarRental.Application.Features.Mediator.Queries.AppUserQueries;
 using CarRental.Application.Tools;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.WebApi.Controllers
 {
+	[AllowAnonymous]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class LoginController(IMediator mediator, JwtTokenGenerator jwtTokenGenerator) : ControllerBase

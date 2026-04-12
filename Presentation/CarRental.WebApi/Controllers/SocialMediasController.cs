@@ -3,15 +3,17 @@ using CarRental.Application.Features.Mediator.Commands.SocialMediaCommands;
 using CarRental.Application.Features.Mediator.Queries.SocialMediaQueries;
 using CarRental.Application.Features.Mediator.Results.SocialMediaResults;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.WebApi.Controllers
 {
-	[Area("Admin")]
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class SocialMediasController(IMediator mediator) : ControllerBase
 	{
+		[AllowAnonymous]
 		[HttpGet]
 		public async Task<IActionResult> SocialMediaList()
 		{
@@ -19,6 +21,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<List<GetSocialMediaQueryResult>>.SuccessResponse(values, "Sosyal medya hesapları başarıyla getirildi"));
 		}
 
+		[AllowAnonymous]
 		[HttpGet("{id}")]
 		public async Task<IActionResult> SocialMediaById(int id)
 		{
@@ -26,6 +29,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<GetSocialMediaByIdQueryResult>.SuccessResponse(value, "İlgili sosyal medya hesabı başarıyla getirildi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPost]
 		public async Task<IActionResult> CreateSocialMedia(CreateSocialMediaCommand command)
 		{
@@ -33,6 +37,7 @@ namespace CarRental.WebApi.Controllers
 			return StatusCode(201, ApiResponse<CreateSocialMediaCommand>.SuccessResponse(createdData, "Yeni sosyal medya hesabı başarıyla oluşturuldu"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> RemoveSocialMedia(int id)
 		{
@@ -40,6 +45,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<RemoveSocialMediaCommand>.SuccessResponse(removedData, "Sosyal medya hesabı başarıyla silindi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPut]
 		public async Task<IActionResult> UpdateSocialMedia(UpdateSocialMediaCommand command)
 		{

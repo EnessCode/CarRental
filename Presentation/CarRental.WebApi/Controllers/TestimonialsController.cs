@@ -3,15 +3,17 @@ using CarRental.Application.Features.Mediator.Commands.TestimonialCommands;
 using CarRental.Application.Features.Mediator.Queries.TestimonialQueries;
 using CarRental.Application.Features.Mediator.Results.TestimonialResults;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.WebApi.Controllers
 {
-	[Area("Admin")]
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class TestimonialsController(IMediator mediator) : ControllerBase
 	{
+		[AllowAnonymous]
 		[HttpGet]
 		public async Task<IActionResult> TestimonialList()
 		{
@@ -19,6 +21,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<List<GetTestimonialQueryResult>>.SuccessResponse(values, "Referanslar başarıyla getirildi"));
 		}
 
+		[AllowAnonymous]
 		[HttpGet("{id}")]
 		public async Task<IActionResult> TestimonialById(int id)
 		{
@@ -26,6 +29,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<GetTestimonialByIdQueryResult>.SuccessResponse(value, "İlgili referans başarıyla getirildi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPost]
 		public async Task<IActionResult> CreateTestimonial(CreateTestimonialCommand command)
 		{
@@ -33,6 +37,7 @@ namespace CarRental.WebApi.Controllers
 			return StatusCode(201, ApiResponse<CreateTestimonialCommand>.SuccessResponse(createdData, "Yeni referans başarıyla oluşturuldu"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> RemoveTestimonial(int id)
 		{
@@ -40,6 +45,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<RemoveTestimonialCommand>.SuccessResponse(removedData, "Referans başarıyla silindi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPut]
 		public async Task<IActionResult> UpdateTestimonial(UpdateTestimonialCommand command)
 		{

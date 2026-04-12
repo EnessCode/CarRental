@@ -20,13 +20,12 @@ namespace CarRental.Application.Features.Mediator.Handlers.BlogHandlers
 				Id = x.Id,
 				Title = x.Title,
 				Description = x.Description,
-				CoverImageUrl = x.CoverImageUrl,
-				AuthorName = x.Author.Name,
-				AuthorDescription = x.Author.Description,
-				AuthorImageUrl = x.Author.ImageUrl,
-				CreatedAt = x.CreatedAt,
+				AuthorName = x.AppUser != null ? x.AppUser.Name + " " + x.AppUser.Surname : "Yazar Bilgisi Yok",
+				AuthorId = x.AppUserId,
 				CategoryId = x.CategoryId,
-				CategoryName = x.Category.Name
+				CategoryName = x.Category?.Name ?? "Kategorisiz",
+				CoverImageUrl = x.CoverImageUrl,
+				CreatedAt = x.CreatedAt
 			}).ToList();
 		}
 	}

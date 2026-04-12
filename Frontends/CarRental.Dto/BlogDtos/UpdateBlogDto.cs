@@ -13,7 +13,7 @@ namespace CarRental.Dto.BlogDtos
 		public string Description { get; set; }
 		public string CoverImageUrl { get; set; }
 		public DateTime CreatedAt { get; set; }
-		public int AuthorId { get; set; }
 		public int CategoryId { get; set; }
+		public int AppUserId { get; set; }
 	}
 }

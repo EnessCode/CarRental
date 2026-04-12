@@ -1,5 +1,4 @@
-﻿using CarRental.Application.Features.Mediator.Results.AuthorResults;
-using CarRental.Application.Features.Mediator.Results.CommentResults;
+﻿using CarRental.Application.Features.Mediator.Results.CommentResults;
 using MediatR;
 using System;
 using System.Collections.Generic;

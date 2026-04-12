@@ -41,6 +41,14 @@ namespace CarRental.WebUI.Controllers
 					var token = handler.ReadJwtToken(tokenModel.Token);
 					var claims = token.Claims.ToList();
 
+					var userIdClaim = token.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.NameId)?.Value
+					  ?? token.Claims.FirstOrDefault(x => x.Type == "id")?.Value;
+
+					if (userIdClaim != null)
+					{
+						claims.Add(new Claim(ClaimTypes.NameIdentifier, userIdClaim));
+					}
+
 					claims.Add(new Claim("accessToken", tokenModel.Token));
 
 					var claimsIdentity = new ClaimsIdentity(claims, JwtBearerDefaults.AuthenticationScheme);
@@ -52,9 +60,14 @@ namespace CarRental.WebUI.Controllers
 
 					await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
 
-					if (token.Claims.FirstOrDefault(x => x.Value == "Admin") != null)
+					if (token.Claims.Any(x => x.Value == "Admin"))
 					{
 						return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+					}
+
+					if (token.Claims.Any(x => x.Value == "Moderator"))
+					{
+						return RedirectToAction("Index", "Dashboard", new { area = "Moderator" });
 					}
 
 					return RedirectToAction("Index", "Default");

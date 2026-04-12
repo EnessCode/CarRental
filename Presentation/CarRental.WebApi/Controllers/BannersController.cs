@@ -3,11 +3,12 @@ using CarRental.Application.Features.CQRS.Commands.BannerCommands;
 using CarRental.Application.Features.CQRS.Handlers.BannerHandlers;
 using CarRental.Application.Features.CQRS.Queries.BannerQueries;
 using CarRental.Application.Features.CQRS.Results.BannerResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.WebApi.Controllers
 {
-	[Area("Admin")]
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class BannersController(
@@ -18,6 +19,8 @@ namespace CarRental.WebApi.Controllers
 		RemoveBannerCommandHandler removeBannerCommandHandler
 		) : ControllerBase
 	{
+
+		[AllowAnonymous]
 		[HttpGet]
 		public async Task<IActionResult> BannerList()
 		{
@@ -25,6 +28,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<List<GetBannerQueryResult>>.SuccessResponse(values, "Site afiş listesi başarıyla getirildi"));
 		}
 
+		[AllowAnonymous]
 		[HttpGet("{id}")]
 		public async Task<IActionResult> BannerById(int id)
 		{
@@ -32,6 +36,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<GetBannerByIdQueryResult>.SuccessResponse(value, "İlgili afiş bilgisi başarıyla getirildi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPost]
 		public async Task<IActionResult> CreateBanner(CreateBannerCommand command)
 		{
@@ -39,6 +44,7 @@ namespace CarRental.WebApi.Controllers
 			return StatusCode(201, ApiResponse<CreateBannerCommand>.SuccessResponse(createdData, "Yeni afiş başarıyla oluşturuldu"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> RemoveBanner(int id)
 		{
@@ -46,6 +52,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<RemoveBannerCommand>.SuccessResponse(removedData, "Afiş kaydı sistemden silindi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPut]
 		public async Task<IActionResult> UpdateBanner(UpdateBannerCommand command)
 		{

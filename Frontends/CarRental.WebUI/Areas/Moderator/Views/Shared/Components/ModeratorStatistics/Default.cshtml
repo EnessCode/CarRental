@@ -1,0 +1,32 @@
+﻿@model CarRental.Dto.StatisticsDtos.ResultStatisticsDto
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card bg-primary text-white shadow-sm mb-4 border-0">
+            <div class="card-body d-flex align-items-center justify-content-between p-4">
+                <div>
+                    <h6 class="text-uppercase mb-1 fw-bold" style="font-size: 0.75rem; opacity: 0.8;">Toplam Yazılarım</h6>
+                    <h2 class="mb-0 fw-bold">@Model.blogCountByAuthorId</h2>
+                </div>
+                <div class="bg-white text-primary rounded-circle p-3 shadow-sm">
+                    <i class="ri-edit-2-line fs-3"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card bg-success text-white shadow-sm mb-4 border-0">
+            <div class="card-body d-flex align-items-center justify-content-between p-4">
+                <div>
+                    <h6 class="text-uppercase mb-1 fw-bold" style="font-size: 0.75rem; opacity: 0.8;">Aldığım Yorumlar</h6>
+                    <h2 class="mb-0 fw-bold">@Model.totalCommentCountByAuthorId</h2>
+                </div>
+                <div class="bg-white text-success rounded-circle p-3 shadow-sm">
+                    <i class="ri-chat-voice-line fs-3"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

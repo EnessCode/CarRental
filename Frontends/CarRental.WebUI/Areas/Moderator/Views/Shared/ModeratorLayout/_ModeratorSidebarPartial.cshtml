@@ -1,0 +1,92 @@
+﻿<div class="sidebar-modern-dark" id="sidebar-wrapper">
+    <div class="brand-section text-center py-4">
+        <div class="brand-logo mx-auto mb-2">
+            <i class="ri-shield-user-fill text-white fs-3"></i>
+        </div>
+        <h6 class="text-white fw-bold mb-0">Moderatör Paneli</h6>
+        <span class="badge bg-info-soft text-info" style="font-size: 10px;">EDİTÖR YETKİSİ</span>
+    </div>
+
+    <div class="px-3 mt-3">
+        <h6 class="menu-title text-uppercase">İçerik Yönetimi</h6>
+        <nav class="nav flex-column gap-2">
+            <a href="/Moderator/Dashboard/Index" class="nav-link-mod">
+                <i class="ri-dashboard-3-line"></i> <span>Genel Bakış</span>
+            </a>
+            <a href="/Moderator/Blog/Index" class="nav-link-mod">
+                <i class="ri-article-line"></i> <span>Blog Yazılarım</span>
+            </a>
+            <a href="/Moderator/Comment/Index" class="nav-link-mod">
+                <i class="ri-chat-check-line"></i> <span>Yorumlar</span>
+            </a>
+            <a href="/Moderator/Profile/Index" class="nav-link-mod">
+                <i class="ri-user-settings-line"></i> <span>Profil Ayarları</span>
+            </a>
+        </nav>
+
+        <div class="mt-5 pt-5 border-top border-secondary">
+            <a href="/Default/Index" class="nav-link-mod text-info">
+                <i class="ri-external-link-line"></i> <span>Siteye Dön</span>
+            </a>
+            <a href="/Login/Logout" class="nav-link-mod text-danger">
+                <i class="ri-logout-box-r-line"></i> <span>Güvenli Çıkış</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .sidebar-modern-dark {
+        width: var(--sidebar-width);
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background: #0f172a;
+        z-index: 1000;
+        transition: 0.3s ease;
+    }
+
+    .brand-logo {
+        background: var(--mod-primary);
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+    }
+
+    .menu-title {
+        font-size: 11px;
+        color: #64748b;
+        letter-spacing: 1.5px;
+        margin-bottom: 15px;
+        padding-left: 10px;
+    }
+
+    .nav-link-mod {
+        display: flex;
+        align-items: center;
+        padding: 12px 15px;
+        border-radius: 10px;
+        color: #94a3b8;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+        .nav-link-mod i {
+            font-size: 20px;
+            margin-right: 12px;
+        }
+
+        .nav-link-mod:hover, .nav-link-mod.active {
+            background: rgba(99, 102, 241, 0.1);
+            color: #fff;
+        }
+
+        .nav-link-mod.active {
+            background: var(--mod-primary);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+</style>

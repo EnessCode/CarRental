@@ -2,15 +2,18 @@
 using CarRental.Application.Features.Mediator.Queries.RentACarQueries;
 using CarRental.Application.Features.Mediator.Results.RentACarResults;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.WebApi.Controllers
 {
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class RentACarsController(IMediator mediator) : ControllerBase
 	{
+		[AllowAnonymous]
 		[HttpGet]
 		public async Task<IActionResult> GetRentACarListByLocation([FromQuery] GetRentACarQuery getRentACarQuery)
 		{

@@ -24,5 +24,7 @@ namespace CarRental.Dto.StatisticsDtos
 		public int carCountByFuelDiesel { get; set; }
 		public int carCountByFuelElectric { get; set; }
 		public int manualCarCount { get; set; }
+		public int blogCountByAuthorId { get; set; } 
+		public int totalCommentCountByAuthorId { get; set; } 
 	}
 }

@@ -1,0 +1,86 @@
+﻿<nav class="navbar navbar-expand px-4 pt-4 mb-4">
+    <div class="container-fluid p-3 shadow-sm bg-white rounded-4 border border-light">
+        <button class="btn btn-light shadow-none border-0 rounded-3 me-3" id="menu-toggle">
+            <i class="ri-menu-fold-line fs-4" style="color: var(--mod-primary);"></i>
+        </button>
+
+        <div class="d-none d-md-flex align-items-center">
+            <span class="badge bg-light text-dark border px-3 py-2 rounded-3">
+                <i class="ri-edit-circle-line me-2 text-primary"></i>
+                İçerik Editörü Modu
+            </span>
+        </div>
+
+        <ul class="navbar-nav ms-auto align-items-center">
+
+            <li class="nav-item">
+                <div class="mod-profile-card">
+                    <img src="https://ui-avatars.com/api/?name=Moderatör&background=6366f1&color=fff" alt="Moderator">
+                    <div class="d-none d-lg-block">
+                        <p class="name mb-0">Moderatör Paneli</p>
+                        <p class="role mb-0" style="color: var(--mod-primary);">İçerik Yönetimi</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<style>
+    .mod-icon-circle {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background: #F8FAFC;
+        color: #64748B;
+        position: relative;
+        text-decoration: none;
+        transition: 0.2s;
+    }
+
+        .mod-icon-circle:hover {
+            background: #EEF2FF;
+            color: var(--mod-primary);
+        }
+
+    .mod-dot-indicator {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 8px;
+        height: 8px;
+        background: #F59E0B; 
+        border-radius: 50%;
+        border: 2px solid #fff;
+    }
+
+    .mod-profile-card {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding-left: 15px;
+        border-left: 1px solid #E2E8F0;
+    }
+
+        .mod-profile-card img {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid #EEF2FF;
+        }
+
+        .mod-profile-card .name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #1E293B;
+        }
+
+        .mod-profile-card .role {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+</style>

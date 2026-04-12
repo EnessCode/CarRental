@@ -3,15 +3,17 @@ using CarRental.Application.Features.Mediator.Commands.PricingCommands;
 using CarRental.Application.Features.Mediator.Queries.PricingQueries;
 using CarRental.Application.Features.Mediator.Results.PricingResults;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.WebApi.Controllers
 {
-	[Area("Admin")]
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class PricingsController(IMediator mediator) : ControllerBase
 	{
+		[AllowAnonymous]
 		[HttpGet]
 		public async Task<IActionResult> PricingList()
 		{
@@ -19,6 +21,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<List<GetPricingQueryResult>>.SuccessResponse(values, "Ödeme türleri başarıyla getirildi"));
 		}
 
+		[AllowAnonymous]
 		[HttpGet("{id}")]
 		public async Task<IActionResult> PricingById(int id)
 		{
@@ -26,6 +29,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<GetPricingByIdQueryResult>.SuccessResponse(value, "İlgili ödeme türü bilgisi başarıyla getirildi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPost]
 		public async Task<IActionResult> CreatePricing(CreatePricingCommand command)
 		{
@@ -33,6 +37,7 @@ namespace CarRental.WebApi.Controllers
 			return StatusCode(201, ApiResponse<CreatePricingCommand>.SuccessResponse(createdData, "Yeni ödeme türü başarıyla oluşturuldu"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> RemovePricing(int id)
 		{
@@ -40,6 +45,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<RemovePricingCommand>.SuccessResponse(removedData, "Ödeme türü başarıyla silindi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPut]
 		public async Task<IActionResult> UpdatePricing(UpdatePricingCommand command)
 		{

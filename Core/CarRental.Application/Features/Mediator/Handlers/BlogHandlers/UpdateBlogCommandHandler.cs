@@ -25,7 +25,7 @@ namespace CarRental.Application.Features.Mediator.Handlers.BlogHandlers
 			value.Title = request.Title;
 			value.Description = request.Description;
 			value.CoverImageUrl = request.CoverImageUrl;
-			value.AuthorId = request.AuthorId;
+			value.AppUserId = request.AppUserId;
 			value.CategoryId = request.CategoryId;
 
 			await blogRepository.UpdateAsync(value);

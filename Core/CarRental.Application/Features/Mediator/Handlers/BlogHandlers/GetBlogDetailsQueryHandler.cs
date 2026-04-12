@@ -28,13 +28,13 @@ namespace CarRental.Application.Features.Mediator.Handlers.BlogHandlers
 				Description = values.Description,
 				CoverImageUrl = values.CoverImageUrl,
 				CreatedAt = values.CreatedAt,
-				AuthorId = values.AuthorId,
-				AuthorName = values.Author.Name,
-				AuthorDescription = values.Author.Description,
-				AuthorImageUrl = values.Author.ImageUrl,   
+				AuthorId = values.AppUserId,
+				AuthorName = values.AppUser != null ? values.AppUser.Name + " " + values.AppUser.Surname : "Yazar Bilgisi Yok",
+				AuthorDescription = values.AppUser?.Description ?? "Bu yazar hakkında henüz bir açıklama bulunmuyor.",
+				AuthorImageUrl = values.AppUser?.ImageUrl ?? "/images/default-user.png",
 				CategoryId = values.CategoryId,
-				CategoryName = values.Category.Name,
-				CommentCount = values.Comments.Count
+				CategoryName = values.Category?.Name ?? "Genel",
+				CommentCount = values.Comments?.Count ?? 0
 			};
 		}
 	}

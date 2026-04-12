@@ -22,7 +22,7 @@ namespace CarRental.Application.Features.Mediator.Handlers.BlogHandlers
 				Title = x.Title,
 				Description = x.Description,
 				CoverImageUrl = x.CoverImageUrl,
-				AuthorId = x.AuthorId,
+				AuthorId = x.AppUserId,
 				CategoryId = x.CategoryId,
 				CreatedAt = x.CreatedAt
 			}).ToList();

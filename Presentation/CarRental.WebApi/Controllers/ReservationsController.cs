@@ -1,16 +1,18 @@
 ﻿using CarRental.Application.Common;
 using CarRental.Application.Features.Mediator.Commands.ReservationCommands;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.WebApi.Controllers
 {
-	[Area("Admin")]
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class ReservationsController(IMediator mediator) : ControllerBase
 	{
+		[AllowAnonymous]
 		[HttpPost]
 		public async Task<IActionResult> CreateReservation(CreateReservationCommand command)
 		{

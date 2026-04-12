@@ -1,0 +1,51 @@
+﻿@model List<CarRental.Dto.BlogDtos.ResultLast5BlogsWithAuthorDto>
+
+<div class="card shadow-sm border-0 rounded-4 mt-4">
+    <div class="card-header bg-white border-0 py-3 d-flex align-items-center justify-content-between">
+        <h6 class="fw-bold mb-0 text-dark">
+            <i class="ri-history-line text-primary me-2"></i>Son Yayınladığım Bloglar
+        </h6>
+        <a href="/Moderator/Blog/Index" class="btn btn-sm btn-light-primary rounded-pill px-3">Tümünü Yönet</a>
+    </div>
+    <div class="table-responsive p-3">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr style="font-size: 0.8rem; color: #6c757d;">
+                    <th>GÖRSEL & BAŞLIK</th>
+                    <th>KATEGORİ</th>
+                    <th>TARİH</th>
+                    <th class="text-end">EYLEM</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="@item.CoverImageUrl" class="rounded-3 me-3" style="width: 45px; height: 45px; object-fit: cover;">
+                                    <span class="fw-bold text-dark" style="font-size: 0.9rem;">@item.Title</span>
+                                </div>
+                            </td>
+                            <td><span class="badge bg-soft-info text-info rounded-pill">@item.CategoryName</span></td>
+                            <td class="text-muted" style="font-size: 0.85rem;">@item.CreatedAt.ToString("dd MMM yyyy")</td>
+                            <td class="text-end">
+                                <a href="/Moderator/Blog/UpdateBlog/@item.Id" class="btn btn-sm btn-icon btn-light-warning">
+                                    <i class="ri-edit-line"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center py-4 text-muted">Henüz bir blog yazınız bulunmuyor.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

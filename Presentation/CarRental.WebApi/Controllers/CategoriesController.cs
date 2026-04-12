@@ -3,11 +3,12 @@ using CarRental.Application.Features.CQRS.Commands.CategoryCommands;
 using CarRental.Application.Features.CQRS.Handlers.CategoryHandlers;
 using CarRental.Application.Features.CQRS.Queries.CategoryQueries;
 using CarRental.Application.Features.CQRS.Results.CategoryResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.WebApi.Controllers
 {
-	[Area("Admin")]
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class CategoriesController(
@@ -20,6 +21,7 @@ namespace CarRental.WebApi.Controllers
 		) : ControllerBase
 	{
 
+		[AllowAnonymous]
 		[HttpGet]
 		public async Task<IActionResult> CategoryList()
 		{
@@ -27,6 +29,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<List<GetCategoryQueryResult>>.SuccessResponse(values, "Araç kategorileri listesi başarıyla getirildi"));
 		}
 
+		[AllowAnonymous]
 		[HttpGet("{id}")]
 		public async Task<IActionResult> CategoryById(int id)
 		{
@@ -34,6 +37,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<GetCategoryByIdQueryResult>.SuccessResponse(value, "İstenen kategori bilgisi başarıyla getirildi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPost]
 		public async Task<IActionResult> CreateCategory(CreateCategoryCommand command)
 		{
@@ -41,6 +45,7 @@ namespace CarRental.WebApi.Controllers
 			return StatusCode(201, ApiResponse<CreateCategoryCommand>.SuccessResponse(createdData, "Yeni kategori başarıyla sisteme eklendi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> RemoveCategory(int id)
 		{
@@ -48,6 +53,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<RemoveCategoryCommand>.SuccessResponse(removedData, "Kategori kaydı başarıyla silindi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPut]
 		public async Task<IActionResult> UpdateCategory(UpdateCategoryCommand command)
 		{
@@ -55,6 +61,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<UpdateCategoryCommand>.SuccessResponse(updatedData, "Kategori bilgisi başarıyla güncellendi"));
 		}
 
+		[AllowAnonymous]
 		[HttpGet("GetCategoriesWithBlogCount")]
 		public async Task<IActionResult> GetCategoriesWithBlogCount()
 		{

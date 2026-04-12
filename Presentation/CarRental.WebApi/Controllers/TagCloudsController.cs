@@ -3,15 +3,17 @@ using CarRental.Application.Features.Mediator.Commands.TagCloudCommands;
 using CarRental.Application.Features.Mediator.Queries.TagCloudQueries;
 using CarRental.Application.Features.Mediator.Results.TagCloudResults;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.WebApi.Controllers
 {
-	[Area("Admin")]
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class TagCloudsController(IMediator mediator) : ControllerBase
 	{
+		[AllowAnonymous]
 		[HttpGet]
 		public async Task<IActionResult> TagCloudList()
 		{
@@ -19,6 +21,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<List<GetTagCloudQueryResult>>.SuccessResponse(values, "Etiket bulutu listesi başarıyla getirildi"));
 		}
 
+		[AllowAnonymous]
 		[HttpGet("{id}")]
 		public async Task<IActionResult> TagCloudById(int id)
 		{
@@ -26,6 +29,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<GetTagCloudByIdQueryResult>.SuccessResponse(value, "İlgili etiket bulutu kaydı başarıyla getirildi"));
 		}
 
+		[Authorize(Roles = "Admin,Moderator")]
 		[HttpPost]
 		public async Task<IActionResult> CreateTagCloud(CreateTagCloudCommand command)
 		{
@@ -33,6 +37,7 @@ namespace CarRental.WebApi.Controllers
 			return StatusCode(201, ApiResponse<CreateTagCloudCommand>.SuccessResponse(createdData, "Yeni etiket bulutu kaydı başarıyla oluşturuldu"));
 		}
 
+		[Authorize(Roles = "Admin,Moderator")]
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> RemoveTagCloud(int id)
 		{
@@ -40,6 +45,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<RemoveTagCloudCommand>.SuccessResponse(removedData, "Etiket bulutu kaydı başarıyla silindi"));
 		}
 
+		[Authorize(Roles = "Admin,Moderator")]
 		[HttpPut]
 		public async Task<IActionResult> UpdateTagCloud(UpdateTagCloudCommand command)
 		{
@@ -47,6 +53,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<UpdateTagCloudCommand>.SuccessResponse(updatedData, "Etiket bulutu bilgisi başarıyla güncellendi"));
 		}
 
+		[AllowAnonymous]
 		[HttpGet("GetTagCloudByBlogId/{id}")]
 		public async Task<IActionResult> GetTagCloudByBlogId(int id)
 		{

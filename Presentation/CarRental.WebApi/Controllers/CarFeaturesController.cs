@@ -3,15 +3,17 @@ using CarRental.Application.Features.Mediator.Commands.CarFeatureCommands;
 using CarRental.Application.Features.Mediator.Queries.CarFeatureQueries;
 using CarRental.Application.Features.Mediator.Results.CarFeatureResults;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.WebApi.Controllers
 {
-	[Area("Admin")]
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class CarFeaturesController(IMediator mediator) : ControllerBase
 	{
+		[AllowAnonymous]
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetCarFeaturesByCarId(int id)
 		{
@@ -19,6 +21,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<List<GetCarFeatureByCarIdQueryResult>>.SuccessResponse(values,"Araca ait özellikler başarıyla getirildi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPost("UpdateCarFeatureAvailable")]
 		public async Task<IActionResult> UpdateCarFeatureAvailable([FromBody] UpdateCarFeatureAvailableCommand command)
 		{

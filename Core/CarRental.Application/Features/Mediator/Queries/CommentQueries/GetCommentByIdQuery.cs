@@ -10,5 +10,6 @@ namespace CarRental.Application.Features.Mediator.Queries.CommentQueries
 {
 	public class GetCommentByIdQuery(int id) : IRequest<GetCommentByIdQueryResult>
 	{
+		public int Id { get; set; } = id;
 	}
 }

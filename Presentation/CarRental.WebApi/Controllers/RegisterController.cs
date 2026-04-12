@@ -1,11 +1,13 @@
 ﻿using CarRental.Application.Common;
 using CarRental.Application.Features.Mediator.Commands.AppUserCommands;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.WebApi.Controllers
 {
+	[AllowAnonymous]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class RegisterController(IMediator mediator) : ControllerBase

@@ -3,11 +3,12 @@ using CarRental.Application.Features.CQRS.Commands.AboutCommands;
 using CarRental.Application.Features.CQRS.Handlers.AboutHandlers;
 using CarRental.Application.Features.CQRS.Queries.AboutQueries;
 using CarRental.Application.Features.CQRS.Results.AboutResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.WebApi.Controllers
 {
-	[Area("Admin")]
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class AboutsController(
@@ -18,7 +19,8 @@ namespace CarRental.WebApi.Controllers
 		RemoveAboutCommandHandler removeAboutCommandHandler
 		) : ControllerBase
 	{
-
+		
+		[AllowAnonymous]
 		[HttpGet]
 		public async Task<IActionResult> AboutList()
 		{
@@ -26,6 +28,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<List<GetAboutQueryResult>>.SuccessResponse(values, "Hakkımızda bölümü yazıları başarıyla getirildi"));
 		}
 
+		[AllowAnonymous]
 		[HttpGet("{id}")]
 		public async Task<IActionResult> AboutById(int id)
 		{
@@ -33,6 +36,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<GetAboutByIdQueryResult>.SuccessResponse(value, "Hakkımızda detayı başarıyla getirildi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPost]
 		public async Task<IActionResult> CreateAbout(CreateAboutCommand command)
 		{
@@ -40,6 +44,7 @@ namespace CarRental.WebApi.Controllers
 			return StatusCode(201, ApiResponse<CreateAboutCommand>.SuccessResponse(createdData, "Hakkımızda bilgisi başarıyla eklendi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> RemoveAbout(int id)
 		{
@@ -47,6 +52,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<RemoveAboutCommand>.SuccessResponse(removedData, "Hakkımızda yazısı başarıyla silindi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPut]
 		public async Task<IActionResult> UpdateAbout(UpdateAboutCommand command)
 		{

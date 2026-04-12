@@ -3,15 +3,17 @@ using CarRental.Application.Features.Mediator.Commands.FooterAddressCommands;
 using CarRental.Application.Features.Mediator.Queries.FooterAddressQueries;
 using CarRental.Application.Features.Mediator.Results.FooterAddressResults;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.WebApi.Controllers
 {
-	[Area("Admin")]
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class FooterAddressesController(IMediator mediator) : ControllerBase
 	{
+		[AllowAnonymous]
 		[HttpGet]
 		public async Task<IActionResult> FooterAddressList()
 		{
@@ -19,6 +21,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<List<GetFooterAddressQueryResult>>.SuccessResponse(values, "Alt bilgi adres listesi başarıyla getirildi"));
 		}
 
+		[AllowAnonymous]
 		[HttpGet("{id}")]
 		public async Task<IActionResult> FooterAddressById(int id)
 		{
@@ -26,6 +29,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<GetFooterAddressByIdQueryResult>.SuccessResponse(value, "İlgili alt bilgi adresi başarıyla getirildi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPost]
 		public async Task<IActionResult> CreateFooterAddress(CreateFooterAddressCommand command)
 		{
@@ -33,6 +37,7 @@ namespace CarRental.WebApi.Controllers
 			return StatusCode(201, ApiResponse<CreateFooterAddressCommand>.SuccessResponse(createdData, "Yeni alt bilgi adresi başarıyla oluşturuldu"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> RemoveFooterAddress(int id)
 		{
@@ -40,6 +45,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<RemoveFooterAddressCommand>.SuccessResponse(removedData, "Alt bilgi adresi başarıyla silindi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPut]
 		public async Task<IActionResult> UpdateFooterAddress(UpdateFooterAddressCommand command)
 		{

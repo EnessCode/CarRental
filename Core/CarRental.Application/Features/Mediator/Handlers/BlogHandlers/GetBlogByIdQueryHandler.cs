@@ -31,7 +31,7 @@ namespace CarRental.Application.Features.Mediator.Handlers.BlogHandlers
 				Description = value.Description,
 				CoverImageUrl = value.CoverImageUrl,
 				CreatedAt = value.CreatedAt,
-				AuthorId = value.AuthorId,
+				AppUserId = value.AppUserId,
 				CategoryId = value.CategoryId,
 			};
 		}

@@ -3,11 +3,12 @@ using CarRental.Application.Features.CQRS.Commands.CarCommands;
 using CarRental.Application.Features.CQRS.Handlers.CarHandlers;
 using CarRental.Application.Features.CQRS.Queries.CarQueries;
 using CarRental.Application.Features.CQRS.Results.CarResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.WebApi.Controllers
 {
-	[Area("Admin")]
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class CarsController(
@@ -22,6 +23,7 @@ namespace CarRental.WebApi.Controllers
 		) : ControllerBase
 	{
 
+		[AllowAnonymous]
 		[HttpGet]
 		public async Task<IActionResult> CarList()
 		{
@@ -29,6 +31,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<List<GetCarQueryResult>>.SuccessResponse(values, "Tüm araçların listesi başarıyla getirildi"));
 		}
 
+		[AllowAnonymous]
 		[HttpGet("{id}")]
 		public async Task<IActionResult> CarById(int id)
 		{
@@ -36,6 +39,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<GetCarByIdQueryResult>.SuccessResponse(value, "İstenen aracın detay bilgileri getirildi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPost]
 		public async Task<IActionResult> CreateCar(CreateCarCommand command)
 		{ 
@@ -43,6 +47,7 @@ namespace CarRental.WebApi.Controllers
 			return StatusCode(201, ApiResponse<CreateCarCommand>.SuccessResponse(createdData, "Yeni araç kaydı başarıyla oluşturuldu"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> RemoveCar(int id)
 		{
@@ -50,6 +55,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<RemoveCarCommand>.SuccessResponse(removedData, "Araç kaydı sistemden başarıyla silindi"));
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPut]
 		public async Task<IActionResult> UpdateCar(UpdateCarCommand command)
 		{
@@ -57,6 +63,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<UpdateCarCommand>.SuccessResponse(updatedData, "Araç bilgileri başarıyla güncellendi"));
 		}
 
+		[AllowAnonymous]
 		[HttpGet("GetCarWithBrand")]
 		public async Task<IActionResult> GetCarWithBrand()
 		{
@@ -64,6 +71,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<List<GetCarWithBrandQueryResult>>.SuccessResponse(values, "Araçlar marka bilgileriyle birlikte listelendi"));
 		}
 
+		[AllowAnonymous]
 		[HttpGet("GetLast5CarsWithBrand")]
 		public async Task<IActionResult> GetLast5CarsWithBrand()
 		{
@@ -71,6 +79,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<List<GetLast5CarsWithBrandQueryResult>>.SuccessResponse(values, "Son 5 araç marka bilgileriyle birlikte listelendi"));
 		}
 
+		[AllowAnonymous]
 		[HttpGet("GetCarWithBrandById/{id}")]
 		public async Task<IActionResult> GetCarWithBrandById(int id)
 		{

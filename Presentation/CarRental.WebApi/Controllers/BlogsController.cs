@@ -3,15 +3,17 @@ using CarRental.Application.Features.Mediator.Commands.BlogCommands;
 using CarRental.Application.Features.Mediator.Queries.BlogQueries;
 using CarRental.Application.Features.Mediator.Results.BlogResults;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.WebApi.Controllers
 {
-	[Area("Admin")]
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class BlogsController(IMediator mediator) : ControllerBase
 	{
+		[AllowAnonymous]
 		[HttpGet]
 		public async Task<IActionResult> BlogList()
 		{
@@ -19,6 +21,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<List<GetBlogQueryResult>>.SuccessResponse(values, "Blog listesi başarıyla getirildi"));
 		}
 
+		[AllowAnonymous]
 		[HttpGet("{id}")]
 		public async Task<IActionResult> BlogById(int id)
 		{
@@ -26,6 +29,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<GetBlogByIdQueryResult>.SuccessResponse(value, "İlgili blog kaydı başarıyla getirildi"));
 		}
 
+		[Authorize(Roles = "Admin,Moderator")]
 		[HttpPost]
 		public async Task<IActionResult> CreateBlog(CreateBlogCommand command)
 		{
@@ -33,6 +37,7 @@ namespace CarRental.WebApi.Controllers
 			return StatusCode(201, ApiResponse<CreateBlogCommand>.SuccessResponse(createdData, "Yeni blog kaydı başarıyla oluşturuldu"));
 		}
 
+		[Authorize(Roles = "Admin,Moderator")]
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> RemoveBlog(int id)
 		{
@@ -40,6 +45,7 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<RemoveBlogCommand>.SuccessResponse(removedData, "Blog kaydı başarıyla silindi"));
 		}
 
+		[Authorize(Roles = "Admin,Moderator")]
 		[HttpPut]
 		public async Task<IActionResult> UpdateBlog(UpdateBlogCommand command)
 		{
@@ -68,11 +74,20 @@ namespace CarRental.WebApi.Controllers
 			return Ok(ApiResponse<GetBlogDetailsQueryResult>.SuccessResponse(value, "Blog detayları ve yazar bilgisi getirildi"));
 		}
 
+		[AllowAnonymous]
 		[HttpGet("GetBlogsByCategoryId/{id}")]
 		public async Task<IActionResult> GetBlogsByCategoryId(int id)
 		{
 			var values = await mediator.Send(new GetBlogByCategoryIdQuery(id));
 			return Ok(ApiResponse<List<GetBlogByCategoryIdQueryResult>>.SuccessResponse(values, "Kategoriye ait bloglar başarıyla getirildi"));
+		}
+
+		[AllowAnonymous]
+		[HttpGet("GetBlogsByAuthorId/{id}")]
+		public async Task<IActionResult> GetBlogsByAuthorId(int id)
+		{
+			var values = await mediator.Send(new GetBlogByAuthorIdQuery(id));
+			return Ok(ApiResponse<List<GetBlogByAuthorIdQueryResult>>.SuccessResponse(values));
 		}
 	}
 }

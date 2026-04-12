@@ -32,5 +32,8 @@ namespace CarRental.Application.Interfaces.StatisticsInterfaces
 		Task<decimal> GetAvgRentPriceForDaily();
 		Task<decimal> GetAvgRentPriceForHourly();
 		Task<decimal> GetAvgRentPriceForMonthly();
+
+		Task<int> GetBlogCountByAuthorId(int id);
+		Task<int> GetTotalCommentCountByAuthorId(int id);
 	}
 }

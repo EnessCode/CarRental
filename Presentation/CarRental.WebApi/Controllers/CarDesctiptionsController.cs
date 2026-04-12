@@ -2,16 +2,18 @@
 using CarRental.Application.Features.Mediator.Queries.CarDescriptionQueries;
 using CarRental.Application.Features.Mediator.Results.CarDescriptionResults;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace CarRental.WebApi.Controllers
 {
-	[Area("Admin")]
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class CarDescriptionsController(IMediator mediator) : ControllerBase
 	{
+		[AllowAnonymous]
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetCarDescriptionByCarId(int id)
 		{

@@ -1,0 +1,175 @@
+﻿@model List<ResultAllBlogsWithAuthorDto>
+
+@{
+    ViewData["Title"] = "Blog Yazılarım";
+    Layout = "~/Areas/Moderator/Views/Shared/ModeratorLayout/_ModeratorLayout.cshtml";
+    int count = 0;
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <div>
+                    <h4 class="fw-bold text-dark mb-1">Yazı Yönetimi</h4>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item small"><a href="/Moderator/Dashboard/Index">Panel</a></li>
+                            <li class="breadcrumb-item small active" aria-current="page">Bloglarım</li>
+                        </ol>
+                    </nav>
+                </div>
+                <a href="/Moderator/Blog/CreateBlog" class="btn btn-primary rounded-pill px-4 shadow-primary d-flex align-items-center gap-2">
+                    <i class="ri-add-line fs-5"></i>
+                    <span class="fw-bold">Yeni Yazı Oluştur</span>
+                </a>
+            </div>
+
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="card-header bg-white border-bottom py-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="bg-soft-primary p-2 rounded-3">
+                            <i class="ri-article-line text-primary fs-5"></i>
+                        </div>
+                        <h5 class="fw-bold mb-0 text-dark">İçerik Arşivim</h5>
+                    </div>
+                </div>
+
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th class="ps-4 py-3 text-muted fw-bold small text-uppercase" style="width: 50px;">#</th>
+                                    <th class="py-3 text-muted fw-bold small text-uppercase">İçerik Başlığı</th>
+                                    <th class="py-3 text-muted fw-bold small text-uppercase text-center">Kategori</th>
+                                    <th class="py-3 text-muted fw-bold small text-uppercase text-center">Yayın Tarihi</th>
+                                    <th class="py-3 text-muted fw-bold small text-uppercase text-center">İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Any())
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td class="ps-4 fw-medium text-secondary">@count</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <div class="position-relative">
+                                                        <img src="@item.CoverImageUrl" class="rounded-3 object-fit-cover border shadow-sm"
+                                                             style="width: 65px; height: 45px;"
+                                                             onerror="this.src='https://placehold.co/600x400?text=Görsel+Yok'">
+                                                    </div>
+                                                    <div style="max-width: 350px;">
+                                                        <div class="fw-bold text-dark text-truncate">@item.Title</div>
+                                                        <small class="text-muted d-block small">ID: #@item.Id</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="badge bg-soft-info text-info rounded-pill px-3 fw-medium">
+                                                    @item.CategoryName
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="small text-secondary fw-medium">
+                                                    <i class="ri-calendar-event-line me-1 text-primary"></i>
+                                                    @item.CreatedAt.ToString("dd.MM.yyyy")
+                                                </div>
+                                            </td>
+                                            <td class="text-center pe-4">
+                                                <div class="d-flex justify-content-center gap-2">
+                                                    <a href="/Blog/BlogDetail/@item.Id" target="_blank" class="btn btn-sm btn-outline-primary rounded-circle p-2 border-0 shadow-sm-hover" title="Sitede Gör">
+                                                        <i class="ri-eye-line fs-5"></i>
+                                                    </a>
+                                                    <a href="/Moderator/Blog/UpdateBlog/@item.Id" class="btn btn-sm btn-outline-info rounded-circle p-2 border-0 shadow-sm-hover" title="Güncelle">
+                                                        <i class="ri-edit-2-line fs-5"></i>
+                                                    </a>
+                                                    <button onclick="deleteItem('@item.Id','Blog')" class="btn btn-sm btn-outline-danger rounded-circle p-2 border-0 shadow-sm-hover" title="Sil">
+                                                        <i class="ri-delete-bin-6-line fs-5"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="5" class="text-center py-5">
+                                            <div class="text-muted">
+                                                <i class="ri-inbox-line fs-1 d-block mb-2 opacity-50"></i>
+                                                Henüz bir blog yazınız bulunmuyor.
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card-footer bg-white border-top py-3">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p class="mb-0 small text-muted">Sizin tarafınızdan toplam <strong>@Model?.Count</strong> içerik yönetiliyor.</p>
+                        <div class="small text-muted">Son güncelleme: @DateTime.Now.ToString("HH:mm")</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+-    .bg-soft-info {
+        background-color: rgba(13, 202, 240, 0.12) !important;
+    }
+
+    .bg-soft-primary {
+        background-color: rgba(67, 97, 238, 0.12) !important;
+    }
+
+    .bg-soft-danger {
+        background-color: rgba(239, 68, 68, 0.12) !important;
+    }
+
+    .object-fit-cover {
+        object-fit: cover;
+    }
+
+-    .shadow-primary {
+        box-shadow: 0 8px 15px rgba(67, 97, 238, 0.25);
+    }
+
+    .shadow-sm-hover {
+        transition: all 0.2s ease;
+    }
+
+        .shadow-sm-hover:hover {
+            background-color: #f8fafc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+-    .table thead th {
+        letter-spacing: 0.05em;
+        border-top: none;
+    }
+
+    .table tbody tr {
+        transition: background-color 0.2s ease;
+    }
+
+        .table tbody tr:hover {
+            background-color: rgba(248, 250, 252, 0.8);
+        }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: "\f2f4"; -
+        font-family: remixicon;
+        font-size: 10px;
+        color: #adb5bd;
+    }
+</style>
