@@ -39,7 +39,8 @@ namespace CarRental.Application.Tools
 			return new TokenResponseDto
 			{
 				Token = tokenHandler.WriteToken(token),
-				ExpireDate = expiresDate
+				ExpireDate = expiresDate,
+				AppUserId = model.Id
 			};
 		}
 	}

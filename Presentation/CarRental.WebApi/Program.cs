@@ -1,3 +1,4 @@
+using CarRental.Application.Common;
 using CarRental.Application.Features.CQRS.Handlers.AboutHandlers;
 using CarRental.Application.Interfaces;
 using CarRental.Application.Interfaces.BlogInterfaces;
@@ -12,6 +13,7 @@ using CarRental.Application.Interfaces.StatisticsInterfaces;
 using CarRental.Application.Interfaces.TagCloudInterfaces;
 using CarRental.Application.Services;
 using CarRental.Application.Tools;
+using CarRental.Application.Validators.AppUserValidators;
 using CarRental.Persistence.Context;
 using CarRental.Persistence.Repositories;
 using CarRental.Persistence.Repositories.BlogRepositories;
@@ -25,7 +27,11 @@ using CarRental.Persistence.Repositories.RentACarRepositories;
 using CarRental.Persistence.Repositories.StatisticsRepositories;
 using CarRental.Persistence.Repositories.TagCloudRepositories;
 using CarRental.WebApi.Middlewares;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -68,8 +74,23 @@ builder.Services.Scan(scan => scan
 	.AsSelf()
 	.WithScopedLifetime());
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddFluentValidationAutoValidation(); 
+builder.Services.AddFluentValidationClientsideAdapters(); 
+builder.Services.AddValidatorsFromAssemblyContaining<CreateAppUserValidator>();
+
+builder.Services.AddControllers()
+	.ConfigureApiBehaviorOptions(options =>
+	{
+		options.InvalidModelStateResponseFactory = context =>
+		{
+			var errors = context.ModelState.Values
+				.SelectMany(x => x.Errors)
+				.Select(x => x.ErrorMessage)
+				.FirstOrDefault(); 
+
+			return new BadRequestObjectResult(ApiResponse<NoContent>.FailResponse(errors));
+		};
+	}); builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();

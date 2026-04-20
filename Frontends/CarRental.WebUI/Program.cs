@@ -1,5 +1,6 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using CarRental.WebUI.Handlers;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,12 +15,13 @@ builder.Services.AddHttpClient("CarRentalApi", client =>
 	client.BaseAddress = new Uri(builder.Configuration["ApiSettings:BaseUrl"]);
 }).AddHttpMessageHandler<TokenHandler>(); ;
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCookie
-	(JwtBearerDefaults.AuthenticationScheme, opt =>
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+	.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
 	{
 		opt.LoginPath = "/Login/Index";
 		opt.LogoutPath = "/Login/Logout";
 		opt.AccessDeniedPath = "/Login/AccessDenied";
+
 		opt.Cookie.SameSite = SameSiteMode.Strict;
 		opt.Cookie.HttpOnly = true;
 		opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;

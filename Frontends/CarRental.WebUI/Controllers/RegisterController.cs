@@ -1,5 +1,8 @@
-﻿using CarRental.Dto.RegistersDto;
+﻿using CarRental.Dto;
+using CarRental.Dto.RegistersDto;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Text;
 using System.Text.Json;
 
@@ -17,14 +20,27 @@ namespace CarRental.WebUI.Controllers
 		public async Task<IActionResult> Index(RegisterDto registerDto)
 		{
 			var client = httpClientFactory.CreateClient("CarRentalApi");
-			var content = new StringContent(JsonSerializer.Serialize(registerDto), Encoding.UTF8, "application/json");
+			var content = new StringContent(JsonConvert.SerializeObject(registerDto), Encoding.UTF8, "application/json");
 			var response = await client.PostAsync("Register", content);
 
 			if (response.IsSuccessStatusCode)
 			{
 				return RedirectToAction("Index", "Login");
 			}
-			return View();
+
+			var jsonData = await response.Content.ReadAsStringAsync();
+			var apiResponse = JsonConvert.DeserializeObject<ResultApiResponseDto<NoContent>>(jsonData);
+
+			if (apiResponse != null && !apiResponse.Success)
+			{
+				TempData["ErrorMessage"] = apiResponse.Message;
+			}
+			else
+			{
+				TempData["ErrorMessage"] = "Beklenmedik bir hata oluştu.";
+			}
+
+			return View(registerDto);
 		}
 	}
 }

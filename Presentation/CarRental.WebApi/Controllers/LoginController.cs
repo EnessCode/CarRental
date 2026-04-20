@@ -1,7 +1,10 @@
-﻿using CarRental.Application.Features.Mediator.Queries.AppUserQueries;
+﻿using CarRental.Application.Common;
+using CarRental.Application.Dtos;
+using CarRental.Application.Features.Mediator.Commands.AppUserCommands;
 using CarRental.Application.Tools;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarRental.WebApi.Controllers
@@ -12,14 +15,13 @@ namespace CarRental.WebApi.Controllers
 	public class LoginController(IMediator mediator, JwtTokenGenerator jwtTokenGenerator) : ControllerBase
 	{
 		[HttpPost]
-		public async Task<IActionResult> Index(GetCheckAppUserQuery getCheckAppUserQuery)
+		public async Task<IActionResult> Index(LoginCommand command)
 		{
-			var values = await mediator.Send(getCheckAppUserQuery);
+			var values = await mediator.Send(command);
 
-			if (values.IsExist)
+			if (values != null)
 			{
-				var token = jwtTokenGenerator.GenerateToken(values);
-				return Ok(token);
+				return Ok(ApiResponse<TokenResponseDto>.SuccessResponse(values, "Giriş işlemi başarıyla tamamlandı."));
 			}
 			else
 			{

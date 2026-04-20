@@ -1,12 +1,13 @@
 ﻿using CarRental.Dto.LoginDtos;
 using CarRental.WebUI.Models;
+using CarRental.Dto; 
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
+using Newtonsoft.Json; 
+using System.IdentityModel.Tokens.Jwt; 
 using System.Security.Claims;
 using System.Text;
-using System.Text.Json;
 
 namespace CarRental.WebUI.Controllers
 {
@@ -22,7 +23,7 @@ namespace CarRental.WebUI.Controllers
 		public async Task<IActionResult> Index(LoginDto loginDto)
 		{
 			var client = httpClientFactory.CreateClient("CarRentalApi");
-			var content = new StringContent(JsonSerializer.Serialize(loginDto), Encoding.UTF8, "application/json");
+			var content = new StringContent(JsonConvert.SerializeObject(loginDto), Encoding.UTF8, "application/json");
 
 			var response = await client.PostAsync("Login", content);
 
@@ -30,47 +31,38 @@ namespace CarRental.WebUI.Controllers
 			{
 				var jsonData = await response.Content.ReadAsStringAsync();
 
-				var tokenModel = JsonSerializer.Deserialize<JwtResponseModel>(jsonData, new JsonSerializerOptions
+				var apiResponse = JsonConvert.DeserializeObject<ResultApiResponseDto<JwtResponseModel>>(jsonData);
+
+				if (apiResponse != null && apiResponse.Success && apiResponse.Data != null)
 				{
-					PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-				});
+					var tokenModel = apiResponse.Data;
+					var handler = new JwtSecurityTokenHandler();
+					var token = handler.ReadJwtToken(tokenModel.Token) as JwtSecurityToken;
 
-				if (tokenModel != null)
-				{
-					JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-					var token = handler.ReadJwtToken(tokenModel.Token);
-					var claims = token.Claims.ToList();
-
-					var userIdClaim = token.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.NameId)?.Value
-					  ?? token.Claims.FirstOrDefault(x => x.Type == "id")?.Value;
-
-					if (userIdClaim != null)
+					if (token != null)
 					{
-						claims.Add(new Claim(ClaimTypes.NameIdentifier, userIdClaim));
+						var claims = token.Claims.ToList();
+						claims.Add(new Claim("accessToken", tokenModel.Token));
+
+						var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+						var authProperties = new AuthenticationProperties
+						{
+							ExpiresUtc = tokenModel.ExpireDate,
+							IsPersistent = true
+						};
+
+						await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+
+						var role = claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
+
+						if (role == "Admin")
+							return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+
+						if (role == "Moderator")
+							return RedirectToAction("Index", "Dashboard", new { area = "Moderator" });
+
+						return RedirectToAction("Index", "Default");
 					}
-
-					claims.Add(new Claim("accessToken", tokenModel.Token));
-
-					var claimsIdentity = new ClaimsIdentity(claims, JwtBearerDefaults.AuthenticationScheme);
-					var authProperties = new AuthenticationProperties
-					{
-						ExpiresUtc = tokenModel.ExpireDate,
-						IsPersistent = true
-					};
-
-					await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
-
-					if (token.Claims.Any(x => x.Value == "Admin"))
-					{
-						return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
-					}
-
-					if (token.Claims.Any(x => x.Value == "Moderator"))
-					{
-						return RedirectToAction("Index", "Dashboard", new { area = "Moderator" });
-					}
-
-					return RedirectToAction("Index", "Default");
 				}
 			}
 
@@ -80,7 +72,7 @@ namespace CarRental.WebUI.Controllers
 
 		public async Task<IActionResult> Logout()
 		{
-			await HttpContext.SignOutAsync(JwtBearerDefaults.AuthenticationScheme);
+			await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 			return RedirectToAction("Index", "Login");
 		}
 	}
