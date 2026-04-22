@@ -9,6 +9,8 @@ using CarRental.Application.Interfaces.CarPricingInterfaces;
 using CarRental.Application.Interfaces.CategoryInterfaces;
 using CarRental.Application.Interfaces.CommentInterfaces;
 using CarRental.Application.Interfaces.RentACarInterfaces;
+using CarRental.Application.Interfaces.RentACarProcessInterfaces;
+using CarRental.Application.Interfaces.ReservationInterfaces;
 using CarRental.Application.Interfaces.StatisticsInterfaces;
 using CarRental.Application.Interfaces.TagCloudInterfaces;
 using CarRental.Application.Services;
@@ -23,7 +25,9 @@ using CarRental.Persistence.Repositories.CarPricingRepositories;
 using CarRental.Persistence.Repositories.CarRepositories;
 using CarRental.Persistence.Repositories.CategoryRepositories;
 using CarRental.Persistence.Repositories.CommentRepositories;
+using CarRental.Persistence.Repositories.RentACarProcessRepositories;
 using CarRental.Persistence.Repositories.RentACarRepositories;
+using CarRental.Persistence.Repositories.ReservationRepositories;
 using CarRental.Persistence.Repositories.StatisticsRepositories;
 using CarRental.Persistence.Repositories.TagCloudRepositories;
 using CarRental.WebApi.Middlewares;
@@ -36,6 +40,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {
@@ -64,6 +70,8 @@ builder.Services.AddScoped<IStatisticsRepository, StatisticsRepository>();
 builder.Services.AddScoped<IRentACarRepository, RentACarRepository>();
 builder.Services.AddScoped<ICarFeatureRepository, CarFeatureRepository>();
 builder.Services.AddScoped<ICarDescriptionRepository, CarDescriptionRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+builder.Services.AddScoped<IRentACarProcessRepository, RentACarProcessRepository>();
 builder.Services.AddScoped<JwtTokenGenerator>();
 
 builder.Services.AddApplicationService(builder.Configuration);

@@ -4,6 +4,7 @@ using CarRental.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRental.Persistence.Migrations
 {
     [DbContext(typeof(CarRentalContext))]
-    partial class CarRentalContextModelSnapshot : ModelSnapshot
+    [Migration("20260421155834_Add_Reservation_Date_Columns")]
+    partial class Add_Reservation_Date_Columns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -421,6 +424,31 @@ namespace CarRental.Persistence.Migrations
                     b.ToTable("Contacts");
                 });
 
+            modelBuilder.Entity("CarRental.Domain.Entities.Customer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Mail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customer");
+                });
+
             modelBuilder.Entity("CarRental.Domain.Entities.Feature", b =>
                 {
                     b.Property<int>("Id")
@@ -535,10 +563,10 @@ namespace CarRental.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AppUserId")
+                    b.Property<int>("CarId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CarId")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<DateOnly>("DropOffDate")
@@ -567,27 +595,18 @@ namespace CarRental.Persistence.Migrations
                     b.Property<TimeOnly>("PickUpTime")
                         .HasColumnType("time");
 
-                    b.Property<int>("ReservationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
-
                     b.HasIndex("CarId");
+
+                    b.HasIndex("CustomerId");
 
                     b.HasIndex("DropOffLocationId");
 
                     b.HasIndex("PickUpLocationId");
-
-                    b.HasIndex("ReservationId");
 
                     b.ToTable("RentACarProcesses");
                 });
@@ -601,9 +620,6 @@ namespace CarRental.Persistence.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("AppUserId")
                         .HasColumnType("int");
 
                     b.Property<int>("CarId")
@@ -658,8 +674,6 @@ namespace CarRental.Persistence.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
 
                     b.HasIndex("CarId");
 
@@ -904,15 +918,15 @@ namespace CarRental.Persistence.Migrations
 
             modelBuilder.Entity("CarRental.Domain.Entities.RentACarProcess", b =>
                 {
-                    b.HasOne("CarRental.Domain.Entities.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CarRental.Domain.Entities.Car", "Car")
                         .WithMany("RentACarProcesses")
                         .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CarRental.Domain.Entities.Customer", "Customer")
+                        .WithMany("RentACarProcesses")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -928,29 +942,17 @@ namespace CarRental.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CarRental.Domain.Entities.Reservation", "Reservation")
-                        .WithMany()
-                        .HasForeignKey("ReservationId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-
                     b.Navigation("Car");
+
+                    b.Navigation("Customer");
 
                     b.Navigation("DropOffLocation");
 
                     b.Navigation("PickUpLocation");
-
-                    b.Navigation("Reservation");
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Reservation", b =>
                 {
-                    b.HasOne("CarRental.Domain.Entities.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId");
-
                     b.HasOne("CarRental.Domain.Entities.Car", "Car")
                         .WithMany()
                         .HasForeignKey("CarId")
@@ -966,8 +968,6 @@ namespace CarRental.Persistence.Migrations
                         .WithMany("PickUpReservations")
                         .HasForeignKey("PickUpLocationId")
                         .IsRequired();
-
-                    b.Navigation("AppUser");
 
                     b.Navigation("Car");
 
@@ -1025,6 +1025,11 @@ namespace CarRental.Persistence.Migrations
             modelBuilder.Entity("CarRental.Domain.Entities.Category", b =>
                 {
                     b.Navigation("Blogs");
+                });
+
+            modelBuilder.Entity("CarRental.Domain.Entities.Customer", b =>
+                {
+                    b.Navigation("RentACarProcesses");
                 });
 
             modelBuilder.Entity("CarRental.Domain.Entities.Feature", b =>

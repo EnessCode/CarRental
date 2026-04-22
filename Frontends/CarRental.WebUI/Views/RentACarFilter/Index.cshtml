@@ -26,7 +26,8 @@
                                         <span class="fs-4 fw-bold text-dark">₺@item.Amount</span>
                                         <span class="text-muted small">/Günlük</span>
                                     </div>
-                                    <a href="/Reservation/Index?carId=@item.CarId&locationId=@Context.Request.Query["locationId"]" class="btn btn-primary rounded-pill px-4">Kirala</a>
+                                    <a href="/Reservation/Index?carId=@item.CarId&locationId=@Context.Request.Query["locationId"]&pickUpDate=@Context.Request.Query["pickUpDate"]&dropOffDate=@Context.Request.Query["dropOffDate"]&pickUpTime=@Context.Request.Query["pickUpTime"]&dropOffTime=@Context.Request.Query["dropOffTime"]"
+                                       class="btn btn-primary rounded-pill px-4">Kirala</a>
                                 </div>
                             </div>
                         </div>

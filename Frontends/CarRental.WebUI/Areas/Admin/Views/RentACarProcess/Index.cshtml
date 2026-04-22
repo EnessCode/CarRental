@@ -1,0 +1,100 @@
+﻿@model List<ResultRentACarProcessDto>
+
+@{
+    ViewData["Title"] = "Kiralama Süreçleri";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-end mb-3">
+                <span class="badge bg-info p-2"><i class="ri-information-line me-1"></i> Toplam Aktif Süreç: @Model.Count</span>
+            </div>
+            <div class="col-12">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Aktif Kiralama ve Operasyon Takibi</h4>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover table-borderless align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Araç Bilgisi</th>
+                                        <th>Müşteri</th>
+                                        <th>Kiralama Periyodu</th>
+                                        <th>Durum</th>
+                                        <th class="text-end">İşlem</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar-sm me-3 bg-soft-primary text-primary rounded-circle d-flex align-items-center justify-content-center" style="width:40px; height:40px; background-color: #e0ebff;">
+                                                        <i class="ri-car-fill fs-4"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="mb-0">@item.CarBrandAndModel</h6>
+                                                        <small class="text-muted">Araç ID: @item.CarId</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="fw-bold">@item.CustomerFullName</div>
+                                                <small class="text-muted">Rezervasyon #@item.ReservationId</small>
+                                            </td>
+                                            <td>
+                                                <div class="badge bg-light text-dark p-2 border">
+                                                    <i class="ri-calendar-2-line text-primary me-1"></i> @item.PickUpDate.ToString("dd.MM.yyyy")
+                                                    <i class="ri-arrow-right-line mx-1"></i>
+                                                    <i class="ri-calendar-check-line text-danger me-1"></i> @item.DropOffDate.ToString("dd.MM.yyyy")
+                                                </div>
+                                            </td>
+                                            <td>
+                                                @{
+                                                    var statusClass = item.Status == "Müşteride" ? "bg-success" :
+                                                    item.Status == "Tamamlandı" ? "bg-secondary" : 
+                                                    item.Status == "Araç Teslim Edilmeyi Bekliyor" ? "bg-warning" : "bg-primary";
+                                                }
+                                                <div class="d-flex align-items-center">
+                                                    <span class="spinner-grow spinner-grow-sm text-success me-2" role="status"></span>
+                                                    <span class="badge @statusClass text-uppercase" style="font-size: 0.7rem;">@item.Status</span>
+                                                </div>
+                                            </td>
+                                            <td class="text-end">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                                        Süreci Yönet
+                                                    </button>
+                                                    <ul class="dropdown-menu shadow border-0">
+                                                        <li>
+                                                            <a class="dropdown-item text-success" asp-action="DeliverCar" asp-route-id="@item.Id">
+                                                                <i class="ri-key-2-line me-2"></i>Araç Teslim Edildi
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item text-primary" asp-action="ReceiveCar" asp-route-id="@item.Id">
+                                                                <i class="ri-checkbox-circle-line me-2"></i>Araç Geri Alındı
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

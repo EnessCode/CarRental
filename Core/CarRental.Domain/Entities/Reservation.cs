@@ -15,6 +15,8 @@ namespace CarRental.Domain.Entities
 		public string Phone { get; set; }
 		public int CarId { get; set; }
 		public Car Car { get; set; }
+		public int? AppUserId { get; set; }
+		public AppUser AppUser { get; set; }
 		public int PickUpLocationId { get; set; }
 		public int DropOffLocationId { get; set; } 
 		public Location PickUpLocation { get; set; }
@@ -22,6 +24,11 @@ namespace CarRental.Domain.Entities
 		public int Age { get; set; }
 		public int DriverLicenseYear { get; set; }
 		public string Description { get; set; }
+		public DateOnly PickUpDate { get; set; }
+		public DateOnly DropOffDate { get; set; }
+		public TimeOnly PickUpTime { get; set; }
+		public TimeOnly DropOffTime { get; set; }
+		public decimal TotalPrice { get; set; }
 		public string Status { get; set; }
 	}
 }

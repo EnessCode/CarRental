@@ -39,6 +39,10 @@
                         <form method="post" action="/Reservation/Index">
                             <input type="hidden" asp-for="CarId" value="@ViewBag.carId" />
                             <input type="hidden" asp-for="PickUpLocationId" value="@ViewBag.locationId" />
+                            <input type="hidden" asp-for="PickUpDate" value="@ViewBag.pickUpDate" />
+                            <input type="hidden" asp-for="DropOffDate" value="@ViewBag.dropOffDate" />
+                            <input type="hidden" asp-for="PickUpTime" value="@ViewBag.pickUpTime" />
+                            <input type="hidden" asp-for="DropOffTime" value="@ViewBag.dropOffTime" />
                             <input type="hidden" asp-for="Status" value="Beklemede" />
 
                             <div class="row g-3">

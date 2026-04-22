@@ -13,7 +13,7 @@ namespace CarRental.WebUI.Controllers
 	public class ReservationController(IHttpClientFactory httpClientFactory) : Controller
 	{
 		[HttpGet]
-		public async Task<IActionResult> Index(int carId, int locationId)
+		public async Task<IActionResult> Index(int carId, int locationId, DateOnly pickUpDate, DateOnly dropOffDate, TimeOnly pickUpTime, TimeOnly dropOffTime)
 		{
 			var client = httpClientFactory.CreateClient("CarRentalApi");
 
@@ -45,6 +45,11 @@ namespace CarRental.WebUI.Controllers
 
 			ViewBag.carId = carId;
 			ViewBag.locationId = locationId;
+			ViewBag.pickUpDate = pickUpDate;
+			ViewBag.dropOffDate = dropOffDate;
+			ViewBag.pickUpTime = pickUpTime;
+			ViewBag.dropOffTime = dropOffTime;
+
 			return View();
 		}
 
@@ -52,6 +57,13 @@ namespace CarRental.WebUI.Controllers
 		public async Task<IActionResult> Index(CreateReservationDto createReservationDto)
 		{
 			var client = httpClientFactory.CreateClient("CarRentalApi");
+			var userIdClaim = User.Claims.FirstOrDefault(x => x.Type == System.Security.Claims.ClaimTypes.NameIdentifier);
+			
+			if (userIdClaim != null)
+			{
+				createReservationDto.AppUserId = int.Parse(userIdClaim.Value);
+			}
+
 			var jsonData = JsonConvert.SerializeObject(createReservationDto);
 			StringContent stringContent = new StringContent(jsonData, System.Text.Encoding.UTF8, "application/json");
 			var responseMessage = await client.PostAsync("Reservations", stringContent);

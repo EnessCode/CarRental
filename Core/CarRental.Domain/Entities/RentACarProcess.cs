@@ -9,10 +9,12 @@ namespace CarRental.Domain.Entities
 	public class RentACarProcess
 	{
 		public int Id { get; set; }
+		public int ReservationId { get; set; }
+		public Reservation Reservation { get; set; }
 		public int CarId { get; set; }
 		public Car Car { get; set; }
-		public int CustomerId { get; set; }
-		public Customer Customer { get; set; }
+		public int AppUserId { get; set; }
+		public AppUser AppUser { get; set; }
 		public int PickUpLocationId { get; set; }
 		public Location PickUpLocation { get; set; }
 		public int DropOffLocationId { get; set; }
@@ -24,5 +26,6 @@ namespace CarRental.Domain.Entities
 		public TimeOnly PickUpTime { get; set; }
 		public TimeOnly DropOffTime { get; set; }
 		public decimal TotalPrice { get; set; }
+		public string Status { get; set; }
 	}
 }

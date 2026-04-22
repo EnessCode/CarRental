@@ -67,5 +67,12 @@ namespace CarRental.Persistence.Repositories.CarPricingRepositories
 			}
 			return list;
 		}
+
+		public async Task<List<CarPricing>> GetCarPricingsByCarId(int carId)
+		{
+			return await context.CarPricings
+				.Where(x => x.CarId == carId)
+				.ToListAsync();
+		}
 	}
 }

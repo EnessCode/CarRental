@@ -12,5 +12,6 @@ namespace CarRental.Application.Interfaces.CarPricingInterfaces
 	{
 		Task<List<CarPricing>> GetCarPricingWithCars();
 		Task<List<GetCarPricingWithTimePeriodQueryResult>> GetCarPricingWithTimePeriod();
+		Task<List<CarPricing>> GetCarPricingsByCarId(int carId);
 	}
 }

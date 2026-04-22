@@ -54,6 +54,12 @@ namespace CarRental.Persistence.Context
 				.WithMany(y => y.DropOffReservations)
 				.HasForeignKey(z => z.DropOffLocationId)
 				.OnDelete(DeleteBehavior.ClientSetNull);
+
+			modelBuilder.Entity<RentACarProcess>()
+				.HasOne(x => x.Reservation)
+				.WithMany()
+				.HasForeignKey(x => x.ReservationId)
+				.OnDelete(DeleteBehavior.NoAction);
 		}
 	}
 }
