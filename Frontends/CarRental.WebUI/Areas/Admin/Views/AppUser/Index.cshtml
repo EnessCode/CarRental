@@ -1,0 +1,90 @@
+﻿@model List<CarRental.Dto.AppUserDtos.ResultAppUserDto>
+
+@{
+    ViewData["Title"] = "Kullanıcı Yönetimi";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Sistem Kullanıcıları</h4>
+                        <p class="card-subtitle mb-4">Tüm üyeleri listeleyebilir ve yetkilerini buradan güncelleyebilirsiniz.</p>
+
+                        <div class="table-responsive">
+                            <table class="table mb-0 table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Kullanıcı</th>
+                                        <th>Email</th>
+                                        <th>Mevcut Rol</th>
+                                        <th class="text-center">İşlem</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <th scope="row">@count</th>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "/images/default-user.png" : item.ImageUrl)" class="rounded-circle mr-3" style="width: 35px; height: 35px; object-fit: cover;">
+                                                    <div>
+                                                        <h6 class="m-0">@item.Name @item.Surname</h6>
+                                                        <small class="text-muted">@@@item.Username</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>@item.Email</td>
+                                            <td>
+                                                @if (item.RoleName == "Admin")
+                                                {
+                                                    <span class="badge bg-danger text-white">Admin</span>
+                                                }
+                                                else if (item.RoleName == "Moderator")
+                                                {
+
+                                                    <span class="badge bg-warning text-dark">Moderatör</span>
+                                                }
+                                                else
+                                                {
+
+                                                    <span class="badge bg-info text-white">Üye</span>
+                                                }
+                                            </td>
+                                            <td class="text-center">
+                                                @if (item.RoleName != "Admin")
+                                                {
+                                                    @if (item.RoleName != "Moderator")
+                                                    {
+                                                        <a href="/Admin/AppUser/AssignModerator/@item.Id" class="btn btn-sm btn-outline-primary">
+                                                            <i class="ri-user-star-line"></i> Moderatör Yap
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="text-success"><i class="ri-check-double-line"></i> Zaten Moderatör</span>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">Yetki Değiştirilemez</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

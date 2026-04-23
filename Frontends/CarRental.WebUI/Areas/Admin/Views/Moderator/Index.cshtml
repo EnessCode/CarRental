@@ -1,0 +1,83 @@
+﻿@model List<CarRental.Dto.ModeratorDtos.ResultModeratorDto>
+
+@{
+    ViewData["Title"] = "Moderatör Yönetimi";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Moderatör Listesi</h4>
+                        <p class="card-subtitle mb-4">
+                            Sistemde blog yazma yetkisine sahip olan kullanıcıları buradan yönetebilirsiniz.
+                        </p>
+
+                        <div class="table-responsive">
+                            <table class="table mb-0 table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Görsel</th>
+                                        <th>Ad Soyad</th>
+                                        <th>E-Posta</th>
+                                        <th>Açıklama</th>
+                                        <th class="text-center">İşlemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null && Model.Count > 0)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            count++;
+                                            <tr>
+                                                <th scope="row">@count</th>
+                                                <td>
+                                                    <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "/images/default-user.png" : item.ImageUrl)" alt="@item.Name" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover; border: 1px solid #ddd;" />
+                                                </td>
+                                                <td><strong>@item.Name @item.Surname</strong></td>
+                                                <td>@item.Email</td>
+                                                <td>
+                                                    @if (!string.IsNullOrEmpty(item.Description))
+                                                    {
+                                                        @(item.Description.Length > 40 ? item.Description.Substring(0, 40) + "..." : item.Description)
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="text-muted">Açıklama yok</span>
+                                                    }
+                                                </td>
+                                                <td class="text-center">
+                                                    <a href="/Admin/Moderator/DismissModerator/@item.Id" class="btn btn-outline-danger btn-sm" onclick="return confirm('Bu kullanıcının moderatörlük yetkisini geri almak istediğinize emin misiniz?')">
+                                                        <i class="fas fa-user-minus"></i> Yetkiyi Al
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="6" class="text-center text-muted">Henüz sistemde kayıtlı bir moderatör bulunamadı.</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="mt-4">
+                            <a href="/Admin/AppUser/Index" class="btn btn-primary waves-effect waves-light">
+                                <i class="fas fa-users mr-2"></i> Yeni Moderatör Ata (Kullanıcı Listesi)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

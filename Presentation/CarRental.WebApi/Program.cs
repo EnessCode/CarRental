@@ -1,6 +1,7 @@
 using CarRental.Application.Common;
 using CarRental.Application.Features.CQRS.Handlers.AboutHandlers;
 using CarRental.Application.Interfaces;
+using CarRental.Application.Interfaces.AppUserInterfaces;
 using CarRental.Application.Interfaces.BlogInterfaces;
 using CarRental.Application.Interfaces.CarDescriptionInterfaces;
 using CarRental.Application.Interfaces.CarFeatureInterfaces;
@@ -19,6 +20,7 @@ using CarRental.Application.Validators.AppUserValidators;
 using CarRental.Infrastructure.Services;
 using CarRental.Persistence.Context;
 using CarRental.Persistence.Repositories;
+using CarRental.Persistence.Repositories.AppUserRepositories;
 using CarRental.Persistence.Repositories.BlogRepositories;
 using CarRental.Persistence.Repositories.CarDescriptionRepositories;
 using CarRental.Persistence.Repositories.CarFeatureRepositories;
@@ -74,6 +76,7 @@ builder.Services.AddScoped<ICarDescriptionRepository, CarDescriptionRepository>(
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 builder.Services.AddScoped<IRentACarProcessRepository, RentACarProcessRepository>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IAppUserRepository, AppUserRepository>();
 builder.Services.AddScoped<JwtTokenGenerator>();
 
 builder.Services.AddApplicationService(builder.Configuration);
