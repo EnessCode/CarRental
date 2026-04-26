@@ -60,9 +60,9 @@ Moderatörlerin içerik üretebildiği ve kendi bilgilerini yönettiği özel al
 Kullanıcıların araçları filtreleyebildiği ve detaylarını inceleyebildiği ekranlar.
 
 <p align="center">
-  <img src="screenshots/car.jpg" width="31%" alt="Araç Filtreleme" />
-  <img src="screenshots/car2.jpg" width="31%" alt="Araç Kartları" />
-  <img src="screenshots/car3.jpg" width="31%" alt="Araç Özellikleri" />
+  <img src="screenshots/car.png" width="31%" alt="Araç Filtreleme" />
+  <img src="screenshots/car2.png" width="31%" alt="Araç Kartları" />
+  <img src="screenshots/car3.png" width="31%" alt="Araç Özellikleri" />
 </p>
 
 ---
